@@ -16,6 +16,6 @@ const env = {
   production: process.env.NODE_ENV === 'production',
 };
 
-const port = process.env.PORT;
+const port = process.env.API_PORT;
 
 export {db, env, port};
