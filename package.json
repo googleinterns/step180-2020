@@ -26,11 +26,14 @@
     "sequelize": "^6.3.3"
   },
   "scripts": {
-    "start": "nodemon server/index.js --exec babel-node",
-    "dev": "concurrently -r \"yarn start\" \"yarn start:client\"",
+    "start": "yarn start:server",
+    "dev": "concurrently -r \"yarn start:server\" \"yarn start:client\"",
+    "start:server": "nodemon server/index.js --exec babel-node",
     "start:client": "react-scripts start",
+    "test": "yarn test:server && yarn test:client",
+    "test:server": "jest --modulePathIgnorePatterns src",
+    "test:client": "react-scripts test",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint"
   },
@@ -62,11 +65,18 @@
     "eslint": "^6.6.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.20.3",
-    "husky": "^4.2.5"
+    "husky": "^4.2.5",
+    "jest": "24.9.0",
+    "supertest": "^4.0.2"
   },
   "husky": {
     "hooks": {
       "pre-commit": "yarn lint ."
     }
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
