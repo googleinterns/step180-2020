@@ -7,15 +7,15 @@ const db = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   host: process.env.DB_HOST,
-  socketPath: process.env.DB_SOCKET_PATH
+  socketPath: process.env.DB_SOCKET_PATH,
 };
 
 const env = {
   development: process.env.NODE_ENV === 'development',
   test: process.env.NODE_ENV === 'test',
-  production: process.env.NODE_ENV === 'production'
+  production: process.env.NODE_ENV === 'production',
 };
 
 const port = process.env.PORT;
 
-export { db, env, port };
+export {db, env, port};

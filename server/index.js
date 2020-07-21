@@ -1,6 +1,6 @@
 import app from './app';
-import { connectToDatabase } from './db';
-import { port } from './config';
+import {connectToDatabase} from './db';
+import {port} from './config';
 
 const start = async () => {
   console.info('Connecting to database');

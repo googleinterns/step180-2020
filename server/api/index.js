@@ -1,7 +1,7 @@
-import { Router } from 'express';
+import {Router as router} from 'express';
 
 // TODO(ernestognw): Setup routes for every model in db
-const api = Router();
+const api = router();
 
 // Health check
 api.get('/', (req, res) => {
