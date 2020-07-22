@@ -26,15 +26,16 @@
     "sequelize": "^6.3.3"
   },
   "scripts": {
-    "start": "yarn start:server",
-    "dev": "concurrently -r \"yarn start:server\" \"yarn start:client\"",
+    "start": "node dist",
     "start:server": "nodemon server/index.js --exec babel-node",
     "start:client": "react-scripts start",
     "test": "yarn test:server && yarn test:client",
     "test:server": "jest --modulePathIgnorePatterns src",
     "test:client": "react-scripts test",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject",
+    "build": "yarn build:server && yarn build:client",
+    "build:server": "npx babel server --out-dir dist",
+    "build:client": "react-scripts build",
+    "dev": "concurrently -r \"yarn start:server\" \"yarn start:client\"",
     "lint": "eslint"
   },
   "eslintConfig": {
@@ -68,6 +69,9 @@
     "husky": "^4.2.5",
     "jest": "24.9.0",
     "supertest": "^4.0.2"
+  },
+  "engines": {
+    "yarn": ">=1.0.0 <2.0.0"
   },
   "husky": {
     "hooks": {
