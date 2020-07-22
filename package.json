@@ -30,10 +30,10 @@
     "start:server": "nodemon server/index.js --exec babel-node",
     "start:client": "react-scripts start",
     "test": "yarn test:server && yarn test:client",
-    "test:server": "jest --modulePathIgnorePatterns src",
+    "test:server": "jest --modulePathIgnorePatterns src dist",
     "test:client": "react-scripts test",
     "build": "yarn build:server && yarn build:client",
-    "build:server": "npx babel server --out-dir dist",
+    "build:server": "babel server --out-dir dist",
     "build:client": "react-scripts build",
     "dev": "concurrently -r \"yarn start:server\" \"yarn start:client\"",
     "lint": "eslint"
