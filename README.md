@@ -1,4 +1,4 @@
-# Chrome Enamel STEP interns project repository
+# Chrome Enamel STEP interns project repository :elephant:
 
 Dashboard for HTTP-related stuff to deprecate in the future by Chrome team
 
