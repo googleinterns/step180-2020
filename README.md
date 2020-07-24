@@ -15,13 +15,14 @@ If you don't have any of the prerequisites, go to [setup section](#setup).
 After that, follow the next steps:
 
 1. Run `sudo -u postgres psql` to enter postgres console
-2. After that, run `CREATE DATABASE <your-database>`, this db will be used in the project, so keep the name
+2. Then, run `CREATE DATABASE <your-database>`, this db will be used in the project, so keep the name
 3. Copy .env.example into a .env file
 4. Replace the variables with your DB user, password and the database you've recently created, host should be localhost
 5. Set NODE_ENV to `development`
 6. Set API_PORT to configure where the server will be running
 7. Set PORT to configure where the React App will be running
-8. Run yarn dev
+8. Run `yarn install` to download every dependency needed
+9. Run `yarn dev` to start project in development mode
 
 ## Troubleshooting (Known issues)
   - If you're receiving a `[SequelizeConnectionError]: password authentication failed for user '<username>'`, please enter to postgres console using `sudo -u postgres psql` and change the password for the user you're trying to use. Also update .env accordingly
