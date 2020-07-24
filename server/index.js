@@ -2,6 +2,16 @@ import app from './app';
 import {connectToDatabase} from './db';
 import {port} from './config';
 
+/**
+ * This script is intended to prepare things just before starting the
+ * express API.
+ *
+ * It is recommended to keep it as it is, tryin to not make it grow so much
+ *
+ * In case there is a particular task to do, so the server can
+ * initialize correctly, please try to move into a separate
+ * script as with connectToDatabase()
+ */
 const start = async () => {
   console.info('Connecting to database');
   try {
