@@ -25,3 +25,8 @@ handlers:
     upload: build/index.html
     secure: always
     redirect_http_response_code: 301
+
+# Expose this key is not a security problem since it is only accessible
+# via Node App Engine runtime. So, no problem if it is hardcoded here.
+env_variables:
+  DATASTORE_SECRETS_KEY: NHnLk0kWnAk6PuxHO7rJ

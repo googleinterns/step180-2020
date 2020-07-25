@@ -9,15 +9,17 @@
  * the project is in development environment, you must provide the .env file
  * using the .env.example at root folder.
  *
- * In production environment, it must be generated via ./prepare-env.js file
- * before initializing the server.
+ * In production environment, the environmental variables are not set
+ * via dotenv. They're set using a parent process that reads the variables
+ * from App Engine Datastore to keep them secret
  */
 
 import dotenv from 'dotenv';
 
-// When no param is pass to config, it uses the .env file from root folder
-// by default
-dotenv.config();
+// Only use .env file in development environment
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 const env = {
   development: process.env.NODE_ENV === 'development',
