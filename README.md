@@ -33,7 +33,11 @@ In order to deploy the project to Google Cloud App Engine, you'll need a project
 - A Cloud SQL instance running PostgreSQL
 - An App Engine setup for a Node JS service
   
-Open your datastore in Google Cloud, create a collection named `secrets`, then create an entry with the database variables according to [the official docs](https://cloud.google.com/sql/docs/postgres/connect-app-engine-standard?hl=es-419#node.js). The project is prepared to setup secret env variables from datastore at startup.
+Open your datastore in Google Cloud, create a collection named `secrets`, then create an entry with the database variables according to [the official docs](https://cloud.google.com/sql/docs/postgres/connect-app-engine-standard?hl=es-419#node.js). 
+
+Whenever you've created the datastore entry with the secrets, please take the Document ID from Datastore, and replace the `DATASTORE_SECRETS_KEY` at `app.yaml` file
+
+The project is prepared to setup secret env variables from datastore at startup.
 
 After that, do:
 
