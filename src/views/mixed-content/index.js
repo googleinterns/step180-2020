@@ -8,7 +8,7 @@ import React from 'react';
  * in order to keep this as a view summary with the list of
  * components used.
  *
- * @return {PropTypes.node} Mixed Content View
+ * @return {ReactNode} Mixed Content View
  */
 const MixedContent = () => {
   // TO-DO(ernestognw): To fill with mixed-content data graphs

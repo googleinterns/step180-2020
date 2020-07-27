@@ -19,7 +19,7 @@ import {
  * MainLayout: Is the layout wrapper, with the navbar and sidebar
  * Switch: It renders the provided component based on the path
  *
- * @return {PropTypes.node} App component
+ * @return {ReactNode} App component
  */
 const App = () => {
   return (

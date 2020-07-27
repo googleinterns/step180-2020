@@ -28,8 +28,8 @@ import {useLocation} from 'react-router-dom';
  * intended to be at App.js in higher level thant <Switch> component
  * since it is reused across views
  *
- * @param {{children: PropTypes.node}} props
- * @return {PropTypes.node} Main App Layout
+ * @param {{children: ReactNode} } props
+ * @return {ReactNode} Main App Layout
  */
 const MainLayout = ({children}) => {
   const [open, setOpen] = useState(false);

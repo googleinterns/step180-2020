@@ -7,7 +7,7 @@ import React from 'react';
  * under /about route. It is intended to have a description
  * about the data and what we're doing with the app
  *
- * @return {PropTypes.node} About View
+ * @return {ReactNode} About View
  */
 const About = () => {
   return (
