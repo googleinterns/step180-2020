@@ -1,10 +1,25 @@
 import React from 'react';
+import MainLayout from './layouts/main';
+import {theme} from './config/theme';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import {
+  ThemeProvider as StyledComponentsThemeProvider,
+} from 'styled-components';
+import {ThemeProvider, StylesProvider} from '@material-ui/core/styles';
 
 const App = () => {
   return (
     <>
-      <img src="/images/general/placeholder.png" alt="Hello world" />
-      <p>Hello world</p>
+      <CssBaseline />
+      <StylesProvider injectFirst>
+        <StyledComponentsThemeProvider theme={theme}>
+          <ThemeProvider theme={theme}>
+            <MainLayout>
+
+            </MainLayout>
+          </ThemeProvider>
+        </StyledComponentsThemeProvider>
+      </StylesProvider>
     </>
   );
 };
