@@ -5,21 +5,25 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import Https from '@material-ui/icons/Https';
 import Description from '@material-ui/icons/Description';
+import {Link} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import {
   CustomAppBar,
   CustomDrawer,
   CustomIconButton,
+  CustomListItem,
   Content,
   Root,
 } from './styles/elements';
 
 const MainLayout = ({children}) => {
   const [open, setOpen] = useState(false);
+
+  const {pathname} = useLocation();
 
   return (
     <Root>
@@ -41,18 +45,25 @@ const MainLayout = ({children}) => {
       <CustomDrawer open={open} variant="permanent">
         <Toolbar />
         <List>
-          <ListItem button>
-            <IconButton>
-              <Description />
-            </IconButton>
-            <ListItemText primary="About" />
-          </ListItem>
-          <ListItem button>
-            <IconButton>
-              <Https />
-            </IconButton>
-            <ListItemText primary="Mixed Content" />
-          </ListItem>
+          <Link to="/about">
+            <CustomListItem active={pathname === '/about' ? 'true' : ''} button>
+              <IconButton>
+                <Description />
+              </IconButton>
+              <ListItemText primary="About" />
+            </CustomListItem>
+          </Link>
+          <Link to="/mixed-content">
+            <CustomListItem
+              active={pathname === '/mixed-content' ? 'true' : ''}
+              button
+            >
+              <IconButton>
+                <Https />
+              </IconButton>
+              <ListItemText primary="Mixed Content" />
+            </CustomListItem>
+          </Link>
         </List>
       </CustomDrawer>
       <Content>

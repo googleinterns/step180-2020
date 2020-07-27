@@ -1,24 +1,36 @@
 import React from 'react';
 import MainLayout from './layouts/main';
 import {theme} from './config/theme';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import {
-  ThemeProvider as StyledComponentsThemeProvider,
-} from 'styled-components';
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import {ThemeProvider as StyledProvider} from 'styled-components';
 import {ThemeProvider, StylesProvider} from '@material-ui/core/styles';
+import About from './views/about';
+import MixedContent from './views/mixed-content';
 
 const App = () => {
   return (
     <>
       <CssBaseline />
       <StylesProvider injectFirst>
-        <StyledComponentsThemeProvider theme={theme}>
+        <StyledProvider theme={theme}>
           <ThemeProvider theme={theme}>
-            <MainLayout>
-
-            </MainLayout>
+            <Router>
+              <MainLayout>
+                <Switch>
+                  <Route path="/about" component={About}/>
+                  <Route path="/mixed-content" component={MixedContent}/>
+                  <Redirect to="/about" />
+                </Switch>
+              </MainLayout>
+            </Router>
           </ThemeProvider>
-        </StyledComponentsThemeProvider>
+        </StyledProvider>
       </StylesProvider>
     </>
   );

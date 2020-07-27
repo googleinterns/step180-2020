@@ -16,7 +16,7 @@ const getClosedDrawerStyles = (theme) => css`
   })};
   overflow-x: hidden;
   width: ${theme.spacing(9) + 1}px;
-  
+
   .MuiListItemText-root {
     visibility: hidden;
   }
@@ -27,4 +27,16 @@ const drawerToggles = ({open, theme}) => {
   return getClosedDrawerStyles(theme);
 };
 
-export {drawerToggles};
+const getActiveTabStyles = (theme) => css`
+  color: ${theme.palette.primary.main};
+
+  .MuiSvgIcon-root {
+    color: ${theme.palette.primary.main};
+  }
+`;
+
+const tabToggle = ({active, theme}) => {
+  if (active) return getActiveTabStyles(theme);
+};
+
+export {drawerToggles, tabToggle};

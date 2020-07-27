@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
-import {drawerToggles} from './functions';
+import ListItem from '@material-ui/core/ListItem';
+import {drawerToggles, tabToggle} from './functions';
 import {drawerWidth} from './constants';
 
 const Root = styled.div`
@@ -25,8 +26,9 @@ const CustomDrawer = styled(Drawer)`
     ${drawerToggles}
   }
 
-  .MuiSvgIcon-root,.MuiDrawer-paper {
-    color: ${({theme}) => theme.palette.secondary.contrastText} !important;
+  .MuiSvgIcon-root,
+  .MuiDrawer-paper {
+    color: ${({theme}) => theme.palette.secondary.contrastText};
   }
 `;
 
@@ -43,4 +45,15 @@ const CustomIconButton = styled(IconButton)`
   margin-right: 36px;
 `;
 
-export {CustomDrawer, Content, Root, CustomAppBar, CustomIconButton};
+const CustomListItem = styled(ListItem)`
+  ${tabToggle}
+`;
+
+export {
+  CustomDrawer,
+  Content,
+  Root,
+  CustomAppBar,
+  CustomIconButton,
+  CustomListItem,
+};
