@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
+import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
+import styled from 'styled-components';
 import {drawerToggles, tabToggle} from './functions';
 import {drawerWidth} from './constants';
 
@@ -50,10 +50,10 @@ const CustomListItem = styled(ListItem)`
 `;
 
 export {
-  CustomDrawer,
   Content,
-  Root,
   CustomAppBar,
+  CustomDrawer,
   CustomIconButton,
   CustomListItem,
+  Root,
 };

@@ -1,25 +1,36 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ListItemText from '@material-ui/core/ListItemText';
+import Description from '@material-ui/icons/Description';
+import Emoji from 'a11y-react-emoji';
 import IconButton from '@material-ui/core/IconButton';
 import Https from '@material-ui/icons/Https';
-import Description from '@material-ui/icons/Description';
-import {Link} from 'react-router-dom';
-import {useLocation} from 'react-router-dom';
+import List from '@material-ui/core/List';
+import ListItemText from '@material-ui/core/ListItemText';
+import MenuIcon from '@material-ui/icons/Menu';
+import PropTypes from 'prop-types';
+import React, {useState} from 'react';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import {
+  Content,
   CustomAppBar,
   CustomDrawer,
   CustomIconButton,
   CustomListItem,
-  Content,
   Root,
 } from './styles/elements';
+import {Link} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 
+/**
+ * Main Layout
+ *
+ * This is the main wrapper for every application view. It is
+ * intended to be at App.js in higher level thant <Switch> component
+ * since it is reused across views
+ *
+ * @param {{children: PropTypes.node}} props
+ * @return {PropTypes.node} Main App Layout
+ */
 const MainLayout = ({children}) => {
   const [open, setOpen] = useState(false);
 
@@ -27,26 +38,35 @@ const MainLayout = ({children}) => {
 
   return (
     <Root>
-      <CustomAppBar position="fixed" open={open}>
+      <CustomAppBar data-testid="appbar" position="fixed" open={open}>
         <Toolbar>
           <CustomIconButton
             color="inherit"
             aria-label="open drawer"
+            data-testid="toggle-drawer-button"
             onClick={() => setOpen(!open)}
             edge="start"
           >
             {open ? <ChevronLeftIcon /> : <MenuIcon />}
           </CustomIconButton>
           <Typography variant="h6" noWrap>
-            Enamel Dashboard 🐘
+            Enamel Dashboard <Emoji symbol="🐘" label="sheep"/>
           </Typography>
         </Toolbar>
       </CustomAppBar>
-      <CustomDrawer open={open} variant="permanent">
+      <CustomDrawer
+        open={open}
+        data-testid="navigation-drawer"
+        variant="permanent"
+      >
         <Toolbar />
         <List>
           <Link to="/about">
-            <CustomListItem active={pathname === '/about' ? 'true' : ''} button>
+            <CustomListItem
+              data-testid="about-navigation-button"
+              active={pathname === '/about' ? 'true' : ''}
+              button
+            >
               <IconButton>
                 <Description />
               </IconButton>
@@ -55,6 +75,7 @@ const MainLayout = ({children}) => {
           </Link>
           <Link to="/mixed-content">
             <CustomListItem
+              data-testid="mixed-content-navigation-button"
               active={pathname === '/mixed-content' ? 'true' : ''}
               button
             >

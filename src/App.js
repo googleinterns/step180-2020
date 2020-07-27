@@ -1,37 +1,37 @@
-import React from 'react';
-import MainLayout from './layouts/main';
-import {theme} from './config/theme';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import {ThemeProvider as StyledProvider} from 'styled-components';
-import {ThemeProvider, StylesProvider} from '@material-ui/core/styles';
 import About from './views/about';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import MainLayout from './layouts/main';
 import MixedContent from './views/mixed-content';
+import React from 'react';
+import {
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
 
+/**
+ * App Component
+ *
+ * This component handles global setup to wrap routes.
+ * It uses the following components and wrappers
+ *
+ * CssBaseline: is the css reset provided by material-ui
+ * MainLayout: Is the layout wrapper, with the navbar and sidebar
+ * Switch: It renders the provided component based on the path
+ *
+ * @return {PropTypes.node} App component
+ */
 const App = () => {
   return (
     <>
       <CssBaseline />
-      <StylesProvider injectFirst>
-        <StyledProvider theme={theme}>
-          <ThemeProvider theme={theme}>
-            <Router>
-              <MainLayout>
-                <Switch>
-                  <Route path="/about" component={About}/>
-                  <Route path="/mixed-content" component={MixedContent}/>
-                  <Redirect to="/about" />
-                </Switch>
-              </MainLayout>
-            </Router>
-          </ThemeProvider>
-        </StyledProvider>
-      </StylesProvider>
+      <MainLayout>
+        <Switch>
+          <Route path="/about" component={About} />
+          <Route path="/mixed-content" component={MixedContent} />
+          <Redirect to="/about" />
+        </Switch>
+      </MainLayout>
     </>
   );
 };
