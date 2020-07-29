@@ -2,8 +2,8 @@ name: Deploy NodeJS app to GCloud App Engine
 
 on:
   push:
-    branches: 
-      -  github-actions/deployment
+    branches:
+      - github-actions/deployment
 
 jobs:
   build:
@@ -11,32 +11,37 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [12.x]
 
     steps:
-    - uses: actions/checkout@v2
-      
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    
-    - name: Install dependencies
-      run: npm install
-      
-    - name: Run unit tests
-      run: npm run test
-      
-    - name: Build NodeJS and React application
-      run: npm build
-    
-    - uses: actions/checkout@v2
-    - name: Setup GCloud environment and authenticate
-      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-      with:
-        project_id: enamel-step-2020
-        service_account_key: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
- 
-    - name: Deploy to GCloud App Engine
-      run: gcloud app deploy --quiet
+      - uses: actions/checkout@v2
 
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install # will run `yarn install` command
+
+      - name: Run unit tests
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: test # will run `yarn test` command
+
+      - name: Build NodeJS and React application
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: build # will run `yarn build` command
+
+      - uses: actions/checkout@v2
+      - name: Setup GCloud environment and authenticate
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: enamel-step-2020
+          service_account_key: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
+
+      - name: Deploy to GCloud App Engine
+        run: gcloud app deploy --quiet
