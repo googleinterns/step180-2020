@@ -29,14 +29,14 @@ jobs:
       
     - name: Build NodeJS and React application
       run: npm build
-      
-    - name: Authenticate with GCloud
-      uses: actions/gcloud/auth@main
-      env:
-        GCLOUD_AUTH: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
+    
+    - uses: actions/checkout@v2
+    - name: Setup GCloud environment and authenticate
+      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        project_id: enamel-step-2020
+        service_account_key: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
  
     - name: Deploy to GCloud App Engine
-      uses: actions/gcloud/cli@main
-      with:
-        args: "app deploy --quiet --project=enamel-step-2020"
+      run: gcloud app deploy --quiet
 
