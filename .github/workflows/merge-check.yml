@@ -1,4 +1,4 @@
-name: Deploy NodeJS app to GCloud App Engine
+name: Code Quality Assurance and Automatic Testing
 
 on:
   pull_request:
@@ -25,6 +25,11 @@ jobs:
         uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install # will run `yarn install` command
+
+      - name: Check code style
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: lint . # will run `yarn test` command
 
       - name: Run unit tests
         uses: borales/actions-yarn@v2.0.0
