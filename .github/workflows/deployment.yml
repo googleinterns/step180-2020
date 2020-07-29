@@ -1,0 +1,42 @@
+name: Deploy NodeJS app to GCloud App Engine
+
+on:
+  push:
+    branches: 
+      -  github-actions/deployment
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Run unit tests
+      run: npm run test
+      
+    - name: Build NodeJS and React application
+      run: npm build
+      
+    - name: Authenticate with GCloud
+      uses: actions/gcloud/auth@main
+      env:
+        GCLOUD_AUTH: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
+ 
+    - name: Deploy to GCloud App Engine
+      uses: actions/gcloud/cli@main
+      with:
+        args: "app deploy --quiet --project=enamel-step-2020"
+
