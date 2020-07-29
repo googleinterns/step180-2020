@@ -3,7 +3,7 @@ name: Code Quality Assurance and Automatic Testing
 on:
   pull_request:
     branches:
-      - github-actions/deployment
+      - master
 
 jobs:
   qa:
