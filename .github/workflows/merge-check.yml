@@ -1,9 +1,9 @@
 name: Deploy NodeJS app to GCloud App Engine
 
 on:
-  push:
+  pull_request:
     branches:
-      - master
+      - github-actions/deployment
 
 jobs:
   qa:
