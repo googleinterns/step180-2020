@@ -7,8 +7,13 @@ handlers:
     secure: always
     redirect_http_response_code: 301
   - url: /images/(.*\.(gif|png|jpg))$
-    static_files: public/images/\1
-    upload: public/images/.*\.(gif|png|jpg)$
+    static_files: build/images/\1
+    upload: build/images/.*\.(gif|png|jpg)$
+    secure: always
+    redirect_http_response_code: 301
+  - url: /css/(.*\.(css))$
+    static_files: build/css/\1
+    upload: build/css/.*\.(css)$
     secure: always
     redirect_http_response_code: 301
   - url: /(.*\.(json|ico|png|txt))$
