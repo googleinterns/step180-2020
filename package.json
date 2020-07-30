@@ -12,6 +12,7 @@
     "url": "https://github.com/googleinterns/step180-2020/issues"
   },
   "dependencies": {
+    "@google-cloud/bigquery": "^5.1.0",
     "@google-cloud/datastore": "^6.1.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
