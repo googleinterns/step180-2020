@@ -47,6 +47,8 @@ tlsApi.get('/tls-requests', async (req, res) => {
   res.json({
     description:
       queryDescription,
+    table:
+      table,
     result: rows,
   });
 });
