@@ -1,0 +1,32 @@
+runtime: nodejs12
+
+handlers:
+  - url: /static/js/(.*)
+    static_files: build/static/js/\1
+    upload: build/static/js/(.*)
+    secure: always
+    redirect_http_response_code: 301
+  - url: /images/(.*\.(gif|png|jpg))$
+    static_files: public/images/\1
+    upload: public/images/.*\.(gif|png|jpg)$
+    secure: always
+    redirect_http_response_code: 301
+  - url: /(.*\.(json|ico|png|txt))$
+    static_files: build/\1
+    upload: build/.*\.(json|ico|png|txt)$
+    secure: always
+    redirect_http_response_code: 301
+  - url: /api(\/.*)*
+    script: auto
+    secure: always
+    redirect_http_response_code: 301
+  - url: /.*
+    static_files: build/index.html
+    upload: build/index.html
+    secure: always
+    redirect_http_response_code: 301
+
+# Expose this key is not a security problem since it is only accessible
+# via Node App Engine runtime. So, no problem if it is hardcoded here.
+env_variables:
+  DATASTORE_SECRETS_KEY: NHnLk0kWnAk6PuxHO7rJ

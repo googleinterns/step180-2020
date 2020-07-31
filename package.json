@@ -1,0 +1,87 @@
+{
+  "name": "enamel-step",
+  "version": "0.1.0",
+  "description": "Dashboard for HTTP-related support to deprecate in the future by Chrome team",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/googleinterns/step180-2020.git"
+  },
+  "author": "Ernesto García <ernestognw@google.com>, Sofia Vega <sofiavega@google.com>, Jonathan Chávez <tabaresj@google.com>",
+  "bugs": {
+    "url": "https://github.com/googleinterns/step180-2020/issues"
+  },
+  "dependencies": {
+    "@google-cloud/datastore": "^6.1.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "concurrently": "^5.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "pg": "^8.3.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1",
+    "sequelize": "^6.3.3"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "start:server": "nodemon server/index.js --exec babel-node",
+    "start:client": "react-scripts start",
+    "test": "yarn test:server && yarn test:client",
+    "test:server": "jest --modulePathIgnorePatterns src dist",
+    "test:client": "react-scripts test",
+    "build": "yarn build:server && yarn build:client",
+    "build:server": "babel server --out-dir dist",
+    "build:client": "react-scripts build",
+    "dev": "concurrently -r \"yarn start:server\" \"yarn start:client\"",
+    "lint": "eslint"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "src/*"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "eslint": "^6.6.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.20.3",
+    "husky": "^4.2.5",
+    "jest": "24.9.0",
+    "supertest": "^4.0.2"
+  },
+  "engines": {
+    "yarn": ">=1.0.0 <2.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint ."
+    }
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  }
+}
