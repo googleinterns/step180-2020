@@ -6,13 +6,14 @@
  *
  */
 
-import {Router as router} from 'express';
-import {BigQuery} from '@google-cloud/bigquery';
+import { Router as router } from 'express';
+import { BigQuery } from '@google-cloud/bigquery';
 // This is a collection of all queries and their metadata in json.
 import * as queries from './queries.json';
 
 const mixedApi = router();
 const bigqueryClient = new BigQuery();
+const mock = true;
 
 mixedApi.get('/top-websites-with-mixed-content', async (req, res) => {
   const query = queries.TopWebsitesWithMixedContent;
@@ -29,7 +30,28 @@ mixedApi.get(
   '/top-government-websites-with-mixed-content',
   async (req, res) => {
     const query = queries.TopGovernmentWebsitesWithMixedContent;
-    const rows = await queryData(query);
+
+    let rows = [];
+
+    // TODO(tabaresj): Refactor mock functionality for all endpoints
+    if (mock) {
+      rows = [
+        { url: 'http://www.zhxz.gov.cn/', mixed_content_resources: 139 },
+        { url: 'http://mohesr.gov.iq/', mixed_content_resources: 135 },
+        {
+          url: 'http://kpp-krakow.policja.gov.pl/',
+          mixed_content_resources: 129,
+        },
+        {
+          url: 'http://www.primocircolotaranto.gov.it/',
+          mixed_content_resources: 125,
+        },
+      ];
+    } else {
+      rows = await queryData(query);
+    }
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
     res.json({
       description: query.description,
