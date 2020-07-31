@@ -5,9 +5,10 @@
  * It is recommended to create a router for every model in database, so
  * we can access them via /:resource
  */
-import { Router as router } from 'express';
-import { BigQuery } from '@google-cloud/bigquery';
+import {Router as router} from 'express';
+import {BigQuery} from '@google-cloud/bigquery';
 import mixedApi from './mixed-content';
+import tlsApi from './tls';
 
 // TODO(ernestognw): Setup routes for every model in db
 const api = router();
@@ -40,5 +41,6 @@ WHERE url NOT LIKE ("https%");`;
 });
 
 api.use('/mixed-content', mixedApi);
+api.use('/tls', tlsApi);
 
 export default api;
