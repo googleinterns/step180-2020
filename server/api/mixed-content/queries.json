@@ -1,0 +1,42 @@
+{
+  "TopWebsitesWithMixedContent": {
+    "description": "Top websites with most mixed content and the percentage of mixed content in it.",
+    "query": [
+      "SELECT",
+      "pages.url,",
+      "COUNT(CASE WHEN reqs.url LIKE 'http:%' THEN 1 END) mixed_reqs_total,",
+      "COUNT(CASE WHEN reqs.url LIKE 'http:%' THEN 1 END) / COUNT(0)",
+      "mixed_percentage",
+      "FROM",
+      "httparchive.sample_data.summary_requests_desktop_10k reqs",
+      "JOIN",
+      "httparchive.sample_data.summary_pages_desktop_10k pages",
+      "ON",
+      "reqs.pageid=pages.pageid",
+      "GROUP BY",
+      "pages.url",
+      "ORDER BY mixed_reqs_total DESC",
+      "LIMIT 10"
+    ],
+    "suggestedVisualizations": ["Histogram"]
+  },
+  "TopGovernmentWebsitesWithMixedContent": {
+    "description": "Top gubermental websites with most mixed content and the number of those resources.",
+    "query": [
+      "SELECT",
+      "pages.url, COUNT(*) mixed_content_resources",
+      "FROM",
+      "httparchive.sample_data.summary_pages_desktop_10k pages",
+      "JOIN",
+      "httparchive.sample_data.summary_requests_desktop_10k reqs",
+      "ON pages.pageid=reqs.pageid",
+      "WHERE",
+      "reqs.url LIKE 'http:%' AND (pages.url LIKE '%.gob%'",
+      "OR pages.url LIKE '%.gov%')",
+      "GROUP BY pages.url",
+      "ORDER BY COUNT(*) DESC",
+      "LIMIT 10"
+    ],
+    "suggestedVisualizations": ["Histogram"]
+  }
+}

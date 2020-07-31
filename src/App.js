@@ -1,10 +1,37 @@
+import About from './views/about';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import MainLayout from './layouts/main';
+import MixedContent from './views/mixed-content';
 import React from 'react';
+import {
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
 
+/**
+ * App Component
+ *
+ * This component handles global setup to wrap routes.
+ * It uses the following components and wrappers
+ *
+ * CssBaseline: is the css reset provided by material-ui
+ * MainLayout: Is the layout wrapper, with the navbar and sidebar
+ * Switch: It renders the provided component based on the path
+ *
+ * @return {ReactNode} App component
+ */
 const App = () => {
   return (
     <>
-      <img src="/images/general/placeholder.png" alt="Hello world" />
-      <p>Hello world</p>
+      <CssBaseline />
+      <MainLayout>
+        <Switch>
+          <Route path="/about" component={About} />
+          <Route path="/mixed-content" component={MixedContent} />
+          <Redirect to="/about" />
+        </Switch>
+      </MainLayout>
     </>
   );
 };

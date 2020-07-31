@@ -28,7 +28,7 @@ After that, follow the next steps:
 
 - If you're receiving a `[SequelizeConnectionError]: password authentication failed for user '<username>'`, please enter to postgres console using `sudo -u postgres psql` and change the password for the user you're trying to use. Also update .env accordingly
 
-- If there's a credential issue with BigQuery, generate app credentials from GCLOUD (.json file) and import that to the root of this project as `gcloud_creds.json`.
+- If there's a credential issue with BigQuery, generate app credentials from GCLOUD > IAM > Service Accounts > enamelbigquery, it is a json file. Import that to the root of this project as `gcloud_creds.json`. Finally add the path of that file to the .env (see .env.example).
 
 # Manual deployment
 
