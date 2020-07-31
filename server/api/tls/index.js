@@ -13,11 +13,15 @@ const bigqueryClient = new BigQuery();
 
 tlsApi.get('/tls-requests', async (req, res) => {
   const version = req.query.version;
-  const date = req.query.table;
+  const year = req.query.year;
+  const month = req.query.month;
   let table = 'httparchive.sample_data.requests_desktop_10k';
-  if (date != null) {
-    table = date;
+  // NOTE: This query could cost more than 2 TB if ran over recent tables
+  // Sample data (default) or tables from 2016 are not as costly
+  if (year != null && month !=null) {
+    table = 'httparchive.requests.'+year+'_'+month+'_01_desktop';
   }
+  let queryDescription = 'Number of requests per TLS version';
   let sqlQuery = `SELECT tls, COUNT(tls) as requests
   FROM
   (SELECT JSON_EXTRACT(payload, '$._securityDetails.protocol') as tls
@@ -25,6 +29,7 @@ tlsApi.get('/tls-requests', async (req, res) => {
   where url like ("https%"))
   GROUP BY tls`;
   if (version != null) {
+    queryDescription = 'Number of requests that use TLS '+version;
     sqlQuery = `SELECT COUNT(url) as requests
     FROM `+table+`
     WHERE url like ("https%") AND 
@@ -41,7 +46,7 @@ tlsApi.get('/tls-requests', async (req, res) => {
 
   res.json({
     description:
-      'Number of requests per TLS version',
+      queryDescription,
     result: rows,
   });
 });
