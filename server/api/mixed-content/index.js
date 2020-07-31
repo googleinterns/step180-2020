@@ -1,45 +1,59 @@
 /**
  * @fileoverview API Route
- * Route for mixed content queries
+ * Route for mixed content queries, it uses BigQuery's client and express's router.
  *
- * Here are all routes for BigQuery mixed-content related queries, each has
- * a description and suggestion for a visualization.
+ * Queries are stored in /.queries.json, each has a name, description, sqlQuery and suggested visualizations.
+ *
  */
 
-import { Router as router } from 'express';
-import { BigQuery } from '@google-cloud/bigquery';
+import {Router as router} from 'express';
+import {BigQuery} from '@google-cloud/bigquery';
+// This is a collection of all queries and their metadata in json.
+import * as queries from './queries.json';
 
 const mixedApi = router();
 const bigqueryClient = new BigQuery();
 
 mixedApi.get('/top-websites-with-mixed-content', async (req, res) => {
-  const sqlQuery = `SELECT
-    pages.url,
-    COUNT(CASE WHEN reqs.url LIKE "http:%" THEN 1 END) mixed_reqs_total,
-    COUNT(CASE WHEN reqs.url LIKE "http:%" THEN 1 END) / COUNT(0) mixed_percentage
-  FROM
-    httparchive.sample_data.summary_requests_desktop_10k reqs
-  JOIN
-    httparchive.sample_data.summary_pages_desktop_10k pages
-  ON
-    reqs.pageid=pages.pageid
-  GROUP BY
-    pages.url
-   ORDER BY mixed_reqs_total DESC
-   LIMIT 10`;
-
-  const options = {
-    query: sqlQuery,
-    location: 'US',
-  };
-
-  const [rows] = await bigqueryClient.query(options);
+  const query = queries.TopWebsitesWithMixedContent;
+  const rows = await queryData(query);
 
   res.json({
-    description:
-      'Top websites with most mixed content and the percentage of mixed content in it.',
+    description: query.description,
     result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
   });
 });
+
+mixedApi.get(
+  '/top-government-websites-with-mixed-content',
+  async (req, res) => {
+    const query = queries.TopGovernmentWebsitesWithMixedContent;
+    const rows = await queryData(query);
+
+    res.json({
+      description: query.description,
+      result: rows,
+      suggestedVisualizations: query.suggestedVisualizations,
+    });
+  }
+);
+
+/**
+ * Makes a BigQuery query given the query from ./queries.json
+ * @param {object} data Query from /.queries.json
+ * @return {object} Array of rows (result of the query).
+ */
+const queryData = async (data) => {
+  // Query is joined because it is partitioned in an array of instructions.
+  data.query = data.query.join(' ');
+
+  const [rows] = await bigqueryClient.query({
+    query: data.query,
+    location: 'US',
+  });
+
+  return rows;
+};
 
 export default mixedApi;

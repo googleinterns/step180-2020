@@ -5,8 +5,8 @@
  * It is recommended to create a router for every model in database, so
  * we can access them via /:resource
  */
-import { Router as router } from 'express';
-import { BigQuery } from '@google-cloud/bigquery';
+import {Router as router} from 'express';
+import {BigQuery} from '@google-cloud/bigquery';
 import mixedApi from './mixed-content';
 
 // TODO(ernestognw): Setup routes for every model in db
