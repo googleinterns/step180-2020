@@ -1,7 +1,7 @@
 {
   "name": "enamel-step",
   "version": "0.1.0",
-  "description": "Dashboard for HTTP-related stuff to deprecate in the future by Chrome team",
+  "description": "Dashboard for HTTP-related support to deprecate in the future by Chrome team",
   "private": true,
   "repository": {
     "type": "git",
