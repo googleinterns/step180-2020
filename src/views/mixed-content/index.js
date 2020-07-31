@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { ResponsiveBar } from '@nivo/bar';
-import axios from 'axios';
+import React from 'react';
+import TopGovernmentWebsitesWithMixedContent
+  from './top-government-websites-with-mixed-content';
 
 /**
  * Mixed Content View
@@ -14,27 +14,10 @@ import axios from 'axios';
  */
 const MixedContent = () => {
   // TO-DO(ernestognw): To fill with mixed-content data graphs
-  const [data, setData] = useState(0);
-
-  useEffect(() => {
-    axios
-      .get(
-        'http://localhost:4000/api/mixed-content/top-government-websites-with-mixed-content'
-      )
-      .then((response) => {
-        console.log('llamada');
-        setData(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <div data-testid="mixed-content">
-      <p>Mixed Content</p>
-      MOCK DATA:
-      {JSON.stringify(data.result)}
+      <TopGovernmentWebsitesWithMixedContent />
     </div>
   );
 };
