@@ -1,0 +1,18 @@
+{
+    "TlsRequests":
+    {
+        "description": "test",
+        "query": [
+            "SELECT tls, COUNT(tls) as requests",
+            "FROM",
+            "(SELECT JSON_EXTRACT(payload, '$._securityDetails.protocol') as tls",
+            "FROM",
+            "httparchive.sample_data.requests_desktop_10k",
+            "where url like (\"https%\"))",
+            "GROUP BY tls"
+        ],
+        "deafultSize": "Number of requests per TLS version",
+        "tableIndex": "4",
+        "suggestedVisualizations": ["Pie chart"]
+    }
+}

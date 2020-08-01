@@ -7,10 +7,12 @@
 
 import {Router as router} from 'express';
 import {BigQuery} from '@google-cloud/bigquery';
+import * as queries from './queries.json';
 
 const tlsApi = router();
 const bigqueryClient = new BigQuery();
 
+// This route doesn't use queries.json
 tlsApi.get('/tls-requests', async (req, res) => {
   const version = req.query.version;
   const year = req.query.year;
@@ -25,7 +27,8 @@ tlsApi.get('/tls-requests', async (req, res) => {
   let sqlQuery = `SELECT tls, COUNT(tls) as requests
   FROM
   (SELECT JSON_EXTRACT(payload, '$._securityDetails.protocol') as tls
-  FROM `+table+`
+  FROM 
+  `+table+`
   where url like ("https%"))
   GROUP BY tls`;
   if (version != null) {
@@ -52,5 +55,42 @@ tlsApi.get('/tls-requests', async (req, res) => {
     result: rows,
   });
 });
+
+// This route uses queries.json but also accepts
+// 'table' param or 'year' and 'month' param
+tlsApi.get('/test-json', async (req, res) => {
+  const query = queries.TlsRequests;
+  let table = req.query.table;
+  const year = req.query.year;
+  const month = req.query.month;
+  if (year != null && month !=null) {
+    table = 'httparchive.requests.'+year+'_'+month+'_01_desktop';
+  }
+  const rows = await queryData(query.query, table, query.tableIndex);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    defaultSize: query.deafultSize,
+    suggestedVisualizations: query.suggestedVisualizations,
+    tableUsed: table,
+  });
+});
+
+// TODO(sofiavega) find a way to make this function usable for
+// all or most queries
+const queryData = async (data, table, tableIndex) => {
+  // Query is joined because it is partitioned in an array of instructions.
+  if (table!=null) {
+    data[tableIndex] = table;
+  }
+  data = data.join(' ');
+  const [rows] = await bigqueryClient.query({
+    query: data,
+    location: 'US',
+  });
+
+  return rows;
+};
 
 export default tlsApi;
