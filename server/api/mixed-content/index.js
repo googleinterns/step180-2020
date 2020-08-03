@@ -18,7 +18,7 @@ const bigqueryClient = new BigQuery();
 const mock = true;
 
 mixedApi.get('/top-websites-with-mixed-content', async (req, res) => {
-  const query = queries.TopWebsitesWithMixedContent;
+  const query = await queries.TopWebsitesWithMixedContent;
   const rows = await queryData(query);
 
   res.json({
@@ -28,10 +28,23 @@ mixedApi.get('/top-websites-with-mixed-content', async (req, res) => {
   });
 });
 
+mixedApi.get('/top-countries-with-more-websites-with-mixed-content',
+    async (req, res) => {
+      const query = await queries.TopCountriesWithMoreWebsitesWithMixedContent;
+      const rows = await queryData(query);
+
+      res.json({
+        description: query.description,
+        result: rows,
+        suggestedVisualizations: query.suggestedVisualizations,
+      });
+    },
+);
+
 mixedApi.get(
     '/top-government-websites-with-mixed-content',
     async (req, res) => {
-      const query = queries.TopGovernmentWebsitesWithMixedContent;
+      const query = await queries.TopGovernmentWebsitesWithMixedContent;
 
       let rows = [];
 
@@ -53,7 +66,6 @@ mixedApi.get(
         rows = await queryData(query);
       }
 
-      res.setHeader('Access-Control-Allow-Origin', '*');
 
       res.json({
         description: query.description,
@@ -70,7 +82,12 @@ mixedApi.get(
  */
 const queryData = async (data) => {
   // Query is joined because it is partitioned in an array of instructions.
-  data.query = data.query.join(' ');
+  // TODO(tabaresj): Sometimes array is automatically converted in
+  // single string, fix.
+  if (typeof data.query === 'array') {
+    data.query = data.query.join(' ');
+  }
+
 
   const [rows] = await bigqueryClient.query({
     query: data.query,
