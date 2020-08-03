@@ -41,7 +41,7 @@ const getClosedDrawerStyles = (theme) => css`
  * @param {{open: boolean, theme: object}} props
  * @return {css} styles according to open state
  */
-const getToggleDrawerStyles = ({open, theme}) => {
+const getDrawerStyles = ({open, theme}) => {
   if (open) return getOpenDrawerStyles(theme);
   return getClosedDrawerStyles(theme);
 };
@@ -65,4 +65,4 @@ const getActiveTabStyles = ({active, theme}) => {
   }
 };
 
-export {getToggleDrawerStyles, getActiveTabStyles};
+export {getDrawerStyles, getActiveTabStyles};
