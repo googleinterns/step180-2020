@@ -1,6 +1,6 @@
 # Chrome Enamel STEP interns project repository :elephant:
 
-Dashboard for HTTP-related stuff to deprecate in the future by Chrome team
+Dashboard for HTTP-related support to deprecate in the future by Chrome team
 
 # Running locally
 
@@ -14,7 +14,7 @@ If you don't have any of the prerequisites, go to [setup section](#setup).
 
 After that, follow the next steps:
 
-1. Run `sudo -u postgres psql` to enter postgres console
+1. Run `sudo -u postgres psql` to enter the postgres console
 2. Then, run `CREATE DATABASE <your-database>`, this db will be used in the project, so keep the name
 3. Copy .env.example into a .env file
 4. Replace the variables with your DB user, password and the database you've recently created, host should be localhost
@@ -95,7 +95,11 @@ and verify it is running with:
 
 #### Recomended:
 
-- Run `sudo -u postgres psql` to enter postgres console
+<<<<<<< HEAD
+
+- # Run `sudo -u postgres psql` to enter postgres console
+- Run `sudo -u postgres psql` to enter the postgres console
+  > > > > > > > a08d4a5777d94d8c8bb1d456e666f7fda81ae7a0
 - Once there, you can run `ALTER USER postgres PASSWORD '<new-password>'`
 - This is done to avoid an issue with local DB connection, 'cause it requires to have a password
 
