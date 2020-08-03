@@ -2,7 +2,9 @@ import {Sequelize} from 'sequelize';
 import {db} from '../config';
 
 /**
- * Script to handle database connection.
+ * Database connection handler
+ *
+ * Starts and handle connection with database
  *
  * Take config file into consideration, since it is
  * where the database access variables will be gotten.

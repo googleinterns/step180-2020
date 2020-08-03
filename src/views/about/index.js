@@ -3,9 +3,9 @@ import React from 'react';
 /**
  * About View
  *
- * This component should have everything to be rendered
- * under /about route. It is intended to have a description
- * about the data and what we're doing with the app
+ * Renders everything under /about route.
+ * It contains a description of the data and the purpose for
+ * the app.
  *
  * @return {ReactNode} About View
  */

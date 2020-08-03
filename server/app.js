@@ -1,11 +1,12 @@
 /**
  * @fileoverview Express app declaration
- * Here is were the express application is initialized.
+ *
+ * Initializes server application
  *
  * If you'll add some new routes, it is recommended to do
  * it under ./api folder, which holds a the API router
  *
- * Also, if the server is goin to expose static files, it would
+ * Also, if the server is going to expose static files, it would
  * be okay to add the express middleware here to handle them
  */
 
