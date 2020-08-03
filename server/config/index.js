@@ -1,9 +1,9 @@
 /**
  * @fileoverview Config file to centralize environmental variables read
  *
- * This file is intended to centralize access to environmental variables,
- * so we can keep a track of their use based on this file. Also, allows
- * to standardize the way to access and review them.
+ * Centralize access to environmental variables, so developers can keep a
+ * track of their use based on this file. Also, allows to standardize the
+ * way to access and review them.
  *
  * NOTE: Environmental variables must be taken from /.env file, so, when
  * the project is in development environment, you must provide the .env file
