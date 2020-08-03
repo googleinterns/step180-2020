@@ -27,7 +27,6 @@ const getClosedDrawerStyles = (theme) => css`
     duration: theme.transitions.duration.leavingScreen,
   })};
   overflow-x: hidden;
-  ${console.log(theme.spacing(3))}
   width: ${theme.spacing(9)}px;
 
   .MuiListItemText-root {
