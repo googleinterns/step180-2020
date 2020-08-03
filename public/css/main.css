@@ -1,0 +1,7 @@
+/* Links style reset */
+body a {
+  color: inherit;
+  cursor: pointer;
+  display: contents;
+  text-decoration: none;
+}
