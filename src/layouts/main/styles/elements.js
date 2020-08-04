@@ -3,7 +3,7 @@ import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
 import styled from 'styled-components';
-import {getToggleDrawerStyles, getActiveTabStyles} from './functions';
+import {getDrawerStyles, getActiveTabStyles} from './functions';
 import {drawerWidth} from './constants';
 
 const Content = styled.main`
@@ -20,7 +20,7 @@ const CustomDrawer = styled(Drawer)`
   flex-shrink: 0;
   white-space: nowrap;
 
-  ${getToggleDrawerStyles}
+  ${getDrawerStyles}
 
   .MuiButtonBase-root {
     justify-content: center;
@@ -28,7 +28,7 @@ const CustomDrawer = styled(Drawer)`
 
   .MuiDrawer-paper {
     background-color: ${({theme}) => theme.palette.secondary.main};
-    ${getToggleDrawerStyles}
+    ${getDrawerStyles}
   }
 
   .MuiSvgIcon-root,

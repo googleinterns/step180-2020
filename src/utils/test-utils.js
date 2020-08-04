@@ -22,7 +22,7 @@ import {render} from '@testing-library/react';
  *    children is the component to be rendered in tests
  * @return {ReactNode} Enhanced children with providers
  */
-const AllTheProviders = ({children}) => {
+const AllProviders = ({children}) => {
   return (
     <StylesProvider injectFirst>
       <StyledProvider theme={theme}>
@@ -34,7 +34,7 @@ const AllTheProviders = ({children}) => {
   );
 };
 
-AllTheProviders.propTypes = {
+AllProviders.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
@@ -47,7 +47,7 @@ AllTheProviders.propTypes = {
  * @return {HTMLNode} rendered component
  */
 const customRender = (ui, options) =>
-  render(ui, {wrapper: AllTheProviders, ...options});
+  render(ui, {wrapper: AllProviders, ...options});
 
 // re-export everything
 export * from '@testing-library/react';
