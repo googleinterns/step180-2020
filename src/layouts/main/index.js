@@ -24,11 +24,11 @@ import {useLocation} from 'react-router-dom';
 /**
  * Main Layout
  *
- * This is the main wrapper for every application view. It is
- * intended to be at App.js in higher level thant <Switch> component
- * since it is reused across views
+ * Wraps every application view. It is used at src/App.js
+ * in a higher level than <Switch> component, since it is reused
+ * accross views
  *
- * @param {{children: ReactNode} } props
+ * @param {{children: ReactNode}} props
  * @return {ReactNode} Main App Layout
  */
 const MainLayout = ({children}) => {

@@ -6,14 +6,13 @@ import {api} from '../../../client';
 import {ResponsiveBar} from '@nivo/bar';
 import {ChartContainer} from './elements';
 
-const TopGovernmentWebsitesWithMixedContent = () => {
+const MixedContentPercentageHistogram = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
     api
-        .get('/api/mixed-content/top-government'+
-        '-websites-with-mixed-content')
+        .get('/api/mixed-content/mixed-content-percentage-histogram')
         .then((response) => {
           setData(response.data.result);
           setLoading(false);
@@ -26,28 +25,27 @@ const TopGovernmentWebsitesWithMixedContent = () => {
   return (
     <Card>
       <CardContent>
-        <h2>Top government websites with more mixed content</h2>
-        <p>HTTPS Government Websites that have
-          the most resources loaded with http.</p>
+        <h2>Mixed content percentage</h2>
+        <p>Histogram of the percentage of mixed content of all websites.</p>
         <ChartContainer>
           {!loading ? (
             <ResponsiveBar
               data={data}
               colors={{scheme: 'accent'}}
-              colorBy='index'
+              colorBy='id'
               keys={[
-                'mixed_content_resources',
+                'total',
               ]}
-              indexBy="url"
+              indexBy="mixed_percentage"
               axisLeft={{
-                legend: 'Mixed content resources',
+                legend: 'Total websites',
                 legendPosition: 'middle',
-                legendOffset: -40,
+                legendOffset: -50,
               }}
               axisBottom={{
                 tickSize: 5,
                 tickPadding: 5,
-                legend: 'URLs',
+                legend: 'Mixed content percentage in the website.',
                 legendPosition: 'middle',
                 legendOffset: 32,
               }}
@@ -63,4 +61,4 @@ const TopGovernmentWebsitesWithMixedContent = () => {
   );
 };
 
-export default TopGovernmentWebsitesWithMixedContent;
+export default MixedContentPercentageHistogram;

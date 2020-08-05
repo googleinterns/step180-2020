@@ -13,8 +13,8 @@ import {
 /**
  * App Component
  *
- * This component handles global setup to wrap routes.
- * It uses the following components and wrappers
+ * Handle global setup to wrap routes.
+ * Also, it uses the following components and wrappers:
  *
  * CssBaseline: is the css reset provided by material-ui
  * MainLayout: Is the layout wrapper, with the navbar and sidebar

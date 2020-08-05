@@ -22,7 +22,7 @@ test('Route buttons are active on their corresponding routes', () => {
   const aboutNavButton = getByTestId('about-navigation-button');
   const mixedContentNavButton = getByTestId('mixed-content-navigation-button');
 
-  // Since app starts at / we need to redirect to /about
+  // Since app starts at / is needed to redirect to /about
   // Change route to /mixed-content
   fireEvent.click(aboutNavButton);
 
@@ -52,6 +52,6 @@ test('Drawer opens and closes', () => {
 
   // Close drawer
   fireEvent.click(toggleDrawerButton);
-  expect(window.getComputedStyle(drawer).width).toBe('73px');
+  expect(window.getComputedStyle(drawer).width).toBe('72px');
   expect(appbar).not.toHaveAttribute('open');
 });
