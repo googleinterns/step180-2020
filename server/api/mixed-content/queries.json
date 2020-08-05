@@ -18,7 +18,7 @@
       "ORDER BY mixed_reqs_total DESC",
       "LIMIT 10"
     ],
-    "suggestedVisualizations": ["Histogram"]
+    "suggestedVisualizations": ["Bar chart"]
   },
   "TopGovernmentWebsitesWithMixedContent": {
     "description": "Top gubermental websites with most mixed content and the number of those resources.",
@@ -37,6 +37,14 @@
       "ORDER BY COUNT(*) DESC",
       "LIMIT 10"
     ],
-    "suggestedVisualizations": ["Histogram"]
+    "suggestedVisualizations": ["Bar chart"]
+  },
+  "TopCountriesWithMoreWebsitesWithMixedContent": {
+    "description": "Countries with more government websites that have mixed content",
+    "query": [
+      "SELECT tld id, total_government_websites_with_mxcont value FROM `enamel-step-2020.httparchive.government_websites_per_country_with_mixed_content`",
+      " LIMIT 20"
+    ],
+    "suggestedVisualizations": ["Bar chart", "Map"]
   }
 }

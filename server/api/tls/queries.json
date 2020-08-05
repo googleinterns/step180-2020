@@ -3,12 +3,13 @@
     {
         "description": "test",
         "query": [
-            "SELECT tls, COUNT(tls) as requests",
+            "SELECT tls as id, COUNT(tls) as value",
             "FROM",
             "(SELECT JSON_EXTRACT(payload, '$._securityDetails.protocol') as tls",
             "FROM",
-            "httparchive.sample_data.requests_desktop_10k",
+            "httparchive.smaller_sample_requests",
             "where url like (\"https%\"))",
+            "where tls is not null",
             "GROUP BY tls"
         ],
         "deafultSize": "Number of requests per TLS version",

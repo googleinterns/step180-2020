@@ -12,6 +12,14 @@ import * as queries from './queries.json';
 const tlsApi = router();
 const bigqueryClient = new BigQuery();
 
+
+tlsApi.get('/test',
+    async (req, res) => {
+      res.json({
+        description: 'hello world',
+      });
+    },
+);
 // This route doesn't use queries.json
 tlsApi.get('/tls-requests', async (req, res) => {
   const version = req.query.version;
@@ -55,7 +63,6 @@ tlsApi.get('/tls-requests', async (req, res) => {
     result: rows,
   });
 });
-
 // This route uses queries.json but also accepts
 // 'table' param or 'year' and 'month' param
 tlsApi.get('/test-json', async (req, res) => {

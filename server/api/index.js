@@ -39,8 +39,12 @@ WHERE url NOT LIKE ("https%");`;
     result: rows,
   });
 });
-
-api.use('/mixed-content', mixedApi);
-api.use('/tls', tlsApi);
-
+api.use('/tls', (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+}, tlsApi);
+api.use('/mixed-content', (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+}, mixedApi);
 export default api;
