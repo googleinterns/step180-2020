@@ -5,12 +5,17 @@ import {api} from '../../../client';
 import {ResponsivePie} from '@nivo/pie';
 import {ChartContainer} from '../../mixed-content/top-countries-with-more-websites-with-mixed-content/elements';
 
+/**
+ * This component shows a pie chart with the number of requests
+ * per TLS version in the sample data requests table.
+ *
+ * @return {ReactNode} TLS versions component
+ */
 const TLSversion = () => {
   const [data, setData] = useState([]);
-  useEffect(()=>{
-    api.get('/api/tls/test-json').then((response)=>{
+  useEffect(() => {
+    api.get('/api/tls/test-json').then((response) => {
       setData(response.data.result);
-      // console.log(JSON.stringify(data));
     }).catch((err) => {
       console.log(err);
     });
@@ -18,8 +23,8 @@ const TLSversion = () => {
   return (
     <Card>
       <CardContent>
-        <h1>Tls versions</h1>
-        <p>{JSON.stringify(data)}</p>
+        <h1>TLS versions</h1>
+        <p>Number of requests by TLS version</p>
         <ChartContainer>
           <ResponsivePie
             data={data}

@@ -2,12 +2,14 @@ import React from 'react';
 import TLSversion from './tls-version/index.js';
 
 /**
- *@return {ReactNode}
+ * TLS view
+ * List of components for TLS-related visualizations
+ *@return {ReactNode} TLS view
  */
 const tls = () => {
   return (
     <div data-testid="tls">
-      <h1>Hola</h1>
+      <h1>TLS Visualizations</h1>
       <TLSversion/>
     </div>
   );
