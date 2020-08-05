@@ -1,8 +1,9 @@
 /**
  * @fileoverview Server initialization and environment variables setup
  *
- * This file should only be used in production environment.
- * It takes the secret variables stored in datastore, and set them into
+ * Should only be used in production environment.
+ *
+ * Take the secret variables stored in datastore, and set them into
  * the process execution environment.
  *
  * After that, it starts a child process running the server. This is done to
@@ -13,7 +14,7 @@
  * to setup a not secret environmental variable, feel free to add
  * it into app.yaml file
  *
- * By know, this secret handling strategy seems too difficult, so a different
+ * By now, this secret handling strategy seems too difficult, so a different
  * approach is welcome if you have one.
  *
  * NOTE: It is not written in ES6 since it is not built during the yarn build
@@ -27,8 +28,7 @@ const childProcess = require('child_process');
 /**
  * Script to execute child process to run server with custom env variables
  *
- * This script will help to run the server inside the main process, to keep
- * environmental variables
+ * Runs the server inside the main process, to keep environmental variables
  *
  * @param {string} scriptPath in which the script to run is
  * @return {Promise} that rejects when child process is done
@@ -59,7 +59,9 @@ const runScript = (scriptPath) => new Promise((resolve, reject) => {
 });
 
 /**
- * To setup environmental variables from datastore and initialize
+ * Server initialization
+ *
+ * Setup environmental variables from datastore and initialize
  * the server build in a childprocess
  */
 const startServer = async () => {

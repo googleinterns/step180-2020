@@ -1,9 +1,9 @@
 /**
  * @fileoverview React entry point
  *
- * This file is used as the entry point for every component
+ * Entry point for every component in the app, and
  * wrote inside src. It is bundled via webpack and used in
- * /public/index.html to render the app.
+ * /public/index.html to render/
  */
 import App from './App';
 import React from 'react';
@@ -16,7 +16,7 @@ import {ThemeProvider, StylesProvider} from '@material-ui/core/styles';
 /**
  * Entry point
  *
- * The app to be rendered needs the following providers to work:
+ * Returns the app to be rendered needs the following providers to work:
  *
  * StylesProvider: it provides suppor for styled-components
  * StyledProvider: it provides context to access theme variables
