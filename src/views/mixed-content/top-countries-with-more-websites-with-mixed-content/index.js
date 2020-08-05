@@ -15,7 +15,7 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
   useEffect(() => {
     api
         .get('/api/mixed-content/top-countries' +
-        '-with-more-websites-with-mixed-content')
+        '-with-more-government-websites-with-mixed-content')
         .then((response) => {
           setData(response.data.result);
           console.log('fetched');
@@ -29,9 +29,8 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
   return (
     <Card>
       <CardContent>
-        <h2>Top government websites with more mixed content</h2>
-        <p>Total number of HTTPS Government
-          websites that contain mixed content.</p>
+        <h2>Top countries with more government websites with mixed content</h2>
+        <p>Countries with more government websites that have mixed content</p>
         <ChartContainer>
           {!loading ? (
             <ResponsiveChoropleth
@@ -49,6 +48,13 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
               graticuleLineColor="#dddddd"
               borderWidth={0.5}
               borderColor="#152538"
+              axisBottom={{
+                tickSize: 5,
+                tickPadding: 5,
+                legend: 'Countries',
+                legendPosition: 'middle',
+                legendOffset: 32,
+              }}
               legends={[
                 {
                   anchor: 'bottom-left',

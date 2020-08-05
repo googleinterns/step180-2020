@@ -3,6 +3,10 @@ import TopGovernmentWebsitesWithMixedContent
   from './top-government-websites-with-mixed-content';
 import TopCountriesWithMoreWebsitesWithMixedContent
   from './top-countries-with-more-websites-with-mixed-content';
+import TopWebsitesWithMixedContent
+  from './top-websites-with-mixed-content';
+import MixedContentPercentageHistogram
+  from './mixed-content-percentage-histogram';
 
 /**
  * Mixed Content View
@@ -15,8 +19,6 @@ import TopCountriesWithMoreWebsitesWithMixedContent
  * @return {ReactNode} Mixed Content View
  */
 const MixedContent = () => {
-  // TO-DO(ernestognw): To fill with mixed-content data graphs
-
   return (
     <div data-testid="mixed-content">
       <h1>Mixed Content</h1>
@@ -26,6 +28,8 @@ const MixedContent = () => {
          positives such as gov.hello.mywebsite.com.</p>
       <TopGovernmentWebsitesWithMixedContent />
       <TopCountriesWithMoreWebsitesWithMixedContent/>
+      <TopWebsitesWithMixedContent/>
+      <MixedContentPercentageHistogram/>
     </div>
   );
 };
