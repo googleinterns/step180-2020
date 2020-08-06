@@ -3,7 +3,7 @@ name: Deploy NodeJS app to GCloud App Engine
 on:
   push:
     branches:
-      - fix/move-secrets-to-gcloud-secret-manager
+      - master
 
 jobs:
   build:
