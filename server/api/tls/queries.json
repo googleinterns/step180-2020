@@ -1,7 +1,7 @@
 {
     "TlsRequests":
     {
-        "description": "test",
+        "description": "Number of requests per TLS version",
         "query": [
             "SELECT tls as id, COUNT(tls) as value",
             "FROM",

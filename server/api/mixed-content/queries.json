@@ -53,5 +53,18 @@
       "SELECT mixed_percentage, COUNT(*) total FROM `enamel-step-2020.httparchive.percentage_mixed_content`",
       " GROUP BY mixed_percentage ORDER BY mixed_percentage ASC;"
     ]
+  },
+  "MixedContentByType": {
+    "description": "",
+    "query": [
+      "SELECT r.mimeType as id, ",
+  "COUNT(*) value,",
+  "COUNT(DISTINCT p.pageid) pages",
+  "FROM httparchive.sample_data.summary_requests_desktop_10k r",
+  "INNER JOIN httparchive.sample_data.summary_pages_desktop_10k p",
+  "ON r.pageid=p.pageid",
+  "WHERE r.url NOT LIKE (\"https%\") AND p.url LIKE (\"https%\")",
+  "GROUP BY r.mimeType;"
+    ]
   }
 }

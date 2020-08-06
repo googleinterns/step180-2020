@@ -68,6 +68,16 @@ mixedApi.get('/mixed-content-percentage-histogram', async (req, res) =>{
   });
 });
 
+mixedApi.get('/mixed-content-by-type', async (req, res) =>{
+  const query = await queries.MixedContentByType;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    result: rows,
+  });
+});
+
 
 /**
  * Makes a BigQuery query given the query from ./queries.json
