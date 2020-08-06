@@ -31,11 +31,17 @@ jobs:
         with:
           cmd: test # will run `yarn test` command
 
+      - name: Setup GCloud environment and authenticate
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: enamel-step-2020
+          service_account_key: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
+          export_default_credentials: true
+
       - name: Load secrets from GCloud Secret Manager
         id: secrets
         uses: GoogleCloudPlatform/github-actions/get-secretmanager-secrets@master
         with:
-          credentials: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
           secrets: |-
             DB_DATABASE: enamel-step-2020/DB_DATABASE
             DB_HOST: enamel-step-2020/DB_HOST
@@ -53,12 +59,6 @@ jobs:
           DB_PASSWORD: ${{ steps.secrets.outputs.DB_PASSWORD }}
           DB_USERNAME: ${{ steps.secrets.outputs.DB_USERNAME }}
           GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.secrets.outputs.GOOGLE_APPLICATION_CREDENTIALS }}
-
-      - name: Setup GCloud environment and authenticate
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
-          project_id: enamel-step-2020
-          service_account_key: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
 
       - name: Deploy to GCloud App Engine
         run: gcloud app deploy --quiet
