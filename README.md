@@ -54,6 +54,16 @@ To test the project, you can run:
     - `yarn test:server`
     - `yarn test:client`
 
+# Adding environmental variables
+
+During development, you'll need to add new environmental variables. For that, please follow the next steps:
+
+1. Update `.env.example` and this README.md accordingly
+2. Add the new environmental variables to your GCloud Secret Manager
+3. Reference the new environmental variable in `.github/workflows/deployment.yml`
+
+Otherwise, could affect the [Automatic Deployment](#automatic-deployment)
+
 # Setup
 
 ## NodeJS

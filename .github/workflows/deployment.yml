@@ -3,7 +3,7 @@ name: Deploy NodeJS app to GCloud App Engine
 on:
   push:
     branches:
-      - master
+      - fix/move-secrets-to-gcloud-secret-manager
 
 jobs:
   build:
@@ -31,10 +31,28 @@ jobs:
         with:
           cmd: test # will run `yarn test` command
 
+      - name: Load secrets from GCloud Secret Manager
+        id: secrets
+        uses: GoogleCloudPlatform/github-actions/get-secretmanager-secrets@master
+        with:
+          credentials: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
+          secrets: |-
+            DB_DATABASE: enamel-step-2020/DB_DATABASE
+            DB_HOST: enamel-step-2020/DB_HOST
+            DB_PASSWORD: enamel-step-2020/DB_PASSWORD
+            DB_USERNAME: enamel-step-2020/DB_USERNAME
+            GOOGLE_APPLICATION_CREDENTIALS: enamel-step-2020/GOOGLE_APPLICATION_CREDENTIALS
+
       - name: Build NodeJS and React application
         uses: borales/actions-yarn@v2.0.0
         with:
           cmd: build # will run `yarn build` command
+        env:
+          DB_DATABASE: ${{ steps.secrets.outputs.DB_DATABASE }}
+          DB_HOST: ${{ steps.secrets.outputs.DB_HOST }}
+          DB_PASSWORD: ${{ steps.secrets.outputs.DB_PASSWORD }}
+          DB_USERNAME: ${{ steps.secrets.outputs.DB_USERNAME }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.secrets.outputs.GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: Setup GCloud environment and authenticate
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
