@@ -43,11 +43,11 @@ jobs:
         uses: GoogleCloudPlatform/github-actions/get-secretmanager-secrets@master
         with:
           secrets: |-
-            DB_DATABASE: enamel-step-2020/DB_DATABASE
-            DB_HOST: enamel-step-2020/DB_HOST
-            DB_PASSWORD: enamel-step-2020/DB_PASSWORD
-            DB_USERNAME: enamel-step-2020/DB_USERNAME
-            GOOGLE_APPLICATION_CREDENTIALS: enamel-step-2020/GOOGLE_APPLICATION_CREDENTIALS
+            DB_DATABASE:enamel-step-2020/DB_DATABASE
+            DB_HOST:enamel-step-2020/DB_HOST
+            DB_PASSWORD:enamel-step-2020/DB_PASSWORD
+            DB_USERNAME:enamel-step-2020/DB_USERNAME
+            GOOGLE_APPLICATION_CREDENTIALS:enamel-step-2020/GOOGLE_APPLICATION_CREDENTIALS
 
       - name: Build NodeJS and React application
         uses: borales/actions-yarn@v2.0.0
