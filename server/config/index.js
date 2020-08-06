@@ -10,8 +10,8 @@
  * using the .env.example at root folder.
  *
  * In production environment, the environmental variables are not set
- * via dotenv. They're set using a parent process that reads the variables
- * from App Engine Datastore to keep them secret
+ * via dotenv. They're set using Google Secrets Manager during the build
+ * stage in Github Actions.
  */
 
 import dotenv from 'dotenv';
