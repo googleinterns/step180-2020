@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import {api} from '../../../client';
 import {ResponsivePie} from '@nivo/pie';
 import {ChartContainer} from '../top-government-websites-with-mixed-content/elements';
+import Typography from '@material-ui/core/Typography';
 
 /**
  * This component shows a pie chart with the number of requests
@@ -23,8 +24,7 @@ const MixedContentByType = () => {
   return (
     <Card>
       <CardContent>
-        <h1>TLS versions</h1>
-        <p>{JSON.stringify(data)}</p>
+        <Typography variant="h5">Mixed Content By Type</Typography>
         <ChartContainer>
           <ResponsivePie
             data={data}

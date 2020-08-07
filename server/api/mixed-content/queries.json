@@ -57,14 +57,16 @@
   "MixedContentByType": {
     "description": "",
     "query": [
-      "SELECT r.mimeType as id, ",
-  "COUNT(*) value,",
-  "COUNT(DISTINCT p.pageid) pages",
-  "FROM httparchive.sample_data.summary_requests_desktop_10k r",
-  "INNER JOIN httparchive.sample_data.summary_pages_desktop_10k p",
-  "ON r.pageid=p.pageid",
-  "WHERE r.url NOT LIKE (\"https%\") AND p.url LIKE (\"https%\")",
-  "GROUP BY r.mimeType;"
+      "SELECT substr(mimeType, 1, strpos(mimeType, \"/\")-1) as id,",
+      "count(*) value,",
+      "count(distinct p.pageid) as pages",
+      "FROM httparchive.sample_data.summary_requests_desktop_10k r",
+      "INNER JOIN httparchive.sample_data.summary_pages_desktop_10k p",
+      "ON r.pageid=p.pageid",
+      "WHERE r.url NOT LIKE (\"https%\") AND p.url LIKE (\"https%\")",
+      "and char_length(mimeType)>0",
+      "GROUP by id",
+      "HAVING value > 1"
     ]
   }
 }

@@ -27,15 +27,13 @@ const MixedContent = () => {
       <p>Websites were considered from a government if they have
          .gov or .gob in their origins. This may lead to many false
          positives such as gov.hello.mywebsite.com.</p>
-      <MixedContentByType/>
-    </div>
-  );
-};
-/**
- *
       <TopGovernmentWebsitesWithMixedContent />
       <TopCountriesWithMoreWebsitesWithMixedContent/>
       <TopWebsitesWithMixedContent/>
       <MixedContentPercentageHistogram/>
- */
+      <MixedContentByType/>
+    </div>
+  );
+};
+
 export default MixedContent;
