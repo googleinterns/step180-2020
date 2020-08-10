@@ -36,7 +36,7 @@ In order to deploy the project to Google Cloud App Engine, you'll need a GCloud 
 - An App Engine setup for a Node JS service
 - Big Query enabled in your GCloud Project
 
-We use GCloud Secret Manager to store secret keys needed, so, you'll need to add every environment variable specified in `.env.example` inside the Secret Manager of your GCloud project except for `NODE_ENV` and `PORT` and client side env variables. These variables are set by App Engine by default or directly not needed.
+We use GCloud Secret Manager to store secret keys needed, so, you'll need to add every environment variable specified in `.env.example` inside the Secret Manager of your GCloud project except for `NODE_ENV` and `PORT` and client side env variables. These variables are set by App Engine by default or not needed.
 
 Once every secret was added to the Secret Manager, add a Service Account key encoded in base64 to Github Secrets with the name of `GCLOUD_SERVICE_ACCOUNT_KEY` as [official docs suggests](https://github.com/GoogleCloudPlatform/github-actions), this will allow your Github Actions to run the different stages needed prior to deployment.
 
