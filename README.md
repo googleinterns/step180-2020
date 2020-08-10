@@ -28,27 +28,22 @@ After that, follow the next steps:
 
 - If you're receiving a `[SequelizeConnectionError]: password authentication failed for user '<username>'`, please enter to postgres console using `sudo -u postgres psql` and change the password for the user you're trying to use. Also update .env accordingly
 
-# Manual deployment
+# Automatic Deployment
 
-In order to deploy the project to Google Cloud App Engine, you'll need a project with the following pre-configured APIs and resources:
+In order to deploy the project to Google Cloud App Engine, you'll need a GCloud project with the following pre-configured APIs and resources:
 
 - A Cloud SQL instance running PostgreSQL
 - An App Engine setup for a Node JS service
+- Big Query enabled in your GCloud Project
 
-Open your datastore in Google Cloud, create a collection named `secrets`, then create an entry with the database variables according to [the official docs](https://cloud.google.com/sql/docs/postgres/connect-app-engine-standard?hl=es-419#node.js).
+We use GCloud Secret Manager to store secret keys needed, so, you'll need to add every environment variable specified in `.env.example` inside the Secret Manager of your GCloud project except for `NODE_ENV` and `PORT` and client side env variables. These variables are set by App Engine by default or not needed.
 
-Whenever you've created the datastore entry with the secrets, please take the Document ID from Datastore, and replace the `DATASTORE_SECRETS_KEY` at `app.yaml` file
+Once every secret was added to the Secret Manager, add a Service Account key encoded in base64 to Github Secrets with the name of `GCLOUD_SERVICE_ACCOUNT_KEY` as [official docs suggests](https://github.com/GoogleCloudPlatform/github-actions), this will allow your Github Actions to run the different stages needed prior to deployment.
 
-The project is prepared to setup secret env variables from datastore at startup.
+Consider that:
 
-After that, do:
-
-- `gcloud init`
-- `yarn build`
-  - (OPTIONAL) You can build only frontend or backend by running:
-    - `yarn build:server`
-    - `yarn build:client`
-- `gcloud app deploy`
+- Your service account must have access to every service used in the project, such as CloudSQL or BigQuery
+- The deployment will run only when `master` branch is updated.
 
 # Test
 
@@ -58,6 +53,16 @@ To test the project, you can run:
   - Or test individually with:
     - `yarn test:server`
     - `yarn test:client`
+
+# Adding environment variables
+
+During development, you'll need to add new environment variables. For that, please follow the next steps:
+
+1. Update `.env.example` and this README.md accordingly
+2. Add the new environment variables to your GCloud Secret Manager
+3. Reference the new environment variable in `.github/workflows/deployment.yml`
+
+Otherwise, could affect the [Automatic Deployment](#automatic-deployment)
 
 # Setup
 
