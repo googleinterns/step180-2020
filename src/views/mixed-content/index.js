@@ -1,12 +1,14 @@
-import React from 'react';
-import TopGovernmentWebsitesWithMixedContent
-  from './top-government-websites-with-mixed-content';
-import TopCountriesWithMoreWebsitesWithMixedContent
-  from './top-countries-with-more-websites-with-mixed-content';
-import TopWebsitesWithMixedContent
-  from './top-websites-with-mixed-content';
 import MixedContentPercentageHistogram
   from './mixed-content-percentage-histogram';
+import React from 'react';
+import TopCountriesWithMoreWebsitesWithMixedContent
+  from './top-countries-with-more-websites-with-mixed-content';
+import TopGovernmentWebsitesWithMixedContent
+  from './top-government-websites-with-mixed-content';
+import TopWebsitesWithMixedContent
+  from './top-websites-with-mixed-content';
+import {Typography} from '@material-ui/core';
+
 
 /**
  * Mixed Content View
@@ -20,11 +22,17 @@ import MixedContentPercentageHistogram
 const MixedContent = () => {
   return (
     <div data-testid="mixed-content">
-      <h1>Mixed Content</h1>
-      <h2>Government websites</h2>
-      <p>Websites were considered from a government if they have
+      <Typography variant={'h1'}>
+        Mixed Content
+      </Typography>
+      <Typography variant={'h2'}>
+        Government websites
+      </Typography>
+      <Typography paragraph={true}>
+          Websites were considered from a government if they have
          .gov or .gob in their origins. This may lead to many false
-         positives such as gov.hello.mywebsite.com.</p>
+         positives such as gov.hello.mywebsite.com.
+      </Typography>
       <TopGovernmentWebsitesWithMixedContent />
       <TopCountriesWithMoreWebsitesWithMixedContent/>
       <TopWebsitesWithMixedContent/>

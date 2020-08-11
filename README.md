@@ -21,14 +21,16 @@ After that, follow the next steps:
 5. Set NODE_ENV to `development`
 6. Set API_PORT to configure where the server will be running
 7. Set PORT to configure where the React App will be running
-8. Run `yarn install` to download every dependency needed
-9. Run `yarn dev` to start project in development mode
+8. Generate a service account in GCLOUD > IAM > Service Accounts, and generate a new JSON key for BigQuery.
+9. Import that json file to the root of this project as `gcloud_creds.json`. Add the path of that file to the .env (see .env.example).
+10. Run `yarn install` to download every dependency needed.
+11. Run `yarn dev` to start project in development mode
 
 ## Troubleshooting (Known issues)
 
 - If you're receiving a `[SequelizeConnectionError]: password authentication failed for user '<username>'`, please enter to postgres console using `sudo -u postgres psql` and change the password for the user you're trying to use. Also update .env accordingly
 
-- If there's a credential issue with BigQuery, generate app credentials from GCLOUD > IAM > Service Accounts > enamelbigquery, it is a json file. Import that to the root of this project as `gcloud_creds.json`. Finally add the path of that file to the .env (see .env.example).
+- If there's a credential issue with BigQuery, make sure you followed correctly steps 8 and 9, remember to rename the JSON key.
 
 # Manual deployment
 
@@ -95,11 +97,8 @@ and verify it is running with:
 
 #### Recomended:
 
-<<<<<<< HEAD
-
-- # Run `sudo -u postgres psql` to enter postgres console
+- Run `sudo -u postgres psql` to enter postgres console
 - Run `sudo -u postgres psql` to enter the postgres console
-  > > > > > > > a08d4a5777d94d8c8bb1d456e666f7fda81ae7a0
 - Once there, you can run `ALTER USER postgres PASSWORD '<new-password>'`
 - This is done to avoid an issue with local DB connection, 'cause it requires to have a password
 

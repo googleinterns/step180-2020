@@ -1,16 +1,20 @@
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import MuiAlert from '@material-ui/lab/Alert';
 import React, {useState, useEffect} from 'react';
 import {api} from '../../../client';
 import {ChartContainer} from './elements';
 import {ResponsiveChoropleth} from '@nivo/geo';
+import {Typography, Snackbar} from '@material-ui/core';
 import * as features from './features.json';
 
 
 const TopCountriesWithMoreWebsitesWithMixedContent = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [snackOpen, setSnackOpen] = useState(false);
+
 
   useEffect(() => {
     api
@@ -26,11 +30,22 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
         });
   }, []);
 
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackOpen(false);
+  };
+
   return (
     <Card>
       <CardContent>
-        <h2>Top countries with more government websites with mixed content</h2>
-        <p>Countries with more government websites that have mixed content</p>
+        <Typography variant={'h3'}>
+        Top countries with more government websites with mixed content
+        </Typography>
+        <Typography paragraph={true}>
+        Countries with more government websites that have mixed content
+        </Typography>
         <ChartContainer>
           {!loading ? (
             <ResponsiveChoropleth
@@ -86,6 +101,12 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
           )}
         </ChartContainer>
       </CardContent>
+      <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>
+        <MuiAlert elevation={6} variant="filled"
+          onClose={handleClose} severity="error">
+          Could not load chart
+        </MuiAlert>
+      </Snackbar>
     </Card>
   );
 };

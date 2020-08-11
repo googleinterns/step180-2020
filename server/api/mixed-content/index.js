@@ -8,16 +8,16 @@
  *
  */
 
-import {Router as router} from 'express';
-import {BigQuery} from '@google-cloud/bigquery';
 // This is a collection of all queries and their metadata in json.
 import * as queries from './queries.json';
+import {BigQuery} from '@google-cloud/bigquery';
+import {Router as router} from 'express';
 
 const mixedApi = router();
 const bigqueryClient = new BigQuery();
 
 mixedApi.get('/top-websites-with-mixed-content', async (req, res) => {
-  const query = await queries.TopWebsitesWithMixedContent;
+  const query = queries.TopWebsitesWithMixedContent;
   const rows = await queryData(query);
 
   res.json({
@@ -30,7 +30,7 @@ mixedApi.get('/top-websites-with-mixed-content', async (req, res) => {
 mixedApi.get(
     '/top-government-websites-with-mixed-content',
     async (req, res) => {
-      const query = await queries.TopGovernmentWebsitesWithMixedContent;
+      const query = queries.TopGovernmentWebsitesWithMixedContent;
       let rows = [];
       rows = await queryData(query);
 
@@ -44,7 +44,7 @@ mixedApi.get(
 
 mixedApi.get('/top-countries-with-more-government-websites-with-mixed-content',
     async (req, res) => {
-      const query = await
+      const query =
       queries.TopCountriesWithMoreGovernmentWebsitesWithMixedContent;
       const rows = await queryData(query);
 
@@ -57,7 +57,7 @@ mixedApi.get('/top-countries-with-more-government-websites-with-mixed-content',
 );
 
 mixedApi.get('/mixed-content-percentage-histogram', async (req, res) =>{
-  const query = await queries.MixedContentPercentageHistogram;
+  const query = queries.MixedContentPercentageHistogram;
   let rows = [];
   rows = await queryData(query);
 
