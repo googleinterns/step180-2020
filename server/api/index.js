@@ -16,9 +16,6 @@ api.get('/', (req, res) => {
   res.status(200).send('API working');
 });
 
-api.use('/mixed-content', (req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  next();
-}, mixedApi);
+api.use('/mixed-content', mixedApi);
 
 export default api;
