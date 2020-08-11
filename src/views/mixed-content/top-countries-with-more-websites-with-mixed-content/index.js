@@ -22,11 +22,10 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
         '-with-more-government-websites-with-mixed-content')
         .then((response) => {
           setData(response.data.result);
-          console.log('fetched');
           setLoading(false);
         })
         .catch((err) => {
-          console.log(err);
+          setSnackOpen(true);
         });
   }, []);
 

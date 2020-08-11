@@ -71,15 +71,17 @@ mixedApi.get('/mixed-content-percentage-histogram', async (req, res) =>{
 
 /**
  * Makes a BigQuery query given the query from ./queries.json
- * @param {object} data Query from /.queries.json
+ * @param {{query: array}} data Query from /.queries.json
  * @return {object} Array of rows (result of the query).
  */
-const queryData = async (data) => {
-  if (typeof data.query === 'object') {
-    data.query = data.query.join(' ');
+const queryData = async ({query}) => {
+  if (Array.isArray(query)) {
+    query = query.join(' ');
+  } else {
+    throw new Error('Query must be an array');
   }
   const [rows] = await bigqueryClient.query({
-    query: data.query,
+    query: query,
     location: 'US',
   });
 

@@ -24,7 +24,7 @@ const TopWebsitesWithMixedContent = () => {
           setLoading(false);
         })
         .catch((err) => {
-          console.log(err);
+          setSnackOpen(true);
         });
   }, []);
 
