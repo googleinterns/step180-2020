@@ -24,6 +24,7 @@
     "@testing-library/user-event": "^7.1.2",
     "a11y-react-emoji": "^1.1.2",
     "axios": "^0.19.2",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "concurrently": "^5.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -38,14 +39,14 @@
     "styled-components": "^5.1.1"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node dist",
     "start:server": "nodemon server/index.js --exec babel-node",
     "start:client": "react-scripts start",
     "test": "yarn test:server && yarn test:client",
     "test:server": "jest --modulePathIgnorePatterns src dist",
     "test:client": "NODE_PATH=src/utils react-scripts test",
     "build": "yarn build:server && yarn build:client",
-    "build:server": "babel server --out-dir dist",
+    "build:server": "BABEL_ENV=production babel server --out-dir dist",
     "build:client": "react-scripts build",
     "dev": "concurrently -r \"yarn start:server\" \"yarn start:client\"",
     "lint": "eslint"
