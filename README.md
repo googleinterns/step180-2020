@@ -102,7 +102,6 @@ and verify it is running with:
 
 #### Recomended:
 
-- Run `sudo -u postgres psql` to enter postgres console
 - Run `sudo -u postgres psql` to enter the postgres console
 - Once there, you can run `ALTER USER postgres PASSWORD '<new-password>'`
 - This is done to avoid an issue with local DB connection, 'cause it requires to have a password
