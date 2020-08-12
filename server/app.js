@@ -12,11 +12,17 @@
 
 import express from 'express';
 import api from './api';
+import allowEveryOrigin from './middlewares/allow-every-origin';
+import {env} from './config';
 
 const app = express();
 
 // Middlewares
 app.use(express.json());
+
+if (env.development) {
+  app.use(allowEveryOrigin);
+}
 
 // Routes
 app.use('/api', api);

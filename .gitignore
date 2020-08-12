@@ -26,7 +26,6 @@ yarn-error.log*
 # credentials
 gcloud_creds.json
 *.env
-gcloud_creds.json
 
 # local config
 .vscode

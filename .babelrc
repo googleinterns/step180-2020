@@ -1,4 +1,17 @@
 {
+  "env": {
+    "production": {
+      "plugins": [
+        [
+          "transform-inline-environment-variables",
+          {
+            // These are not secrets. It is safe to let GAE set them
+            "exclude": ["NODE_ENV", "PORT"]
+          }
+        ]
+      ]
+    }
+  },
   "presets": [
     [
       "@babel/preset-env",
