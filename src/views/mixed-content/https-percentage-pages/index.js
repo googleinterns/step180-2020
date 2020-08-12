@@ -18,16 +18,14 @@ const HTTPSPercentagePages = () => {
     api
         .get('/api/mixed-content/https-percentage-pages')
         .then((response) => {
-          // Format data from sql for nivo in (x,y) properties
+          // Response data is formated to fit nivo requirements
+          // nivo schema: {x: data, y: data}
           const formattedData = [];
           response.data.result.forEach((element) => {
             const newElement = {};
             newElement.x = formatDate(new Date(element.timestamp));
             newElement.y = element.percent;
-            // Clean all percentages less than 5%.
-            if (element.percent > 5.0) {
-              formattedData.push(newElement);
-            }
+            newElement.client = element.client;
           });
           setData(formattedData);
           setLoading(false);
@@ -37,6 +35,11 @@ const HTTPSPercentagePages = () => {
         });
   }, []);
 
+  /**
+   * Converts a Date object to a yy-mm-dd string
+   * @param {object} date Date object to be converted
+   * @return {string} String of a date with yy-mm-dd format
+   */
   const formatDate = (date) => {
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1);
@@ -70,14 +73,20 @@ const HTTPSPercentagePages = () => {
         </Typography>
         <Typography paragraph={true}>
           Time Series of the percentage of websites that load through HTTPS.
+          Broken down by desktop and mobile.
         </Typography>
         <ChartContainer>
           {!loading ? (
             <ResponsiveLine
-              data={data}
-              margin={{top: 50, right: 110, bottom: 50, left: 60}}
+              data={[{'id': 'mobile',
+                'data': data.filter((datapoint) =>
+                  datapoint.client == 'mobile')},
+              {'id': 'desktop',
+                'data': data.filter((datapoint) =>
+                  datapoint.client == 'desktop')}]}
+              margin={{top: 50, right: 110, bottom: 20, left: 60}}
               xScale={{type: 'point'}}
-              yScale={{type: 'linear', min: 'auto', max: 'auto',
+              yScale={{type: 'linear', min: 'auto',
                 stacked: true, reverse: false}}
               curve="natural"
               axisTop={null}
@@ -102,7 +111,7 @@ const HTTPSPercentagePages = () => {
               }}
               colors={{scheme: 'nivo'}}
               enablePointLabel={true}
-              lineWidth={8}
+              lineWidth={3}
               pointSize={10}
               pointColor={{theme: 'background'}}
               pointBorderWidth={2}
