@@ -1,3 +1,5 @@
+import HTTPSPercentagePages
+  from './https-percentage-pages';
 import MixedContentPercentageHistogram
   from './mixed-content-percentage-histogram';
 import React from 'react';
@@ -33,6 +35,7 @@ const MixedContent = () => {
          .gov or .gob in their origins. This may lead to many false
          positives such as gov.hello.mywebsite.com.
       </Typography>
+      <HTTPSPercentagePages></HTTPSPercentagePages>
       <TopGovernmentWebsitesWithMixedContent />
       <TopCountriesWithMoreWebsitesWithMixedContent/>
       <TopWebsitesWithMixedContent/>

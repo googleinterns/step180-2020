@@ -68,6 +68,30 @@ mixedApi.get('/mixed-content-percentage-histogram', async (req, res) =>{
   });
 });
 
+mixedApi.get('/https-percentage-pages-mobile', async (req, res) =>{
+  const query = queries.HTTPSPercentagePagesMobile;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
+mixedApi.get('/https-percentage-pages', async (req, res) =>{
+  const query = queries.HTTPSPercentagePagesDesktop;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
 
 /**
  * Makes a BigQuery query given the query from ./queries.json

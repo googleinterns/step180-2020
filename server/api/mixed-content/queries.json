@@ -53,5 +53,21 @@
       "SELECT mixed_percentage, COUNT(*) total FROM `enamel-step-2020.httparchive.percentage_mixed_content`",
       " GROUP BY mixed_percentage ORDER BY mixed_percentage ASC;"
     ]
+  },
+  "HTTPSPercentagePagesDesktop": {
+    "description": "Percentage of all desktop pages that load with HTTPS",
+    "query": [
+      "SELECT date, timestamp, percent FROM `enamel-step-2020.httparchive.TimeSeries_HTTPPages`",
+      " WHERE client='desktop' LIMIT 200"
+    ],
+    "suggestedVisualizations": ["Line chart"]
+  },
+  "HTTPSPercentagePagesMobile": {
+    "description": "Percentage of all mobile pages that load with HTTPS",
+    "query": [
+      "SELECT date, timestamp, percent FROM `enamel-step-2020.httparchive.TimeSeries_HTTPPages`",
+      " WHERE client='mobile' LIMIT 200 ORDER BY timestamp ASC"
+    ],
+    "suggestedVisualizations": ["Line chart"]
   }
 }
