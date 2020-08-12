@@ -3,10 +3,11 @@ import {CardContent} from '@material-ui/core';
 import React, {useEffect, useState} from 'react';
 import {api} from '../../../client';
 import {ResponsivePie} from '@nivo/pie';
-import {ChartContainer} from '../../mixed-content/top-countries-with-more-websites-with-mixed-content/elements';
+import {ChartContainer} from '../../chart-container';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import {SelectContainer} from '../../select-container';
 
 /**
  * This component shows a pie chart with the number of requests
@@ -18,12 +19,12 @@ const TLSversion = () => {
   const [data, setData] = useState([]);
   const [table, setTable] = useState('httparchive.smaller_sample_requests');
   useEffect(() => {
-    api.get('/api/tls/test-json?table='+table).then((response) => {
+    api.get('/api/tls/tls-version?table='+table).then((response) => {
       setData(response.data.result);
     }).catch((err) => {
       console.log(err);
     });
-  });
+  }, [table]);
   const handleChange = (event) => {
     setTable(event.target.value);
   };
@@ -32,7 +33,7 @@ const TLSversion = () => {
       <CardContent>
         <h1>TLS versions</h1>
         <p>Number of requests by TLS version</p>
-        <ChartContainer>
+        <SelectContainer>
           <FormControl>
             <Select
               value={table}
@@ -46,7 +47,7 @@ const TLSversion = () => {
               >Table 2</MenuItem>
             </Select>
           </FormControl>
-        </ChartContainer>
+        </SelectContainer>
         <ChartContainer>
           <ResponsivePie
             data={data}

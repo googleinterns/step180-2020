@@ -12,22 +12,12 @@ import * as queries from './queries.json';
 const tlsApi = router();
 const bigqueryClient = new BigQuery();
 
-
-tlsApi.get('/test',
-    async (req, res) => {
-      res.json({
-        description: 'hello world',
-      });
-    },
-);
-// This route doesn't use queries.json
+// TODO (SofiaVega) delete this (this route is the same as the one below)
 tlsApi.get('/tls-requests', async (req, res) => {
   const version = req.query.version;
   const year = req.query.year;
   const month = req.query.month;
   let table = 'httparchive.sample_data.requests_desktop_10k';
-  // NOTE: This query could cost more than 2 TB if ran over recent tables
-  // Sample data (default) or tables from 2016 are not as costly
   if (year != null && month !=null) {
     table = 'httparchive.requests.'+year+'_'+month+'_01_desktop';
   }
@@ -63,9 +53,8 @@ tlsApi.get('/tls-requests', async (req, res) => {
     result: rows,
   });
 });
-// This route uses queries.json but also accepts
-// 'table' param or 'year' and 'month' param
-tlsApi.get('/test-json', async (req, res) => {
+
+tlsApi.get('/tls-version', async (req, res) => {
   const query = queries.TlsRequests;
   let table = req.query.table;
   const year = req.query.year;
@@ -73,7 +62,7 @@ tlsApi.get('/test-json', async (req, res) => {
   if (year != null && month !=null) {
     table = 'httparchive.requests.'+year+'_'+month+'_01_desktop';
   }
-  const rows = await queryData(query.query, table, query.tableIndex);
+  const rows = await queryData(query, table);
 
   res.json({
     description: query.description,
@@ -84,16 +73,13 @@ tlsApi.get('/test-json', async (req, res) => {
   });
 });
 
-// TODO(sofiavega) find a way to make this function usable for
-// all or most queries
-const queryData = async (data, table, tableIndex) => {
-  // Query is joined because it is partitioned in an array of instructions.
-  if (table!=null) {
-    data[tableIndex] = table;
-  }
-  data = data.join(' ');
+const queryData = async (data, table) => {
+  const index = data.tableIndex;
+  let dataQuery = data.query;
+  dataQuery[index] = table;
+  dataQuery = dataQuery.join(' ');
   const [rows] = await bigqueryClient.query({
-    query: data,
+    query: dataQuery,
     location: 'US',
   });
 

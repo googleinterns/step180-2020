@@ -12,7 +12,6 @@
             "where tls is not null",
             "GROUP BY tls"
         ],
-        "deafultSize": "Number of requests per TLS version",
         "tableIndex": "4",
         "suggestedVisualizations": ["Pie chart"]
     }
