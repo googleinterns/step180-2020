@@ -8,14 +8,14 @@ import {ChartContainer} from './elements';
 import {ResponsiveLine} from '@nivo/line';
 import {Typography, Snackbar} from '@material-ui/core';
 
-const HTTPSPercentagePages = () => {
+const HTTPSPercentageRequests = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [snackOpen, setSnackOpen] = useState(false);
 
   useEffect(() => {
     api
-        .get('/api/mixed-content/https-percentage-pages')
+        .get('/api/mixed-content/https-percentage-requests')
         .then((response) => {
           // Response data is formated to fit nivo requirements
           // nivo schema: {x: data, y: data}
@@ -69,11 +69,12 @@ const HTTPSPercentagePages = () => {
     <Card>
       <CardContent>
         <Typography variant={'h3'}>
-          Percentage of HTTPS websites of all websites
+          Percentage of HTTPS requests of all websites
         </Typography>
         <Typography paragraph={true}>
-          Time Series of the percentage of websites that load through HTTPS.
+          Time Series of the percentage of resources that load through HTTPS.
           Broken down by desktop and mobile.
+          These resources can be images, javascript code.
         </Typography>
         <ChartContainer>
           {!loading ? (
@@ -162,4 +163,4 @@ const HTTPSPercentagePages = () => {
   );
 };
 
-export default HTTPSPercentagePages;
+export default HTTPSPercentageRequests;

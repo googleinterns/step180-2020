@@ -1,5 +1,8 @@
 import HTTPSPercentagePages
   from './https-percentage-pages';
+import HTTPSPercentageRequests
+  from './https-percentage-requests';
+import HSTSPercentageRequests from './hsts-percentage-requests';
 import MixedContentPercentageHistogram
   from './mixed-content-percentage-histogram';
 import React from 'react';
@@ -27,6 +30,28 @@ const MixedContent = () => {
       <Typography variant={'h1'}>
         Mixed Content
       </Typography>
+
+      <Typography variant={'h2'}>
+        Mixed Content in the web
+      </Typography>
+      <TopWebsitesWithMixedContent/>
+      <MixedContentPercentageHistogram/>
+
+      <Typography variant={'h2'}>
+        HTTPS Trends
+      </Typography>
+      <Typography paragraph={true}>
+          Trends of HTTPS adoption throughout the web in websites and resources.
+      </Typography>
+      <HTTPSPercentagePages/>
+      <HTTPSPercentageRequests/>
+
+      <Typography variant={'h2'}>
+        HSTS Header Trends
+      </Typography>
+      <HSTSPercentageRequests/>
+
+
       <Typography variant={'h2'}>
         Government websites
       </Typography>
@@ -35,11 +60,9 @@ const MixedContent = () => {
          .gov or .gob in their origins. This may lead to many false
          positives such as gov.hello.mywebsite.com.
       </Typography>
-      <HTTPSPercentagePages></HTTPSPercentagePages>
       <TopGovernmentWebsitesWithMixedContent />
       <TopCountriesWithMoreWebsitesWithMixedContent/>
-      <TopWebsitesWithMixedContent/>
-      <MixedContentPercentageHistogram/>
+
     </div>
   );
 };

@@ -61,5 +61,20 @@
       " WHERE percent > 5.0 ORDER BY timestamp ASC  LIMIT 200"
     ],
     "suggestedVisualizations": ["Line chart"]
+  },
+  "HTTPSPercentageRequests": {
+    "description": "Percentage of all mobile pages that load with HTTPS",
+    "query": [
+      "SELECT * FROM `enamel-step-2020.httparchive.TimeSeries_HTTPS`",
+      " WHERE percent > 5.0 ORDER BY timestamp ASC  LIMIT 200"
+    ],
+    "suggestedVisualizations": ["Line chart"]
+  },
+  "HSTSPercentageRequests": {
+    "description": "Percentage of all desktop requests that contain Strict-Transport-Security header.",
+    "query": [
+      "SELECT ROUND(percent, 2) percent, year FROM `enamel-step-2020.httparchive.HSTSTimeSeries` LIMIT 10"
+    ],
+    "suggestedVisualizations": ["Line chart"]
   }
 }

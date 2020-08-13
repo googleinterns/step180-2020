@@ -8,54 +8,33 @@ import {ChartContainer} from './elements';
 import {ResponsiveLine} from '@nivo/line';
 import {Typography, Snackbar} from '@material-ui/core';
 
-const HTTPSPercentagePages = () => {
+const HSTSPercentageRequests = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [snackOpen, setSnackOpen] = useState(false);
 
   useEffect(() => {
     api
-        .get('/api/mixed-content/https-percentage-pages')
+        .get('/api/mixed-content/hsts-percentage-requests')
         .then((response) => {
           // Response data is formated to fit nivo requirements
           // nivo schema: {x: data, y: data}
           const formattedData = [];
           response.data.result.forEach((element) => {
             const newElement = {};
-            newElement.x = formatDate(new Date(element.timestamp));
+            newElement.x = element.year;
             newElement.y = element.percent;
             newElement.client = element.client;
             formattedData.push(newElement);
           });
           setData(formattedData);
+          console.log(formattedData);
           setLoading(false);
         })
         .catch((err) => {
           setSnackOpen(true);
         });
   }, []);
-
-  /**
-   * Converts a Date object to a yy-mm-dd string
-   * @param {object} date Date object to be converted
-   * @return {string} String of a date with yy-mm-dd format
-   */
-  const formatDate = (date) => {
-    const d = new Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-
-    return [year, month, day].join('-');
-  };
-
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -69,22 +48,20 @@ const HTTPSPercentagePages = () => {
     <Card>
       <CardContent>
         <Typography variant={'h3'}>
-          Percentage of HTTPS websites of all websites
+          Percentage of resources with HSTS header
         </Typography>
         <Typography paragraph={true}>
-          Time Series of the percentage of websites that load through HTTPS.
-          Broken down by desktop and mobile.
+          Time Series of the percentage of resources that contain the
+          <b> Strict-Transport-Security</b> header.
+          This response header is used to let the browser know that the
+          resource should be accessed only using HTTPS.
         </Typography>
         <ChartContainer>
           {!loading ? (
             <ResponsiveLine
-              data={[{'id': 'mobile',
-                'data': data.filter((datapoint) =>
-                  datapoint.client === 'mobile')},
-              {'id': 'desktop',
-                'data': data.filter((datapoint) =>
-                  datapoint.client === 'desktop')}]}
-              margin={{top: 50, right: 110, bottom: 20, left: 60}}
+              data={[{'id': 'desktop',
+                'data': data}]}
+              margin={{top: 50, right: 110, bottom: 30, left: 60}}
               xScale={{type: 'point'}}
               yScale={{type: 'linear', min: 'auto',
                 stacked: true, reverse: false}}
@@ -96,7 +73,7 @@ const HTTPSPercentagePages = () => {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'Date',
+                legend: 'Year',
                 legendOffset: 36,
                 legendPosition: 'middle',
               }}
@@ -162,4 +139,4 @@ const HTTPSPercentagePages = () => {
   );
 };
 
-export default HTTPSPercentagePages;
+export default HSTSPercentageRequests;

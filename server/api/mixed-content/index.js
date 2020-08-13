@@ -81,6 +81,29 @@ mixedApi.get('/https-percentage-pages', async (req, res) =>{
   });
 });
 
+mixedApi.get('/https-percentage-requests', async (req, res) =>{
+  const query = queries.HTTPSPercentageRequests;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
+mixedApi.get('/hsts-percentage-requests', async (req, res) =>{
+  const query = queries.HSTSPercentageRequests;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
 
 /**
  * Makes a BigQuery query given the query from ./queries.json
