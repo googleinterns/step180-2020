@@ -40,10 +40,17 @@
     "suggestedVisualizations": ["Bar chart"]
   },
   "TopCountriesWithMoreGovernmentWebsitesWithMixedContent": {
-    "description": "Countries with more government websites that have mixed content",
+    "description": "Top countries with more government websites that have mixed content",
     "query": [
       "SELECT tld id, total_government_websites_with_mxcont value FROM `enamel-step-2020.httparchive.government_websites_per_country_with_mixed_content`",
       " LIMIT 40"
+    ],
+    "suggestedVisualizations": ["Bar chart", "Map"]
+  },
+  "TopCountriesWithMoreGovernmentWebsitesWithMixedContentAdjusted": {
+    "description": "Top countries with more percentage of government websites that have mixed content from the total of government websites.",
+    "query": [
+      "SELECT country id, percentage_mixed_from_total*100 value FROM `enamel-step-2020.httparchive.countries_mixed_adjusted` LIMIT 1000"
     ],
     "suggestedVisualizations": ["Bar chart", "Map"]
   },

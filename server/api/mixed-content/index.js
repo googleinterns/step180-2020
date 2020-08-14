@@ -56,6 +56,20 @@ mixedApi.get('/top-countries-with-more-government-websites-with-mixed-content',
     },
 );
 
+mixedApi.get('/top-countries-with-more-government-'+
+'websites-with-mixed-content-adjusted', async (req, res) =>{
+  const query =
+  queries.TopCountriesWithMoreGovernmentWebsitesWithMixedContentAdjusted;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
 mixedApi.get('/mixed-content-percentage-histogram', async (req, res) =>{
   const query = queries.MixedContentPercentageHistogram;
   let rows = [];

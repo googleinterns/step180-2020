@@ -8,6 +8,8 @@ import MixedContentPercentageHistogram
 import React from 'react';
 import TopCountriesWithMoreWebsitesWithMixedContent
   from './top-countries-with-more-websites-with-mixed-content';
+import TopCountriesWithMoreWebsitesWithMixedContentAdjusted
+  from './top-countries-with-more-websites-with-mixed-content-adjusted';
 import TopGovernmentWebsitesWithMixedContent
   from './top-government-websites-with-mixed-content';
 import TopWebsitesWithMixedContent
@@ -62,6 +64,7 @@ const MixedContent = () => {
       </Typography>
       <TopGovernmentWebsitesWithMixedContent />
       <TopCountriesWithMoreWebsitesWithMixedContent/>
+      <TopCountriesWithMoreWebsitesWithMixedContentAdjusted/>
 
     </div>
   );
