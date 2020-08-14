@@ -116,6 +116,7 @@ const queryData = async ({query}) => {
   } else {
     throw new Error('Query must be an array');
   }
+  console.log(bigqueryClient);
   const [rows] = await bigqueryClient.query({
     query: query,
     location: 'US',
