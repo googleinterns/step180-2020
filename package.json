@@ -81,7 +81,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.20.3",
     "husky": "^4.2.5",
-    "jest": "^26.4.0",
+    "jest": "24.9.0",
     "supertest": "^4.0.2"
   },
   "engines": {
