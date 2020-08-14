@@ -78,6 +78,7 @@ const queryData = async (data, table) => {
   let dataQuery = data.query;
   dataQuery[index] = table;
   dataQuery = dataQuery.join(' ');
+  console.log(dataQuery);
   const [rows] = await bigqueryClient.query({
     query: dataQuery,
     location: 'US',
