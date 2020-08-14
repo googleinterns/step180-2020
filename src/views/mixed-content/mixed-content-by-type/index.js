@@ -1,18 +1,17 @@
+import {api} from '../../../client';
 import Card from '@material-ui/core/Card';
 import {CardContent} from '@material-ui/core';
-import React, {useEffect, useState} from 'react';
-import {api} from '../../../client';
-import {ResponsivePie} from '@nivo/pie';
 import {ChartContainer} from '../../chart-container';
-import Typography from '@material-ui/core/Typography';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import React, {useEffect, useState} from 'react';
+import {ResponsivePie} from '@nivo/pie';
 import Select from '@material-ui/core/Select';
 import {SelectContainer} from '../../select-container';
+import Typography from '@material-ui/core/Typography';
 
 /**
- * This component shows a pie chart with the percentage of mixed
- * content by types
+ * Returns a pie chart with the percentage of mixed content by types
  *
  * @return {ReactNode} TLS versions component
  */
@@ -20,7 +19,8 @@ const MixedContentByType = () => {
   const [data, setData] = useState([]);
   const [type, setType] = useState('all');
   useEffect(() => {
-    api.get('/api/mixed-content/mixed-content-by-type?type='+type).then((response) => {
+    api.get('/api/mixed-content/'+
+    'mixed-content-by-type?type='+type).then((response) => {
       setData(response.data.result);
     }).catch((err) => {
       console.log(err);

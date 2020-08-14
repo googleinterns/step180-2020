@@ -5,8 +5,8 @@
  * Here are all routes for BigQuery TLS related queries
  */
 
-import {Router as router} from 'express';
 import {BigQuery} from '@google-cloud/bigquery';
+import {Router as router} from 'express';
 import * as queries from './queries.json';
 
 const tlsApi = router();

@@ -2,7 +2,7 @@ import About from './views/about';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MainLayout from './layouts/main';
 import MixedContent from './views/mixed-content';
-import tls from './views/tls';
+import Tls from './views/tls';
 import React from 'react';
 import {
   Redirect,
@@ -30,7 +30,7 @@ const App = () => {
         <Switch>
           <Route path="/about" component={About} />
           <Route path="/mixed-content" component={MixedContent} />
-          <Route path="/tls" component={tls}/>
+          <Route path="/tls" component={Tls}/>
           <Redirect to="/about" />
         </Switch>
       </MainLayout>

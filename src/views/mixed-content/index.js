@@ -1,3 +1,7 @@
+import MixedContentPercentageHistogram
+  from './mixed-content-percentage-histogram';
+import MixedContentByType
+  from './mixed-content-by-type';
 import React from 'react';
 import TopGovernmentWebsitesWithMixedContent
   from './top-government-websites-with-mixed-content';
@@ -5,10 +9,6 @@ import TopCountriesWithMoreWebsitesWithMixedContent
   from './top-countries-with-more-websites-with-mixed-content';
 import TopWebsitesWithMixedContent
   from './top-websites-with-mixed-content';
-import MixedContentPercentageHistogram
-  from './mixed-content-percentage-histogram';
-import MixedContentByType
-  from './mixed-content-by-type';
 
 /**
  * Mixed Content View

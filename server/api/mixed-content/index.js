@@ -8,9 +8,8 @@
  *
  */
 
-import {Router as router} from 'express';
 import {BigQuery} from '@google-cloud/bigquery';
-// This is a collection of all queries and their metadata in json.
+import {Router as router} from 'express';
 import * as queries from './queries.json';
 
 const mixedApi = router();
@@ -69,15 +68,15 @@ mixedApi.get('/mixed-content-percentage-histogram', async (req, res) =>{
 });
 
 mixedApi.get('/mixed-content-by-type', async (req, res) =>{
-  let query = await queries.MixedContentByType;
+  let query = queries.MixedContentByType;
   const type = req.query.type;
   if (type != 'all') {
-    query = await queries.MixedContentOneType;
+    query = queries.MixedContentOneType;
   }
   let rows = [];
   rows = await queryType(query, type);
   if (type != 'all') {
-    rows = await toPieChart(rows);
+    rows = toPieChart(rows);
   }
   res.json({
     type: type,
