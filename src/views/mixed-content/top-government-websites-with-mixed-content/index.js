@@ -1,14 +1,19 @@
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import MuiAlert from '@material-ui/lab/Alert';
 import React, {useState, useEffect} from 'react';
 import {api} from '../../../client';
-import {ResponsiveBar} from '@nivo/bar';
 import {ChartContainer} from './elements';
+import {ResponsiveBar} from '@nivo/bar';
+import {Typography, Snackbar} from '@material-ui/core';
+
 
 const TopGovernmentWebsitesWithMixedContent = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [snackOpen, setSnackOpen] = useState(false);
+
 
   useEffect(() => {
     api
@@ -19,16 +24,27 @@ const TopGovernmentWebsitesWithMixedContent = () => {
           setLoading(false);
         })
         .catch((err) => {
-          console.log(err);
+          setSnackOpen(true);
         });
   }, []);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackOpen(false);
+  };
 
   return (
     <Card>
       <CardContent>
-        <h2>Top government websites with more mixed content</h2>
-        <p>HTTPS Government Websites that have
-          the most resources loaded with http.</p>
+        <Typography variant={'h3'}>
+        Top government websites with more mixed content
+        </Typography>
+        <Typography paragraph={true}>
+        HTTPS Government Websites that have
+          the most resources loaded with http.
+        </Typography>
         <ChartContainer>
           {!loading ? (
             <ResponsiveBar
@@ -59,6 +75,12 @@ const TopGovernmentWebsitesWithMixedContent = () => {
           )}
         </ChartContainer>
       </CardContent>
+      <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>
+        <MuiAlert elevation={6} variant="filled"
+          onClose={handleClose} severity="error">
+          Could not load chart
+        </MuiAlert>
+      </Snackbar>
     </Card>
   );
 };

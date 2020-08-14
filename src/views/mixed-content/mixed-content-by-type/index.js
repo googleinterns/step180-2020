@@ -19,12 +19,14 @@ const MixedContentByType = () => {
   const [data, setData] = useState([]);
   const [type, setType] = useState('all');
   useEffect(() => {
-    api.get('/api/mixed-content/'+
-    'mixed-content-by-type?type='+type).then((response) => {
-      setData(response.data.result);
-    }).catch((err) => {
-      console.log(err);
-    });
+    api
+        .get('/api/mixed-content/mixed-content-by-type?type=' + type)
+        .then((response) => {
+          setData(response.data.result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   }, [type]);
   const handleChange = (event) => {
     setType(event.target.value);
@@ -32,28 +34,15 @@ const MixedContentByType = () => {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h5">Mixed Content By Type</Typography>
+        <Typography variant="h3">Mixed Content By Type</Typography>
         <SelectContainer>
           <FormControl>
-            <Select
-              value={type}
-              onChange={handleChange}
-            >
-              <MenuItem
-                value={'all'}
-              >All types</MenuItem>
-              <MenuItem
-                value={'image'}
-              >Images</MenuItem>
-              <MenuItem
-                value={'font'}
-              >Font</MenuItem>
-              <MenuItem
-                value={'text'}
-              >Text</MenuItem>
-              <MenuItem
-                value={'application'}
-              >Application</MenuItem>
+            <Select value={type} onChange={handleChange}>
+              <MenuItem value={'all'}>All types</MenuItem>
+              <MenuItem value={'image'}>Images</MenuItem>
+              <MenuItem value={'font'}>Font</MenuItem>
+              <MenuItem value={'text'}>Text</MenuItem>
+              <MenuItem value={'application'}>Application</MenuItem>
             </Select>
           </FormControl>
         </SelectContainer>

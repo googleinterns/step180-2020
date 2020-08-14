@@ -16,7 +16,7 @@ const mixedApi = router();
 const bigqueryClient = new BigQuery();
 
 mixedApi.get('/top-websites-with-mixed-content', async (req, res) => {
-  const query = await queries.TopWebsitesWithMixedContent;
+  const query = queries.TopWebsitesWithMixedContent;
   const rows = await queryData(query);
 
   res.json({
@@ -29,7 +29,7 @@ mixedApi.get('/top-websites-with-mixed-content', async (req, res) => {
 mixedApi.get(
     '/top-government-websites-with-mixed-content',
     async (req, res) => {
-      const query = await queries.TopGovernmentWebsitesWithMixedContent;
+      const query = queries.TopGovernmentWebsitesWithMixedContent;
       let rows = [];
       rows = await queryData(query);
 
@@ -43,7 +43,7 @@ mixedApi.get(
 
 mixedApi.get('/top-countries-with-more-government-websites-with-mixed-content',
     async (req, res) => {
-      const query = await
+      const query =
       queries.TopCountriesWithMoreGovernmentWebsitesWithMixedContent;
       const rows = await queryData(query);
 
@@ -56,7 +56,7 @@ mixedApi.get('/top-countries-with-more-government-websites-with-mixed-content',
 );
 
 mixedApi.get('/mixed-content-percentage-histogram', async (req, res) =>{
-  const query = await queries.MixedContentPercentageHistogram;
+  const query = queries.MixedContentPercentageHistogram;
   let rows = [];
   rows = await queryData(query);
 
@@ -76,7 +76,7 @@ mixedApi.get('/mixed-content-by-type', async (req, res) =>{
   let rows = [];
   rows = await queryType(query, type);
   if (type != 'all') {
-    rows = toPieChart(rows);
+    rows = await toPieChart(rows);
   }
   res.json({
     type: type,
@@ -86,15 +86,17 @@ mixedApi.get('/mixed-content-by-type', async (req, res) =>{
 
 /**
  * Makes a BigQuery query given the query from ./queries.json
- * @param {object} data Query from /.queries.json
+ * @param {{query: array}} data Query from /.queries.json
  * @return {object} Array of rows (result of the query).
  */
-const queryData = async (data) => {
-  if (typeof data.query === 'object') {
-    data.query = data.query.join(' ');
+const queryData = async ({query}) => {
+  if (Array.isArray(query)) {
+    query = query.join(' ');
+  } else {
+    throw new Error('Query must be an array');
   }
   const [rows] = await bigqueryClient.query({
-    query: data.query,
+    query: query,
     location: 'US',
   });
 
@@ -109,7 +111,7 @@ const queryData = async (data) => {
  */
 const queryType = async (data, type) => {
   const index = data.typeIndex;
-  let dataQuery=data.query;
+  let dataQuery = data.query;
   if (type!='all') {
     dataQuery[index] = '("%'+type+'/%")';
   }

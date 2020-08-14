@@ -8,6 +8,7 @@ import React, {useEffect, useState} from 'react';
 import {ResponsivePie} from '@nivo/pie';
 import Select from '@material-ui/core/Select';
 import {SelectContainer} from '../../select-container';
+import Typography from '@material-ui/core/Typography';
 
 /**
  * This component shows a pie chart with the number of requests
@@ -31,8 +32,9 @@ const TLSversion = () => {
   return (
     <Card>
       <CardContent>
-        <h1>TLS versions</h1>
-        <p>Number of requests by TLS version</p>
+        <Typography variant="h3">TLS versions</Typography>
+        <Typography paragraph={true}
+        >Number of requests by TLS version</Typography>
         <SelectContainer>
           <FormControl>
             <Select

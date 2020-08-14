@@ -1,5 +1,6 @@
 import React from 'react';
 import TLSversion from './tls-version/index.js';
+import Typography from '@material-ui/core/Typography';
 
 /**
  * TLS view
@@ -9,7 +10,7 @@ import TLSversion from './tls-version/index.js';
 const tls = () => {
   return (
     <div data-testid="tls">
-      <h1>TLS Visualizations</h1>
+      <Typography variant="h1">TLS Visualizations</Typography>
       <TLSversion/>
     </div>
   );
