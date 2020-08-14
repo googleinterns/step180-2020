@@ -9,7 +9,7 @@
  */
 
 // This is a collection of all queries and their metadata in json.
-import * as queries from './queries.json';
+import queries from './queries.json';
 import {BigQuery} from '@google-cloud/bigquery';
 import {Router as router} from 'express';
 
@@ -110,15 +110,15 @@ mixedApi.get('/hsts-percentage-requests', async (req, res) =>{
  * @param {{query: array}} data Query from /.queries.json
  * @return {object} Array of rows (result of the query).
  */
-const queryData = async ({query}) => {
-  if (Array.isArray(query)) {
-    query = query.join(' ');
+const queryData = async ({sql}) => {
+  if (Array.isArray(sql)) {
+    sql = sql.join(' ');
   } else {
-    throw new Error('Query must be an array');
+    throw new Error('SQL query must be an array');
   }
-  console.log(bigqueryClient);
+
   const [rows] = await bigqueryClient.query({
-    query: query,
+    query: sql,
     location: 'US',
   });
 
