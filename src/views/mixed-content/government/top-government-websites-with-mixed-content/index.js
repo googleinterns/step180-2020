@@ -4,6 +4,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiAlert from '@material-ui/lab/Alert';
 import React, {useState, useEffect} from 'react';
+import Skeleton from '@material-ui/lab/Skeleton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,7 +12,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import {api} from 'client';
-import {ChartContainer} from './elements';
+import {ChartContainer, SkeletonContainer} from './elements';
 import {ResponsiveBar} from '@nivo/bar';
 import {Snackbar} from '@material-ui/core';
 
@@ -77,26 +78,39 @@ const TopGovernmentWebsitesWithMixedContent = () => {
               <CircularProgress data-testid="chart-loader" />
             </ChartContainer>
           )}
-          <TableContainer>
-            <Table size="small" aria-label="a dense table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>URL</TableCell>
-                  <TableCell>Total of mixed content resources</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {data.map(
-                  ({mixed_content_resources: mixedContentResources, url}) => (
-                    <TableRow key={url}>
-                      <TableCell>{url}</TableCell>
-                      <TableCell>{mixedContentResources}</TableCell>
-                    </TableRow>
-                  ),
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          {loading ? (
+            <SkeletonContainer data-testid="table-skeletons">
+              <Skeleton height={40} />
+              <Skeleton height={40} />
+              <Skeleton height={40} />
+              <Skeleton height={40} />
+              <Skeleton height={40} />
+              <Skeleton height={40} />
+              <Skeleton height={40} />
+              <Skeleton height={40} />
+            </SkeletonContainer>
+          ) : (
+            <TableContainer data-testid="mixed-content-government-sites-table">
+              <Table size="small" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>URL</TableCell>
+                    <TableCell>Total of mixed content resources</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {data.map(
+                    ({mixed_content_resources: mixedContentResources, url}) => (
+                      <TableRow key={url}>
+                        <TableCell>{url}</TableCell>
+                        <TableCell>{mixedContentResources}</TableCell>
+                      </TableRow>
+                    ),
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
         </CardContent>
       </Card>
       <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>

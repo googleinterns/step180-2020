@@ -7,4 +7,9 @@ const ChartContainer = styled.div`
   align-items: center;
 `;
 
-export {ChartContainer};
+const SkeletonContainer = styled.div`
+  width: 100%;
+  padding: 20px;
+`;
+
+export {ChartContainer, SkeletonContainer};

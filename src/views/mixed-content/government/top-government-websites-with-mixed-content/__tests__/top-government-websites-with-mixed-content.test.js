@@ -1,20 +1,21 @@
 import React from 'react';
 import TopGovernmentWebsitesWithMixedContent from '../index';
-import {render, waitForElementToBeRemoved, screen} from 'test-utils';
+import {render, screen, waitForElementToBeRemoved} from 'test-utils';
+
+beforeEach(() => render(<TopGovernmentWebsitesWithMixedContent />));
 
 test('Renders main card container correctly', async () => {
-  const {getByTestId} = render(<TopGovernmentWebsitesWithMixedContent />);
-  const card = getByTestId('top-government-websites-with-mixed-content-card');
+  const card = screen.getByTestId(
+    'top-government-websites-with-mixed-content-card',
+  );
   expect(card).toBeInTheDocument();
 
   // Check that initially renders loader component
-  const chartLoader = getByTestId('chart-loader');
+  const chartLoader = screen.getByTestId('chart-loader');
   expect(chartLoader).toBeInTheDocument();
 });
 
 test('Renders charts after API is called', async () => {
-  render(<TopGovernmentWebsitesWithMixedContent />);
-
   // After API is called, loaders should disappear
   await waitForElementToBeRemoved(screen.getByTestId('chart-loader'));
 
@@ -23,4 +24,15 @@ test('Renders charts after API is called', async () => {
     'top-government-websites-with-mixed-content-chart',
   );
   expect(mixedPercentageChart).toBeInTheDocument();
+});
+
+test('Renders table after API is called', async () => {
+  // After API is called, skeletons should disappear
+  await waitForElementToBeRemoved(screen.getByTestId('table-skeletons'));
+
+  // Also, first table should be rendered by default
+  const mixedContentTable = screen.getByTestId(
+    'mixed-content-government-sites-table',
+  );
+  expect(mixedContentTable).toBeInTheDocument();
 });

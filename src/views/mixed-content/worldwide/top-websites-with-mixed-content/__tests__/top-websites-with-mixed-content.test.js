@@ -1,24 +1,55 @@
 import React from 'react';
 import TopWebistesWithMixedContent from '../index';
-import {render, waitForElementToBeRemoved, screen} from 'test-utils';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from 'test-utils';
+
+beforeEach(() => render(<TopWebistesWithMixedContent />));
 
 test('Renders main card container correctly', async () => {
-  const {getByTestId} = render(<TopWebistesWithMixedContent />);
-  const card = getByTestId('top-websites-with-mixed-content-card');
+  const card = screen.getByTestId('top-websites-with-mixed-content-card');
   expect(card).toBeInTheDocument();
 
   // Check that initially renders loader component
-  const chartLoader = getByTestId('chart-loader');
+  const chartLoader = screen.getByTestId('chart-loader');
   expect(chartLoader).toBeInTheDocument();
 });
 
 test('Renders charts after API is called', async () => {
-  render(<TopWebistesWithMixedContent />);
-
   // After API is called, loaders should disappear
   await waitForElementToBeRemoved(screen.getByTestId('chart-loader'));
 
   // Also, first chart should be rendered by default
   const mixedPercentageChart = screen.getByTestId('mixed-percentage-chart');
   expect(mixedPercentageChart).toBeInTheDocument();
+});
+
+test('Renders table after API is called', async () => {
+  // After API is called, skeletons should disappear
+  await waitForElementToBeRemoved(screen.getByTestId('table-skeletons'));
+
+  // Also, first table should be rendered by default
+  const mixedContentTable = screen.getByTestId('mixed-content-sites-table');
+  expect(mixedContentTable).toBeInTheDocument();
+});
+
+test('Changes between tabs and shows different charts', async () => {
+  // After API is called, loaders should disappear
+  await waitForElementToBeRemoved(screen.getByTestId('chart-loader'));
+
+  // Change to total resources table
+  fireEvent.click(screen.getByTestId('total-tab'));
+  await waitFor(() =>
+    expect(screen.getByTestId('mixed-reqs-total-chart')).toBeInTheDocument(),
+  );
+
+  // Change to total resources table
+  fireEvent.click(screen.getByTestId('percentage-tab'));
+  await waitFor(() =>
+    expect(screen.getByTestId('mixed-percentage-chart')).toBeInTheDocument(),
+  );
 });

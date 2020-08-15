@@ -4,6 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiAlert from '@material-ui/lab/Alert';
 import Paper from '@material-ui/core/Paper';
 import React, {useState, useEffect} from 'react';
+import Skeleton from '@material-ui/lab/Skeleton';
 import Tab from '@material-ui/core/Tab';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,7 +14,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Tabs from '@material-ui/core/Tabs';
 import {api} from 'client';
-import {ChartContainer, CustomCard} from './elements';
+import {ChartContainer, CustomCard, SkeletonContainer} from './elements';
 import {ResponsiveBar} from '@nivo/bar';
 import {Snackbar} from '@material-ui/core';
 
@@ -65,8 +66,8 @@ const TopWebsitesWithMixedContent = () => {
             textColor="primary"
             onChange={(_, newValue) => setTab(newValue)}
           >
-            <Tab label="% of resources" />
-            <Tab label="Total of resources" />
+            <Tab data-testid="percentage-tab" label="% of resources" />
+            <Tab data-testid="total-tab" label="Total of resources" />
           </Tabs>
         </Paper>
         <CardContent>
@@ -143,32 +144,45 @@ const TopWebsitesWithMixedContent = () => {
             Could not load chart
           </MuiAlert>
         </Snackbar>
-        <TableContainer>
-          <Table size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell>URL</TableCell>
-                <TableCell>% of mixed content resources</TableCell>
-                <TableCell>Total of mixed content resources</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data.map(
-                ({
-                  mixed_percentage: mixedPercentage,
-                  mixed_reqs_total: mixedReqsTotal,
-                  url,
-                }) => (
-                  <TableRow key={url}>
-                    <TableCell>{url}</TableCell>
-                    <TableCell>{mixedPercentage}</TableCell>
-                    <TableCell>{mixedReqsTotal}</TableCell>
-                  </TableRow>
-                ),
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        {loading ? (
+          <SkeletonContainer data-testid="table-skeletons">
+            <Skeleton height={40} />
+            <Skeleton height={40} />
+            <Skeleton height={40} />
+            <Skeleton height={40} />
+            <Skeleton height={40} />
+            <Skeleton height={40} />
+            <Skeleton height={40} />
+            <Skeleton height={40} />
+          </SkeletonContainer>
+        ) : (
+          <TableContainer data-testid="mixed-content-sites-table">
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell>URL</TableCell>
+                  <TableCell>% of mixed content resources</TableCell>
+                  <TableCell>Total of mixed content resources</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data.map(
+                  ({
+                    mixed_percentage: mixedPercentage,
+                    mixed_reqs_total: mixedReqsTotal,
+                    url,
+                  }) => (
+                    <TableRow key={url}>
+                      <TableCell>{url}</TableCell>
+                      <TableCell>{mixedPercentage}</TableCell>
+                      <TableCell>{mixedReqsTotal}</TableCell>
+                    </TableRow>
+                  ),
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
       </CustomCard>
     </>
   );
