@@ -32,6 +32,10 @@ const getClosedDrawerStyles = (theme) => css`
   .MuiListItemText-root {
     visibility: hidden;
   }
+
+  .expand-icon {
+    visibility: hidden;
+  }
 `;
 
 /**

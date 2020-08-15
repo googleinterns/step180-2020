@@ -1,14 +1,20 @@
+import Business from '@material-ui/icons/Business';
+import Collapse from '@material-ui/core/Collapse';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Description from '@material-ui/icons/Description';
 import Emoji from 'a11y-react-emoji';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import Https from '@material-ui/icons/Https';
 import List from '@material-ui/core/List';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import PropTypes from 'prop-types';
+import Public from '@material-ui/icons/Public';
 import React, {useState} from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
+import TrendingUp from '@material-ui/icons/TrendingUp';
 import Typography from '@material-ui/core/Typography';
 import {
   Content,
@@ -16,8 +22,9 @@ import {
   CustomDrawer,
   CustomIconButton,
   CustomListItem,
+  NestedList,
   Root,
-} from './styles/elements';
+} from './elements';
 import {Link} from 'react-router-dom';
 import {useLocation} from 'react-router-dom';
 
@@ -32,7 +39,8 @@ import {useLocation} from 'react-router-dom';
  * @return {ReactNode} Main App Layout
  */
 const MainLayout = ({children}) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
+  const [mixedContentOpen, setMixedCOntentOpen] = useState(true);
 
   const {pathname} = useLocation();
 
@@ -50,7 +58,7 @@ const MainLayout = ({children}) => {
             {open ? <ChevronLeftIcon /> : <MenuIcon />}
           </CustomIconButton>
           <Typography variant="h6" noWrap>
-            Enamel Dashboard <Emoji symbol="🐘" label="sheep"/>
+            Enamel Dashboard <Emoji symbol="🐘" label="sheep" />
           </Typography>
         </Toolbar>
       </CustomAppBar>
@@ -73,18 +81,62 @@ const MainLayout = ({children}) => {
               <ListItemText primary="About" />
             </CustomListItem>
           </Link>
-          <Link to="/mixed-content">
-            <CustomListItem
-              data-testid="mixed-content-navigation-button"
-              active={pathname === '/mixed-content' ? 'true' : ''}
-              button
-            >
-              <IconButton>
-                <Https />
-              </IconButton>
-              <ListItemText primary="Mixed Content" />
-            </CustomListItem>
-          </Link>
+          <CustomListItem
+            data-testid="mixed-content-navigation-button"
+            active={pathname.includes('/mixed-content') ? 'true' : ''}
+            onClick={() => setMixedCOntentOpen(!mixedContentOpen)}
+            button
+          >
+            <IconButton>
+              <Https />
+            </IconButton>
+            <ListItemText primary="Mixed Content" />
+            {mixedContentOpen ? (
+              <ExpandLess className="expand-icon" />
+            ) : (
+              <ExpandMore className="expand-icon" />
+            )}
+          </CustomListItem>
+          <Collapse in={mixedContentOpen} timeout="auto" unmountOnExit>
+            <NestedList open={open}>
+              <Link to="/mixed-content/worldwide">
+                <CustomListItem
+                  data-testid="mixed-content-worldwide-navigation-button"
+                  active={pathname.includes('/worldwide') ? 'true' : ''}
+                  button
+                >
+                  <IconButton>
+                    <Public />
+                  </IconButton>
+                  <ListItemText primary="Worldwide" />
+                </CustomListItem>
+              </Link>
+              <Link to="/mixed-content/trends">
+                <CustomListItem
+                  data-testid="mixed-content-trends-navigation-button"
+                  active={pathname.includes('/trends') ? 'true' : ''}
+                  button
+                >
+                  <IconButton>
+                    <TrendingUp />
+                  </IconButton>
+                  <ListItemText primary="Trends" />
+                </CustomListItem>
+              </Link>
+              <Link to="/mixed-content/government">
+                <CustomListItem
+                  data-testid="mixed-content-government-navigation-button"
+                  active={pathname.includes('/government') ? 'true' : ''}
+                  button
+                >
+                  <IconButton>
+                    <Business />
+                  </IconButton>
+                  <ListItemText primary="Government" />
+                </CustomListItem>
+              </Link>
+            </NestedList>
+          </Collapse>
         </List>
       </CustomDrawer>
       <Content>

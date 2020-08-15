@@ -1,61 +1,53 @@
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import moment from 'moment';
 import MuiAlert from '@material-ui/lab/Alert';
 import React, {useState, useEffect} from 'react';
-import {api} from '../../../client';
+import {api} from 'client';
 import {ChartContainer} from './elements';
 import {ResponsiveLine} from '@nivo/line';
-import {Typography, Snackbar} from '@material-ui/core';
+import {Snackbar} from '@material-ui/core';
 
-const HTTPSPercentageRequests = () => {
+const HTTPSPercentagePages = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [snackOpen, setSnackOpen] = useState(false);
 
   useEffect(() => {
     api
-        .get('/api/mixed-content/https-percentage-requests')
+        .get('/api/mixed-content/https-percentage-pages')
         .then((response) => {
-          // Response data is formated to fit nivo requirements
-          // nivo schema: {x: data, y: data}
-          const formattedData = [];
+        // Response data is formated to fit nivo requirements
+        // nivo schema: {x: data, y: data}
+          const mobileData = [];
+          const desktopData = [];
           response.data.result.forEach((element) => {
             const newElement = {};
-            newElement.x = formatDate(new Date(element.timestamp));
+            newElement.x = moment(element.timestamp).format('L');
             newElement.y = element.percent;
             newElement.client = element.client;
-            formattedData.push(newElement);
+            if (newElement.client === 'mobile') {
+              mobileData.push(newElement);
+            } else {
+              desktopData.push(newElement);
+            }
           });
-          setData(formattedData);
+          setData([{
+            id: 'mobile',
+            data: mobileData,
+          },
+          {
+            id: 'desktop',
+            data: desktopData,
+          }]);
           setLoading(false);
         })
         .catch((err) => {
           setSnackOpen(true);
         });
   }, []);
-
-  /**
-   * Converts a Date object to a yy-mm-dd string
-   * @param {object} date Date object to be converted
-   * @return {string} String of a date with yy-mm-dd format
-   */
-  const formatDate = (date) => {
-    const d = new Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-
-    return [year, month, day].join('-');
-  };
-
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -64,31 +56,26 @@ const HTTPSPercentageRequests = () => {
     setSnackOpen(false);
   };
 
-
   return (
     <Card>
+      <CardHeader
+        title=" Percentage of HTTPS websites of all websites"
+        subheader="Time Series of the percentage of websites that load through
+          HTTPS. Broken down by desktop and mobile."
+      />
       <CardContent>
-        <Typography variant={'h3'}>
-          Percentage of HTTPS requests of all websites
-        </Typography>
-        <Typography paragraph={true}>
-          Time Series of the percentage of resources that load through HTTPS.
-          Broken down by desktop and mobile.
-          These resources can be images, javascript code.
-        </Typography>
         <ChartContainer>
           {!loading ? (
             <ResponsiveLine
-              data={[{'id': 'mobile',
-                'data': data.filter((datapoint) =>
-                  datapoint.client === 'mobile')},
-              {'id': 'desktop',
-                'data': data.filter((datapoint) =>
-                  datapoint.client === 'desktop')}]}
-              margin={{top: 50, right: 110, bottom: 20, left: 60}}
+              data={data}
+              margin={{top: 20, right: 50, bottom: 100, left: 50}}
               xScale={{type: 'point'}}
-              yScale={{type: 'linear', min: 'auto',
-                stacked: true, reverse: false}}
+              yScale={{
+                type: 'linear',
+                min: 'auto',
+                stacked: true,
+                reverse: false,
+              }}
               curve="natural"
               axisTop={null}
               axisRight={null}
@@ -96,9 +83,9 @@ const HTTPSPercentageRequests = () => {
                 orient: 'bottom',
                 tickSize: 5,
                 tickPadding: 5,
-                tickRotation: 0,
+                tickRotation: -60,
                 legend: 'Date',
-                legendOffset: 36,
+                legendOffset: 70,
                 legendPosition: 'middle',
               }}
               axisLeft={{
@@ -122,31 +109,20 @@ const HTTPSPercentageRequests = () => {
               useMesh={true}
               legends={[
                 {
-                  anchor: 'bottom-right',
-                  direction: 'column',
+                  anchor: 'bottom-left',
+                  direction: 'row',
                   justify: false,
-                  translateX: 100,
-                  translateY: 0,
-                  itemsSpacing: 0,
+                  translateX: 0,
+                  translateY: 100,
+                  itemsSpacing: 20,
                   itemDirection: 'left-to-right',
-                  itemWidth: 80,
+                  itemWidth: 120,
                   itemHeight: 20,
-                  itemOpacity: 0.75,
                   symbolSize: 12,
                   symbolShape: 'circle',
                   symbolBorderColor: 'rgba(0, 0, 0, .5)',
-                  effects: [
-                    {
-                      on: 'hover',
-                      style: {
-                        itemBackground: 'rgba(0, 0, 0, .03)',
-                        itemOpacity: 1,
-                      },
-                    },
-                  ],
                 },
               ]}
-
             />
           ) : (
             <CircularProgress />
@@ -154,8 +130,12 @@ const HTTPSPercentageRequests = () => {
         </ChartContainer>
       </CardContent>
       <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>
-        <MuiAlert elevation={6} variant="filled"
-          onClose={handleClose} severity="error">
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleClose}
+          severity="error"
+        >
           Could not load chart
         </MuiAlert>
       </Snackbar>
@@ -163,4 +143,4 @@ const HTTPSPercentageRequests = () => {
   );
 };
 
-export default HTTPSPercentageRequests;
+export default HTTPSPercentagePages;

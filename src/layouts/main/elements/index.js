@@ -1,9 +1,13 @@
 import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import styled from 'styled-components';
-import {getDrawerStyles, getActiveTabStyles} from './functions';
+import {
+  getDrawerStyles,
+  getActiveTabStyles,
+} from './functions';
 import {drawerWidth} from './constants';
 
 const Content = styled.main`
@@ -21,6 +25,11 @@ const CustomDrawer = styled(Drawer)`
   white-space: nowrap;
 
   ${getDrawerStyles}
+
+  .expand-icon {
+    position: absolute;
+    right: 20px;
+  }
 
   .MuiButtonBase-root {
     justify-content: center;
@@ -45,6 +54,10 @@ const CustomListItem = styled(ListItem)`
   ${getActiveTabStyles}
 `;
 
+const NestedList = styled(List)`
+  padding-left: ${({theme, open}) => theme.spacing(open ? 4 : 0)}px;
+`;
+
 const Root = styled.div`
   display: flex;
 `;
@@ -55,5 +68,6 @@ export {
   CustomDrawer,
   CustomIconButton,
   CustomListItem,
+  NestedList,
   Root,
 };

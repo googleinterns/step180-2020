@@ -1,6 +1,7 @@
+import {css} from 'styled-components';
 import {createMuiTheme} from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
+const prebuiltTheme = createMuiTheme({
   // Add special theming using this reference: https://material-ui.com/customization/default-theme/
   palette: {
     primary: {
@@ -17,5 +18,19 @@ const theme = createMuiTheme({
     },
   },
 });
+
+const theme = {
+  ...prebuiltTheme,
+  media: Object.keys(prebuiltTheme.breakpoints.values).reduce((acc, label) => {
+    acc[label] = (...args) =>
+      css`
+        @media (max-width: ${prebuiltTheme.breakpoints.values[label] / 16}em) {
+          ${css(...args)};
+        }
+      `;
+
+    return acc;
+  }, {}),
+};
 
 export {theme};
