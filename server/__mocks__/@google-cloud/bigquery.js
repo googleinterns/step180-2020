@@ -1,3 +1,12 @@
+/**
+ * @fileoverview BigQuery Mock
+ * Mock class of BigQuery class used to call BigQuery service.
+ *
+ * It implements the mock method BigQuery.query which pulls the data
+ * from api/queries.json instead of making a database call
+ *
+ */
+
 import queries from '../../api/mixed-content/queries.json';
 
 /**
@@ -5,7 +14,8 @@ import queries from '../../api/mixed-content/queries.json';
  */
 class BigQuery {
   /**
-   * Constructor, mocks the query method.
+   * Constructor: mocks the query method which simulates a database
+   * call.
    */
   constructor() {
     this.query = ({query, location}) => {

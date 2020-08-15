@@ -1,3 +1,14 @@
+/**
+ * @fileoverview API Tests
+ * Tests for the routes of the API.
+ *
+ * They use a mock object of the original BigQuery
+ * class and it's method, BigQuery.query.
+ *
+ * To run these tests: yarn test:server
+ *
+ */
+
 import request from 'supertest';
 import app from '../app';
 
