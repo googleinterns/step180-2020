@@ -10,7 +10,7 @@ import {Router as router} from 'express';
 import * as queries from './queries.json';
 
 const tlsApi = router();
-const bigqueryClient = new BigQuery();
+const bigQueryClient = new BigQuery();
 
 // TODO (SofiaVega) delete this (this route is the same as the one below)
 tlsApi.get('/tls-requests', async (req, res) => {
@@ -43,7 +43,7 @@ tlsApi.get('/tls-requests', async (req, res) => {
     location: 'US',
   };
 
-  const [rows] = await bigqueryClient.query(options);
+  const [rows] = await bigQueryClient.query(options);
 
   res.json({
     description:
@@ -78,7 +78,7 @@ const queryData = async (data, table) => {
   let dataQuery = data.query;
   dataQuery[index] = table;
   dataQuery = dataQuery.join(' ');
-  const [rows] = await bigqueryClient.query({
+  const [rows] = await bigQueryClient.query({
     query: dataQuery,
     location: 'US',
   });

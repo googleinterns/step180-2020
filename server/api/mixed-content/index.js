@@ -13,7 +13,7 @@ import {Router as router} from 'express';
 import * as queries from './queries.json';
 
 const mixedApi = router();
-const bigqueryClient = new BigQuery();
+const bigQueryClient = new BigQuery();
 
 mixedApi.get('/top-websites-with-mixed-content', async (req, res) => {
   const query = queries.TopWebsitesWithMixedContent;
@@ -95,7 +95,7 @@ const queryData = async ({query}) => {
   } else {
     throw new Error('Query must be an array');
   }
-  const [rows] = await bigqueryClient.query({
+  const [rows] = await bigQueryClient.query({
     query: query,
     location: 'US',
   });
@@ -116,7 +116,7 @@ const queryType = async (data, type) => {
     dataQuery[index] = '("%'+type+'/%")';
   }
   dataQuery = dataQuery.join(' ');
-  const [rows] = await bigqueryClient.query({
+  const [rows] = await .query({
     query: dataQuery,
     location: 'US',
   });
