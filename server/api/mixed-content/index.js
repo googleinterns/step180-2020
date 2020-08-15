@@ -95,7 +95,6 @@ const queryData = async ({query}) => {
   } else {
     throw new Error('Query must be an array');
   }
-  console.log(bigqueryClient);
   const [rows] = await bigqueryClient.query({
     query: query,
     location: 'US',
@@ -113,7 +112,7 @@ const queryData = async ({query}) => {
 const queryType = async (data, type) => {
   const index = data.typeIndex;
   let dataQuery = data.query;
-  if (type!='all') {
+  if (type != 'all') {
     dataQuery[index] = '("%'+type+'/%")';
   }
   dataQuery = dataQuery.join(' ');

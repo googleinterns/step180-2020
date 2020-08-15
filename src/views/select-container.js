@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const SelectContainer = styled.div`
-  height: 80px;
-  display: flex;
-  justify-content: left;
   align-items: left;
+  display: flex;
+  height: 80px;
+  justify-content: left;
 `;
 
 export {SelectContainer};

@@ -18,7 +18,7 @@ tlsApi.get('/tls-requests', async (req, res) => {
   const year = req.query.year;
   const month = req.query.month;
   let table = 'httparchive.sample_data.requests_desktop_10k';
-  if (year != null && month !=null) {
+  if (year != null && month != null) {
     table = 'httparchive.requests.'+year+'_'+month+'_01_desktop';
   }
   let queryDescription = 'Number of requests per TLS version';

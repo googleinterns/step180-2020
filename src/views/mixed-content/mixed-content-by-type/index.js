@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 /**
  * Returns a pie chart with the percentage of mixed content by types
  *
- * @return {ReactNode} TLS versions component
+ * @return {ReactNode} Mixed content types component
  */
 const MixedContentByType = () => {
   const [data, setData] = useState([]);
