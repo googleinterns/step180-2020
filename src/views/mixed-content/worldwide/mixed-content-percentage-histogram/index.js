@@ -40,7 +40,7 @@ const MixedContentPercentageHistogram = () => {
   };
 
   return (
-    <Card>
+    <Card data-testid="mixed-content-percentage-card">
       <CardContent>
         <CardHeader
           title="Websites grouped by percentage of mixed content"
@@ -48,8 +48,8 @@ const MixedContentPercentageHistogram = () => {
             but there are still many websites with different percentage
             amounts of mixed content"
         />
-        <ChartContainer>
-          {!loading ? (
+        {!loading ? (
+          <ChartContainer data-testid="mixed-content-percentage-chart">
             <ResponsivePie
               data={data}
               margin={{top: 40, right: 80, bottom: 80, left: 80}}
@@ -102,10 +102,12 @@ const MixedContentPercentageHistogram = () => {
                 },
               ]}
             />
-          ) : (
-            <CircularProgress />
-          )}
-        </ChartContainer>
+          </ChartContainer>
+        ) : (
+          <ChartContainer>
+            <CircularProgress data-testid="chart-loader" />
+          </ChartContainer>
+        )}
       </CardContent>
       <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>
         <MuiAlert

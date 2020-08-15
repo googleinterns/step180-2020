@@ -25,7 +25,7 @@ const TopWebsitesWithMixedContent = () => {
 
   useEffect(() => {
     api
-        .get('/api/mixed-content/top' + '-websites-with-mixed-content')
+        .get('/api/mixed-content/top-websites-with-mixed-content')
         .then((response) => {
           setData(
               response.data.result.map((website) => ({
@@ -51,7 +51,7 @@ const TopWebsitesWithMixedContent = () => {
 
   return (
     <>
-      <CustomCard>
+      <CustomCard data-testid="top-websites-with-mixed-content-card">
         <CardHeader
           title="Top websites with more mixed content"
           subheader="Websites with the greatest amount of mixed content
@@ -64,17 +64,16 @@ const TopWebsitesWithMixedContent = () => {
             indicatorColor="primary"
             textColor="primary"
             onChange={(_, newValue) => setTab(newValue)}
-            aria-label="disabled tabs example"
           >
             <Tab label="% of resources" />
             <Tab label="Total of resources" />
           </Tabs>
         </Paper>
         <CardContent>
-          <ChartContainer>
-            {!loading ? (
-              <>
-                {tab === 0 && (
+          {!loading ? (
+            <>
+              {tab === 0 && (
+                <ChartContainer data-testid="mixed-percentage-chart">
                   <ResponsiveBar
                     data={data}
                     colors={{scheme: 'accent'}}
@@ -96,8 +95,10 @@ const TopWebsitesWithMixedContent = () => {
                     margin={{top: 50, right: 130, bottom: 50, left: 60}}
                     padding={0.4}
                   />
-                )}
-                {tab === 1 && (
+                </ChartContainer>
+              )}
+              {tab === 1 && (
+                <ChartContainer data-testid="mixed-reqs-total-chart">
                   <ResponsiveBar
                     data={data}
                     colors={{scheme: 'accent'}}
@@ -119,12 +120,14 @@ const TopWebsitesWithMixedContent = () => {
                     margin={{top: 50, right: 130, bottom: 50, left: 60}}
                     padding={0.4}
                   />
-                )}
-              </>
-            ) : (
-              <CircularProgress />
-            )}
-          </ChartContainer>
+                </ChartContainer>
+              )}
+            </>
+          ) : (
+            <ChartContainer>
+              <CircularProgress data-testid="chart-loader" />
+            </ChartContainer>
+          )}
         </CardContent>
         <Snackbar
           open={snackOpen}
@@ -141,7 +144,7 @@ const TopWebsitesWithMixedContent = () => {
           </MuiAlert>
         </Snackbar>
         <TableContainer>
-          <Table size="small" aria-label="a dense table">
+          <Table size="small">
             <TableHead>
               <TableRow>
                 <TableCell>URL</TableCell>

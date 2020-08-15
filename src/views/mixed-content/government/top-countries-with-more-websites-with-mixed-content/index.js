@@ -16,12 +16,11 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
 
   useEffect(() => {
     api
-        .get(
-            '/api/mixed-content/top-countries' +
-          '-with-more-government-websites-with-mixed-content',
-        )
+        .get('/api/mixed-content/top-countries-with-more-government-websites-with-mixed-content')
         .then((response) => {
-          setData(response.data.result);
+          setData(
+              response.data.result,
+          );
           setLoading(false);
         })
         .catch((err) => {
@@ -38,15 +37,21 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
 
   return (
     <>
-      <CustomCard>
+      <CustomCard
+        data-testid="top-countries-with-more-websites-more-government-with-mixed-content-card"
+      >
         <CardHeader
           title="Top countries with more government websites with mixed content"
           subheader="Countries with more government websites that have mixed
           content"
         />
         <CardContent>
-          <ChartContainer>
-            {!loading ? (
+          {!loading ? (
+            <ChartContainer
+              data-testid="
+                top-countries-with-more-websites-more-government-with-mixed-content-chart
+              "
+            >
               <ResponsiveChoropleth
                 data={data}
                 features={features.features}
@@ -95,10 +100,12 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
                   },
                 ]}
               />
-            ) : (
-              <CircularProgress />
-            )}
-          </ChartContainer>
+            </ChartContainer>
+          ) : (
+            <ChartContainer>
+              <CircularProgress data-testid="chart-loader" />
+            </ChartContainer>
+          )}
         </CardContent>
       </CustomCard>
       <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>

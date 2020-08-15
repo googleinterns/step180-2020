@@ -59,7 +59,7 @@ const HTTPSPercentageRequests = () => {
 
   return (
     <>
-      <CustomCard>
+      <CustomCard data-testid="https-percentage-requests-card">
         <CardHeader
           title="Percentage of HTTPS requests of all websites"
           subheader="Time Series of the percentage of resources that load
@@ -67,8 +67,8 @@ const HTTPSPercentageRequests = () => {
             resources can be images, javascript code."
         />
         <CardContent>
-          <ChartContainer>
-            {!loading ? (
+          {!loading ? (
+            <ChartContainer data-testid="https-percentage-requests-chart">
               <ResponsiveLine
                 data={data}
                 margin={{top: 20, right: 50, bottom: 100, left: 50}}
@@ -127,10 +127,12 @@ const HTTPSPercentageRequests = () => {
                   },
                 ]}
               />
-            ) : (
-              <CircularProgress />
-            )}
-          </ChartContainer>
+            </ChartContainer>
+          ) : (
+            <ChartContainer>
+              <CircularProgress data-testid="chart-loader" />
+            </ChartContainer>
+          )}
         </CardContent>
       </CustomCard>
       <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>

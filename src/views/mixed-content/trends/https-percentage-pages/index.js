@@ -34,14 +34,16 @@ const HTTPSPercentagePages = () => {
               desktopData.push(newElement);
             }
           });
-          setData([{
-            id: 'mobile',
-            data: mobileData,
-          },
-          {
-            id: 'desktop',
-            data: desktopData,
-          }]);
+          setData([
+            {
+              id: 'mobile',
+              data: mobileData,
+            },
+            {
+              id: 'desktop',
+              data: desktopData,
+            },
+          ]);
           setLoading(false);
         })
         .catch((err) => {
@@ -57,15 +59,15 @@ const HTTPSPercentagePages = () => {
   };
 
   return (
-    <Card>
+    <Card data-testid="https-percentage-pages-card">
       <CardHeader
         title=" Percentage of HTTPS websites of all websites"
         subheader="Time Series of the percentage of websites that load through
           HTTPS. Broken down by desktop and mobile."
       />
       <CardContent>
-        <ChartContainer>
-          {!loading ? (
+        {!loading ? (
+          <ChartContainer data-testid="https-percentage-pages-chart">
             <ResponsiveLine
               data={data}
               margin={{top: 20, right: 50, bottom: 100, left: 50}}
@@ -124,10 +126,12 @@ const HTTPSPercentagePages = () => {
                 },
               ]}
             />
-          ) : (
-            <CircularProgress />
-          )}
-        </ChartContainer>
+          </ChartContainer>
+        ) : (
+          <ChartContainer >
+            <CircularProgress data-testid="chart-loader" />
+          </ChartContainer>
+        )}
       </CardContent>
       <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>
         <MuiAlert

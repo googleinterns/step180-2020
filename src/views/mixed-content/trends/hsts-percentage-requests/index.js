@@ -25,7 +25,6 @@ const HSTSPercentageRequests = () => {
             const newElement = {};
             newElement.x = element.year;
             newElement.y = element.percent;
-            newElement.client = element.client;
             formattedData.push(newElement);
           });
           setData(formattedData);
@@ -44,7 +43,7 @@ const HSTSPercentageRequests = () => {
   };
 
   return (
-    <Card>
+    <Card data-testid="hsts-percentage-requests-card">
       <CardHeader
         title="Percentage of resources with HSTS header"
         subheader="Time Series of the percentage of resources that contain the
@@ -53,8 +52,8 @@ const HSTSPercentageRequests = () => {
           using HTTPS."
       />
       <CardContent>
-        <ChartContainer>
-          {!loading ? (
+        {!loading ? (
+          <ChartContainer data-testid="hsts-percentage-requests-chart">
             <ResponsiveLine
               data={[{id: 'desktop', data: data}]}
               margin={{top: 20, right: 50, bottom: 100, left: 50}}
@@ -113,10 +112,12 @@ const HSTSPercentageRequests = () => {
                 },
               ]}
             />
-          ) : (
-            <CircularProgress />
-          )}
-        </ChartContainer>
+          </ChartContainer>
+        ) : (
+          <ChartContainer >
+            <CircularProgress data-testid="chart-loader" />
+          </ChartContainer>
+        )}
       </CardContent>
       <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>
         <MuiAlert

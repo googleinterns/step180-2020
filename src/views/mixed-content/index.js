@@ -19,7 +19,7 @@ const MixedContent = () => {
       <Route path="/mixed-content/worldwide" component={Worldwide} />
       <Route path="/mixed-content/trends" component={Trends} />
       <Route path="/mixed-content/government" component={Government} />
-      <Redirect to="//mixed-content/worldwide" />
+      <Redirect to="/mixed-content/worldwide" />
     </Switch>
   );
 };

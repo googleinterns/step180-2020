@@ -41,15 +41,15 @@ const TopGovernmentWebsitesWithMixedContent = () => {
 
   return (
     <>
-      <Card>
+      <Card data-testid="top-government-websites-with-mixed-content-card">
         <CardHeader
           title="Top government websites with more mixed content"
           subheader="HTTPS Government Websites that have
           the most resources loaded with http."
         />
         <CardContent>
-          <ChartContainer>
-            {!loading ? (
+          {!loading ? (
+            <ChartContainer data-testid="top-government-websites-with-mixed-content-chart">
               <ResponsiveBar
                 data={data}
                 colors={{scheme: 'accent'}}
@@ -71,10 +71,12 @@ const TopGovernmentWebsitesWithMixedContent = () => {
                 margin={{top: 50, right: 130, bottom: 50, left: 60}}
                 padding={0.4}
               />
-            ) : (
-              <CircularProgress />
-            )}
-          </ChartContainer>
+            </ChartContainer>
+          ) : (
+            <ChartContainer>
+              <CircularProgress data-testid="chart-loader" />
+            </ChartContainer>
+          )}
           <TableContainer>
             <Table size="small" aria-label="a dense table">
               <TableHead>
@@ -85,10 +87,7 @@ const TopGovernmentWebsitesWithMixedContent = () => {
               </TableHead>
               <TableBody>
                 {data.map(
-                    ({
-                      mixed_content_resources: mixedContentResources,
-                      url,
-                    }) => (
+                    ({mixed_content_resources: mixedContentResources, url}) => (
                       <TableRow key={url}>
                         <TableCell>{url}</TableCell>
                         <TableCell>{mixedContentResources}</TableCell>
