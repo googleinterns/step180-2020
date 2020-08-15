@@ -116,7 +116,7 @@ const queryType = async (data, type) => {
     dataQuery[index] = '("%'+type+'/%")';
   }
   dataQuery = dataQuery.join(' ');
-  const [rows] = await .query({
+  const [rows] = await bigQueryClient.query({
     query: dataQuery,
     location: 'US',
   });
