@@ -11,10 +11,14 @@ test('Routing is working', () => {
   const aboutMessage = getByTestId('about');
   expect(aboutMessage).toBeInTheDocument();
 
-  // Change route to /mixed-content
-  fireEvent.click(getByTestId('mixed-content-navigation-button'));
+  // Change route to /mixed-content/worldwide
+  fireEvent.click(getByTestId('mixed-content-worldwide-navigation-button'));
 
-  // Ensure new elements are there
-  const mixedContentMessage = getByTestId('mixed-content');
-  expect(mixedContentMessage).toBeInTheDocument();
+  // Since /mixed-content is only a router, there is no actual elements
+  // under that route but the main redirect could be tested, which by
+  // default renders /worldwide
+  const mixedContentContainerDefaultRedirect = getByTestId(
+      'mixed-content-worldwide',
+  );
+  expect(mixedContentContainerDefaultRedirect).toBeInTheDocument();
 });

@@ -15,7 +15,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
  */
 const MixedContent = () => {
   return (
-    <Switch data-testid="mixed-content">
+    <Switch>
       <Route path="/mixed-content/worldwide" component={Worldwide} />
       <Route path="/mixed-content/trends" component={Trends} />
       <Route path="/mixed-content/government" component={Government} />

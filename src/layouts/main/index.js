@@ -40,7 +40,7 @@ import {useLocation} from 'react-router-dom';
  */
 const MainLayout = ({children}) => {
   const [open, setOpen] = useState(true);
-  const [mixedContentOpen, setMixedCOntentOpen] = useState(true);
+  const [mixedContentOpen, setMixedCntentOpen] = useState(true);
 
   const {pathname} = useLocation();
 
@@ -82,9 +82,9 @@ const MainLayout = ({children}) => {
             </CustomListItem>
           </Link>
           <CustomListItem
-            data-testid="mixed-content-navigation-button"
+            data-testid="mixed-content-tab-button"
             active={pathname.includes('/mixed-content') ? 'true' : ''}
-            onClick={() => setMixedCOntentOpen(!mixedContentOpen)}
+            onClick={() => setMixedCntentOpen(!mixedContentOpen)}
             button
           >
             <IconButton>
@@ -97,7 +97,13 @@ const MainLayout = ({children}) => {
               <ExpandMore className="expand-icon" />
             )}
           </CustomListItem>
-          <Collapse in={mixedContentOpen} timeout="auto" unmountOnExit>
+          <Collapse
+            data-testid="mixed-content-collapse"
+            in={mixedContentOpen}
+            is-open-for-testing={mixedContentOpen ? 'true' : 'false'}
+            timeout="auto"
+            unmountOnExit
+          >
             <NestedList open={open}>
               <Link to="/mixed-content/worldwide">
                 <CustomListItem

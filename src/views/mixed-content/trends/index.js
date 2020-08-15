@@ -8,7 +8,7 @@ import HSTSPercentageRequests from './hsts-percentage-requests';
 
 const Trends = () => {
   return (
-    <Container>
+    <Container data-testid="mixed-content-trends">
       <Typography variant="h4">Trends</Typography>
       <Typography variant="subtitle1">
         Trends of HTTPS adoption throughout the web in websites and resources.

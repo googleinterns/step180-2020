@@ -8,10 +8,20 @@ test('Route buttons are shown', () => {
   // If you're adding a new route, add the appropiate data-testid
   // and list it here
   const aboutNavButton = getByTestId('about-navigation-button');
-  const mixedContentNavButton = getByTestId('mixed-content-navigation-button');
+  const mixedContentWorlwideNavButton = getByTestId(
+      'mixed-content-worldwide-navigation-button',
+  );
+  const mixedContentTrendsNavButton = getByTestId(
+      'mixed-content-trends-navigation-button',
+  );
+  const mixedContentGovernmentNavButton = getByTestId(
+      'mixed-content-government-navigation-button',
+  );
 
   expect(aboutNavButton).toBeInTheDocument();
-  expect(mixedContentNavButton).toBeInTheDocument();
+  expect(mixedContentWorlwideNavButton).toBeInTheDocument();
+  expect(mixedContentTrendsNavButton).toBeInTheDocument();
+  expect(mixedContentGovernmentNavButton).toBeInTheDocument();
 });
 
 test('Route buttons are active on their corresponding routes', () => {
@@ -20,38 +30,84 @@ test('Route buttons are active on their corresponding routes', () => {
   // If you're adding a new route, add the appropiate data-testid
   // and list it here
   const aboutNavButton = getByTestId('about-navigation-button');
-  const mixedContentNavButton = getByTestId('mixed-content-navigation-button');
+  const mixedContentWorlwideNavButton = getByTestId(
+      'mixed-content-worldwide-navigation-button',
+  );
+  const mixedContentTrendsNavButton = getByTestId(
+      'mixed-content-trends-navigation-button',
+  );
+  const mixedContentGovernmentNavButton = getByTestId(
+      'mixed-content-government-navigation-button',
+  );
 
   // Since app starts at / is needed to redirect to /about
-  // Change route to /mixed-content
+  // the first route should be active, so this line is only for
+  // formalizing navigation
   fireEvent.click(aboutNavButton);
 
   expect(aboutNavButton).toHaveAttribute('active', 'true');
-  expect(mixedContentNavButton).toHaveAttribute('active', '');
+  expect(mixedContentWorlwideNavButton).toHaveAttribute('active', '');
+  expect(mixedContentTrendsNavButton).toHaveAttribute('active', '');
+  expect(mixedContentGovernmentNavButton).toHaveAttribute('active', '');
 
-  // Change route to /mixed-content
-  fireEvent.click(mixedContentNavButton);
+  // Change route to /mixed-content/worldwide
+  fireEvent.click(mixedContentWorlwideNavButton);
 
-  // Since app starts at / and redirects to /about,
-  // the first route should be active
   expect(aboutNavButton).toHaveAttribute('active', '');
-  expect(mixedContentNavButton).toHaveAttribute('active', 'true');
+  expect(mixedContentWorlwideNavButton).toHaveAttribute('active', 'true');
+  expect(mixedContentTrendsNavButton).toHaveAttribute('active', '');
+  expect(mixedContentGovernmentNavButton).toHaveAttribute('active', '');
+
+  // Change route to /mixed-content/trends
+  fireEvent.click(mixedContentTrendsNavButton);
+
+  expect(aboutNavButton).toHaveAttribute('active', '');
+  expect(mixedContentWorlwideNavButton).toHaveAttribute('active', '');
+  expect(mixedContentTrendsNavButton).toHaveAttribute('active', 'true');
+  expect(mixedContentGovernmentNavButton).toHaveAttribute('active', '');
+
+  // Change route to /mixed-content/trends
+  fireEvent.click(mixedContentGovernmentNavButton);
+
+  expect(aboutNavButton).toHaveAttribute('active', '');
+  expect(mixedContentWorlwideNavButton).toHaveAttribute('active', '');
+  expect(mixedContentTrendsNavButton).toHaveAttribute('active', '');
+  expect(mixedContentGovernmentNavButton).toHaveAttribute('active', 'true');
 });
 
-test('Drawer opens and closes', () => {
+test('Drawer opens and closes correctly', () => {
   const {getByTestId} = render(<MainLayout>Test Children</MainLayout>);
 
   const drawer = getByTestId('navigation-drawer');
   const appbar = getByTestId('appbar');
   const toggleDrawerButton = getByTestId('toggle-drawer-button');
 
-  // Open drawer
-  fireEvent.click(toggleDrawerButton);
-  expect(window.getComputedStyle(drawer).width).toBe('240px');
-  expect(appbar).toHaveAttribute('open');
+  // By default drawer is open
 
   // Close drawer
   fireEvent.click(toggleDrawerButton);
   expect(window.getComputedStyle(drawer).width).toBe('72px');
   expect(appbar).not.toHaveAttribute('open');
+
+  // Open drawer
+  fireEvent.click(toggleDrawerButton);
+  expect(window.getComputedStyle(drawer).width).toBe('240px');
+  expect(appbar).toHaveAttribute('open');
+});
+
+test('Mixed Content tab opens and closes correctly', () => {
+  const {getByTestId} = render(<MainLayout>Test Children</MainLayout>);
+
+  const collapse = getByTestId('mixed-content-collapse');
+  const mixedContentTabButton = getByTestId('mixed-content-tab-button');
+
+  // By default collapse is open
+
+  // Close collapse
+  fireEvent.click(mixedContentTabButton);
+  expect(collapse).toHaveAttribute('is-open-for-testing', 'false');
+
+  // Open collapse
+  fireEvent.click(mixedContentTabButton);
+  expect(collapse).toHaveAttribute('is-open-for-testing', 'true');
 });

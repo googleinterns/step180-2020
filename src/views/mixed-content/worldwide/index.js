@@ -6,9 +6,9 @@ import MixedContentPercentageHistogram
 import TopWebsitesWithMixedContent
   from './top-websites-with-mixed-content';
 
-const MixedContentInTheWeb = () => {
+const Worldwide = () => {
   return (
-    <Container>
+    <Container data-testid="mixed-content-worldwide">
       <Typography variant="h4">Worldwide</Typography>
       <Typography variant="subtitle1">
         Mixed content data websites around the world
@@ -19,4 +19,4 @@ const MixedContentInTheWeb = () => {
   );
 };
 
-export default MixedContentInTheWeb;
+export default Worldwide;

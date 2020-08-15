@@ -6,9 +6,9 @@ import TopCountriesWithMoreWebsitesWithMixedContent
 import TopGovernmentWebsitesWithMixedContent
   from './top-government-websites-with-mixed-content';
 
-const MixedContentInTheWeb = () => {
+const Government = () => {
   return (
-    <Container>
+    <Container data-testid="mixed-content-government">
       <Typography variant="h4">Government</Typography>
       <Typography variant="subtitle1">
         Mixed content in governmental websites around the world
@@ -19,4 +19,4 @@ const MixedContentInTheWeb = () => {
   );
 };
 
-export default MixedContentInTheWeb;
+export default Government;

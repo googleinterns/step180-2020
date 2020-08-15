@@ -7,7 +7,7 @@
  */
 import PropTypes from 'prop-types';
 import {MemoryRouter} from 'react-router-dom';
-import {theme} from '../config/theme';
+import {theme} from './config/theme';
 import {ThemeProvider as StyledProvider} from 'styled-components';
 import {ThemeProvider, StylesProvider} from '@material-ui/core/styles';
 import React from 'react';
