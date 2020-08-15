@@ -28,35 +28,36 @@ mixedApi.get('/top-websites-with-mixed-content', async (req, res) => {
 });
 
 mixedApi.get(
-    '/top-government-websites-with-mixed-content',
-    async (req, res) => {
-      const query = queries.TopGovernmentWebsitesWithMixedContent;
-      let rows = [];
-      rows = await queryData(query);
+  '/top-government-websites-with-mixed-content',
+  async (req, res) => {
+    const query = queries.TopGovernmentWebsitesWithMixedContent;
+    let rows = [];
+    rows = await queryData(query);
 
-      res.json({
-        description: query.description,
-        result: rows,
-        suggestedVisualizations: query.suggestedVisualizations,
-      });
-    },
+    res.json({
+      description: query.description,
+      result: rows,
+      suggestedVisualizations: query.suggestedVisualizations,
+    });
+  },
 );
 
-mixedApi.get('/top-countries-with-more-government-websites-with-mixed-content',
-    async (req, res) => {
-      const query =
+mixedApi.get(
+  '/top-countries-with-more-government-websites-with-mixed-content',
+  async (req, res) => {
+    const query =
       queries.TopCountriesWithMoreGovernmentWebsitesWithMixedContent;
-      const rows = await queryData(query);
+    const rows = await queryData(query);
 
-      res.json({
-        description: query.description,
-        result: rows,
-        suggestedVisualizations: query.suggestedVisualizations,
-      });
-    },
+    res.json({
+      description: query.description,
+      result: rows,
+      suggestedVisualizations: query.suggestedVisualizations,
+    });
+  },
 );
 
-mixedApi.get('/mixed-content-percentage-histogram', async (req, res) =>{
+mixedApi.get('/mixed-content-percentage-histogram', async (req, res) => {
   const query = queries.MixedContentPercentageHistogram;
   let rows = [];
   rows = await queryData(query);
@@ -68,8 +69,7 @@ mixedApi.get('/mixed-content-percentage-histogram', async (req, res) =>{
   });
 });
 
-
-mixedApi.get('/https-percentage-pages', async (req, res) =>{
+mixedApi.get('/https-percentage-pages', async (req, res) => {
   const query = queries.HTTPSPercentagePages;
   let rows = [];
   rows = await queryData(query);
@@ -81,7 +81,7 @@ mixedApi.get('/https-percentage-pages', async (req, res) =>{
   });
 });
 
-mixedApi.get('/https-percentage-requests', async (req, res) =>{
+mixedApi.get('/https-percentage-requests', async (req, res) => {
   const query = queries.HTTPSPercentageRequests;
   let rows = [];
   rows = await queryData(query);
@@ -93,7 +93,7 @@ mixedApi.get('/https-percentage-requests', async (req, res) =>{
   });
 });
 
-mixedApi.get('/hsts-percentage-requests', async (req, res) =>{
+mixedApi.get('/hsts-percentage-requests', async (req, res) => {
   const query = queries.HSTSPercentageRequests;
   let rows = [];
   rows = await queryData(query);

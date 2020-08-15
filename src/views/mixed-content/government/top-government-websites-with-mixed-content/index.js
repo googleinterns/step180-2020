@@ -22,14 +22,14 @@ const TopGovernmentWebsitesWithMixedContent = () => {
 
   useEffect(() => {
     api
-        .get('/api/mixed-content/top-government-websites-with-mixed-content')
-        .then((response) => {
-          setData(response.data.result);
-          setLoading(false);
-        })
-        .catch((err) => {
-          setSnackOpen(true);
-        });
+      .get('/api/mixed-content/top-government-websites-with-mixed-content')
+      .then((response) => {
+        setData(response.data.result);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setSnackOpen(true);
+      });
   }, []);
 
   const handleClose = (event, reason) => {
@@ -87,12 +87,12 @@ const TopGovernmentWebsitesWithMixedContent = () => {
               </TableHead>
               <TableBody>
                 {data.map(
-                    ({mixed_content_resources: mixedContentResources, url}) => (
-                      <TableRow key={url}>
-                        <TableCell>{url}</TableCell>
-                        <TableCell>{mixedContentResources}</TableCell>
-                      </TableRow>
-                    ),
+                  ({mixed_content_resources: mixedContentResources, url}) => (
+                    <TableRow key={url}>
+                      <TableCell>{url}</TableCell>
+                      <TableCell>{mixedContentResources}</TableCell>
+                    </TableRow>
+                  ),
                 )}
               </TableBody>
             </Table>

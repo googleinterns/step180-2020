@@ -16,38 +16,38 @@ const HTTPSPercentageRequests = () => {
 
   useEffect(() => {
     api
-        .get('/api/mixed-content/https-percentage-requests')
-        .then((response) => {
+      .get('/api/mixed-content/https-percentage-requests')
+      .then((response) => {
         // Response data is formated to fit nivo requirements
         // nivo schema: {x: data, y: data}
-          const mobileData = [];
-          const desktopData = [];
-          response.data.result.forEach((element) => {
-            const newElement = {};
-            newElement.x = moment(element.timestamp).format('L');
-            newElement.y = element.percent;
-            newElement.client = element.client;
-            if (newElement.client === 'mobile') {
-              mobileData.push(newElement);
-            } else {
-              desktopData.push(newElement);
-            }
-          });
-          setData([
-            {
-              id: 'mobile',
-              data: mobileData,
-            },
-            {
-              id: 'desktop',
-              data: desktopData,
-            },
-          ]);
-          setLoading(false);
-        })
-        .catch((err) => {
-          setSnackOpen(true);
+        const mobileData = [];
+        const desktopData = [];
+        response.data.result.forEach((element) => {
+          const newElement = {};
+          newElement.x = moment(element.timestamp).format('L');
+          newElement.y = element.percent;
+          newElement.client = element.client;
+          if (newElement.client === 'mobile') {
+            mobileData.push(newElement);
+          } else {
+            desktopData.push(newElement);
+          }
         });
+        setData([
+          {
+            id: 'mobile',
+            data: mobileData,
+          },
+          {
+            id: 'desktop',
+            data: desktopData,
+          },
+        ]);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setSnackOpen(true);
+      });
   }, []);
 
   const handleClose = (event, reason) => {

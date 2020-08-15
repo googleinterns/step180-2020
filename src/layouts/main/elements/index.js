@@ -4,10 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import styled from 'styled-components';
-import {
-  getDrawerStyles,
-  getActiveTabStyles,
-} from './functions';
+import {getDrawerStyles, getActiveTabStyles} from './functions';
 import {drawerWidth} from './constants';
 
 const Content = styled.main`

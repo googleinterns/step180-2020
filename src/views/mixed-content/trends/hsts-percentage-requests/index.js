@@ -16,23 +16,23 @@ const HSTSPercentageRequests = () => {
 
   useEffect(() => {
     api
-        .get('/api/mixed-content/hsts-percentage-requests')
-        .then((response) => {
+      .get('/api/mixed-content/hsts-percentage-requests')
+      .then((response) => {
         // Response data is formated to fit nivo requirements
         // nivo schema: {x: data, y: data}
-          const formattedData = [];
-          response.data.result.forEach((element) => {
-            const newElement = {};
-            newElement.x = element.year;
-            newElement.y = element.percent;
-            formattedData.push(newElement);
-          });
-          setData(formattedData);
-          setLoading(false);
-        })
-        .catch((err) => {
-          setSnackOpen(true);
+        const formattedData = [];
+        response.data.result.forEach((element) => {
+          const newElement = {};
+          newElement.x = element.year;
+          newElement.y = element.percent;
+          formattedData.push(newElement);
         });
+        setData(formattedData);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setSnackOpen(true);
+      });
   }, []);
 
   const handleClose = (event, reason) => {
@@ -114,7 +114,7 @@ const HSTSPercentageRequests = () => {
             />
           </ChartContainer>
         ) : (
-          <ChartContainer >
+          <ChartContainer>
             <CircularProgress data-testid="chart-loader" />
           </ChartContainer>
         )}

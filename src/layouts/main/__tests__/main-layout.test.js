@@ -9,13 +9,13 @@ test('Route buttons are shown', () => {
   // and list it here
   const aboutNavButton = getByTestId('about-navigation-button');
   const mixedContentWorlwideNavButton = getByTestId(
-      'mixed-content-worldwide-navigation-button',
+    'mixed-content-worldwide-navigation-button',
   );
   const mixedContentTrendsNavButton = getByTestId(
-      'mixed-content-trends-navigation-button',
+    'mixed-content-trends-navigation-button',
   );
   const mixedContentGovernmentNavButton = getByTestId(
-      'mixed-content-government-navigation-button',
+    'mixed-content-government-navigation-button',
   );
 
   expect(aboutNavButton).toBeInTheDocument();
@@ -31,13 +31,13 @@ test('Route buttons are active on their corresponding routes', () => {
   // and list it here
   const aboutNavButton = getByTestId('about-navigation-button');
   const mixedContentWorlwideNavButton = getByTestId(
-      'mixed-content-worldwide-navigation-button',
+    'mixed-content-worldwide-navigation-button',
   );
   const mixedContentTrendsNavButton = getByTestId(
-      'mixed-content-trends-navigation-button',
+    'mixed-content-trends-navigation-button',
   );
   const mixedContentGovernmentNavButton = getByTestId(
-      'mixed-content-government-navigation-button',
+    'mixed-content-government-navigation-button',
   );
 
   // Since app starts at / is needed to redirect to /about

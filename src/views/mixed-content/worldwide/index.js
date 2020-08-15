@@ -1,10 +1,8 @@
 import React from 'react';
 import {Container} from './elements';
 import {Typography} from '@material-ui/core';
-import MixedContentPercentageHistogram
-  from './mixed-content-percentage-histogram';
-import TopWebsitesWithMixedContent
-  from './top-websites-with-mixed-content';
+import MixedContentPercentageHistogram from './mixed-content-percentage-histogram';
+import TopWebsitesWithMixedContent from './top-websites-with-mixed-content';
 
 const Worldwide = () => {
   return (

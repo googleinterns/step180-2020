@@ -20,7 +20,7 @@ test('Renders charts after API is called', async () => {
 
   // Also, chart should be rendered by default
   const mixedPercentageChart = screen.getByTestId(
-      'top-government-websites-with-mixed-content-chart',
+    'top-government-websites-with-mixed-content-chart',
   );
   expect(mixedPercentageChart).toBeInTheDocument();
 });

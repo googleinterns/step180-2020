@@ -4,10 +4,10 @@ import {render, waitForElementToBeRemoved, screen} from 'test-utils';
 
 test('Renders main card container correctly', async () => {
   const {getByTestId} = render(
-      <TopCountriesWithMoreWebsitesWithMixedContent />,
+    <TopCountriesWithMoreWebsitesWithMixedContent />,
   );
   const card = getByTestId(
-      'top-countries-with-more-websites-more-government-with-mixed-content-card',
+    'top-countries-with-more-websites-more-government-with-mixed-content-card',
   );
   expect(card).toBeInTheDocument();
 
@@ -24,7 +24,7 @@ test('Renders charts after API is called', async () => {
 
   // Also, chart should be rendered by default
   const mixedPercentageChart = screen.getByTestId(
-      'top-countries-with-more-websites-more-government-with-mixed-content-chart',
+    'top-countries-with-more-websites-more-government-with-mixed-content-chart',
   );
   expect(mixedPercentageChart).toBeInTheDocument();
 });

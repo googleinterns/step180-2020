@@ -25,21 +25,21 @@ const TopWebsitesWithMixedContent = () => {
 
   useEffect(() => {
     api
-        .get('/api/mixed-content/top-websites-with-mixed-content')
-        .then((response) => {
-          setData(
-              response.data.result.map((website) => ({
-                ...website,
-                mixed_percentage: Number(
-                    (website.mixed_percentage * 100).toFixed(2),
-                ),
-              })),
-          );
-          setLoading(false);
-        })
-        .catch((err) => {
-          setSnackOpen(true);
-        });
+      .get('/api/mixed-content/top-websites-with-mixed-content')
+      .then((response) => {
+        setData(
+          response.data.result.map((website) => ({
+            ...website,
+            mixed_percentage: Number(
+              (website.mixed_percentage * 100).toFixed(2),
+            ),
+          })),
+        );
+        setLoading(false);
+      })
+      .catch((err) => {
+        setSnackOpen(true);
+      });
   }, []);
 
   const handleClose = (event, reason) => {
@@ -154,17 +154,17 @@ const TopWebsitesWithMixedContent = () => {
             </TableHead>
             <TableBody>
               {data.map(
-                  ({
-                    mixed_percentage: mixedPercentage,
-                    mixed_reqs_total: mixedReqsTotal,
-                    url,
-                  }) => (
-                    <TableRow key={url}>
-                      <TableCell>{url}</TableCell>
-                      <TableCell>{mixedPercentage}</TableCell>
-                      <TableCell>{mixedReqsTotal}</TableCell>
-                    </TableRow>
-                  ),
+                ({
+                  mixed_percentage: mixedPercentage,
+                  mixed_reqs_total: mixedReqsTotal,
+                  url,
+                }) => (
+                  <TableRow key={url}>
+                    <TableCell>{url}</TableCell>
+                    <TableCell>{mixedPercentage}</TableCell>
+                    <TableCell>{mixedReqsTotal}</TableCell>
+                  </TableRow>
+                ),
               )}
             </TableBody>
           </Table>

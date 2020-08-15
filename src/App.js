@@ -3,11 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import MainLayout from './layouts/main';
 import MixedContent from './views/mixed-content';
 import React from 'react';
-import {
-  Redirect,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 
 /**
  * App Component

@@ -16,20 +16,20 @@ const MixedContentPercentageHistogram = () => {
 
   useEffect(() => {
     api
-        .get('/api/mixed-content/mixed-content-percentage-histogram')
-        .then((response) => {
-          setData(
-              response.data.result.map((website) => ({
-                ...website,
-                id: `${website.mixed_percentage * 100}%`,
-                value: website.total,
-              })),
-          );
-          setLoading(false);
-        })
-        .catch((err) => {
-          setSnackOpen(true);
-        });
+      .get('/api/mixed-content/mixed-content-percentage-histogram')
+      .then((response) => {
+        setData(
+          response.data.result.map((website) => ({
+            ...website,
+            id: `${website.mixed_percentage * 100}%`,
+            value: website.total,
+          })),
+        );
+        setLoading(false);
+      })
+      .catch((err) => {
+        setSnackOpen(true);
+      });
   }, []);
 
   const handleClose = (event, reason) => {

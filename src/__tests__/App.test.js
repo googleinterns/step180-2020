@@ -1,6 +1,6 @@
 import App from '../App';
 import React from 'react';
-import {act, fireEvent, render, screen} from 'test-utils';
+import {fireEvent, render, screen} from 'test-utils';
 
 test('Routing is working', async () => {
   render(<App />);
@@ -12,7 +12,7 @@ test('Routing is working', async () => {
 
   // Change route to /mixed-content/worldwide
   fireEvent.click(
-      screen.getByTestId('mixed-content-worldwide-navigation-button'),
+    screen.getByTestId('mixed-content-worldwide-navigation-button'),
   );
 
   // Since /mixed-content is only a router, there is no actual elements
@@ -29,7 +29,7 @@ test('Routing is working', async () => {
 
   // Change route to /mixed-content/government
   fireEvent.click(
-      screen.getByTestId('mixed-content-government-navigation-button'),
+    screen.getByTestId('mixed-content-government-navigation-button'),
   );
 
   const mixedContentGovernment = screen.getByTestId('mixed-content-government');
