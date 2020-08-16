@@ -79,6 +79,7 @@ mixedApi.get('/mixed-content-by-type', async (req, res) =>{
     rows = await toPieChart(rows);
   }
   res.json({
+    description: query.description,
     type: type,
     result: rows,
   });

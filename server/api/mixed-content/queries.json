@@ -55,7 +55,7 @@
     ]
   },
   "MixedContentByType": {
-    "description": "",
+    "description": "Return mixed content request by types",
     "query": [
       "SELECT substr(mimeType, 1, strpos(mimeType, \"/\")-1) as id,",
       "count(*) value,",
@@ -70,7 +70,7 @@
     ]
   },
   "MixedContentOneType": {
-    "description": "",
+    "description": "Return mixed content requests of specified type",
     "query": [
       "SELECT sum(https) AS httpsPercentage, sum(http) AS httpPercentage",
       "FROM",
