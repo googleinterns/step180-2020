@@ -143,6 +143,18 @@ const MainLayout = ({children}) => {
               </Link>
             </NestedList>
           </Collapse>
+          <Link to="/tls">
+            <CustomListItem
+              data-testid="tls-navigation-button"
+              active={pathname === '/tls' ? 'true' : ''}
+              button
+            >
+              <IconButton>
+                <Https />
+              </IconButton>
+              <ListItemText primary="TLS" />
+            </CustomListItem>
+          </Link>
         </List>
       </CustomDrawer>
       <Content>
