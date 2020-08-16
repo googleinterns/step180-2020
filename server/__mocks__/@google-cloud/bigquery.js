@@ -43,5 +43,4 @@ const simulateQueryResult = (simulatedQuery) => {
   return null;
 };
 
-
 export {BigQuery};

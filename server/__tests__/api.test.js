@@ -19,11 +19,13 @@ describe('Health Check', () => {
  */
 describe('mixed-content', () => {
   it('Check /top-websites-with-mixed-content', async () => {
-    const res = await request(app).get('/api/mixed-content/'+
-    'top-websites-with-mixed-content');
+    const res = await request(app).get(
+      '/api/mixed-content/top-websites-with-mixed-content',
+    );
 
-    expect(res.body.description).toBe('Top websites with most mixed content'+
-    'and the percentage of mixed content in it.');
+    expect(res.body.description).toBe(
+      'Top websites with most mixed content and the percentage of mixed content in it.',
+    );
     expect(res.body.result).toBeInstanceOf(Array);
     expect(res.body.suggestedVisualizations).toContain('Bar chart');
   });
