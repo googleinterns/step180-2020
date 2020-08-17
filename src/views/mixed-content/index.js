@@ -1,8 +1,8 @@
+import HSTSPercentageRequests from './hsts-percentage-requests';
 import HTTPSPercentagePages
   from './https-percentage-pages';
 import HTTPSPercentageRequests
   from './https-percentage-requests';
-import HSTSPercentageRequests from './hsts-percentage-requests';
 import MixedContentPercentageHistogram
   from './mixed-content-percentage-histogram';
 import React from 'react';
