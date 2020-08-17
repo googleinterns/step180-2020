@@ -8,9 +8,8 @@
  * To run these tests: yarn test:server
  *
  */
-
-import request from 'supertest';
 import app from '../app';
+import request from 'supertest';
 
 jest.mock('@google-cloud/bigquery');
 
@@ -34,7 +33,7 @@ describe('mixed-content', () => {
     'top-websites-with-mixed-content');
 
     expect(res.body.description).toBe('Top websites with most mixed content'+
-    'and the percentage of mixed content in it.');
+    ' and the percentage of mixed content in it.');
     expect(res.body.result).toBeInstanceOf(Array);
     expect(res.body.suggestedVisualizations).toContain('Bar chart');
   });
