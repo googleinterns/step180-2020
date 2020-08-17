@@ -80,6 +80,31 @@ describe('mixed-content', () => {
     expect(res.body.suggestedVisualizations).toContain('Line chart');
   });
 
+  it('Check with 3 datapoints /https-percentage-pages', async () => {
+    const res = await request(app).get('/api/mixed-content/'+
+    '/https-percentage-pages?datapoints=3');
+
+    expect(res.body.description).toBe('Time Series of the percentage of'+
+    ' all pages that load with HTTPS');
+    expect(res.body.result).toBeInstanceOf(Array);
+    // 3 desktop and mobile datapoints each
+    expect(res.body.result.length).toBe(6);
+    expect(res.body.suggestedVisualizations).toContain('Line chart');
+  });
+
+  it('Check with more datapoints than they exist /https-percentage-pages',
+      async () => {
+        const res = await request(app).get('/api/mixed-content/'+
+    '/https-percentage-pages?datapoints=1000000');
+
+        expect(res.body.description).toBe('Time Series of the percentage of'+
+    ' all pages that load with HTTPS');
+        expect(res.body.result).toBeInstanceOf(Array);
+        // Desktop and mobile datapoints
+        expect(res.body.result.length).not.toBe(2000000);
+        expect(res.body.suggestedVisualizations).toContain('Line chart');
+      });
+
   it('Check /https-percentage-requests', async () => {
     const res = await request(app).get('/api/mixed-content/'+
     '/https-percentage-requests');

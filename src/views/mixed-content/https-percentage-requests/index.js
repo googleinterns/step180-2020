@@ -15,7 +15,7 @@ const HTTPSPercentageRequests = () => {
 
   useEffect(() => {
     api
-        .get('/api/mixed-content/https-percentage-requests')
+        .get('/api/mixed-content/https-percentage-requests?datapoints=10')
         .then((response) => {
           // Response data is formated to fit nivo requirements
           // nivo schema: {x: data, y: data}
@@ -88,7 +88,7 @@ const HTTPSPercentageRequests = () => {
               margin={{top: 50, right: 110, bottom: 20, left: 60}}
               xScale={{type: 'point'}}
               yScale={{type: 'linear', min: 'auto',
-                stacked: true, reverse: false}}
+                stacked: false, reverse: false}}
               curve="natural"
               axisTop={null}
               axisRight={null}
