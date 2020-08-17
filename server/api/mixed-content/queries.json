@@ -38,7 +38,7 @@
     ]
   },
   "TopGovernmentWebsitesWithMixedContent": {
-    "description": "Top gubermental websites with most mixed content and the number of those resources.",
+    "description": "Top governmental websites with most mixed content and the number of those resources.",
     "sql": [
       "SELECT",
       "pages.url, COUNT(*) mixed_content_resources",
@@ -54,7 +54,12 @@
       "ORDER BY COUNT(*) DESC",
       "LIMIT 5"
     ],
-    "suggestedVisualizations": ["Bar chart"]
+    "suggestedVisualizations": ["Bar chart"],
+    "mockResult": [
+      {"url": "http://www.zhxz.gov.cn/", "mixed_content_resources": 139},
+      {"url": "http://mohesr.gov.iq/", "mixed_content_resources": 135},
+      {"url": "http://www.filipposurico.gov.it/", "mixed_content_resources": 84}
+    ]
   },
   "TopCountriesWithMoreGovernmentWebsitesWithMixedContent": {
     "description": "Countries with more government websites that have mixed content",
@@ -62,36 +67,110 @@
       "SELECT tld id, total_government_websites_with_mxcont value FROM `enamel-step-2020.httparchive.government_websites_per_country_with_mixed_content`",
       " LIMIT 40"
     ],
-    "suggestedVisualizations": ["Bar chart", "Map"]
+    "suggestedVisualizations": ["Bar chart", "Map"],
+    "mockResult": [
+      {"id": "BRA", "value": 6664},
+      {"id": "USA", "value": 4368},
+      {"id": "IND", "value": 3012},
+      {"id": "COL", "value": 2308},
+      {"id": "MEX", "value": 2305},
+      {"id": "VNM", "value": 1785},
+      {"id": "ARG", "value": 1607},
+      {"id": "TUR", "value": 1474}
+    ]
   },
   "MixedContentPercentageHistogram": {
     "description": "Histogram of the percentage of mixed content of all websites.",
     "sql": [
       "SELECT mixed_percentage, COUNT(*) total FROM `enamel-step-2020.httparchive.percentage_mixed_content`",
       " GROUP BY mixed_percentage ORDER BY mixed_percentage ASC;"
+    ],
+    "suggestedVisualizations": ["Bar chart"],
+    "mockResult": [
+      {"mixed_percentage": 0, "total": 7551},
+      {"mixed_percentage": 0.1, "total": 269},
+      {"mixed_percentage": 0.2, "total": 142},
+      {"mixed_percentage": 0.3, "total": 130},
+      {"mixed_percentage": 0.4, "total": 137},
+      {"mixed_percentage": 0.5, "total": 143},
+      {"mixed_percentage": 0.6, "total": 188},
+      {"mixed_percentage": 0.7, "total": 208},
+      {"mixed_percentage": 0.8, "total": 307},
+      {"mixed_percentage": 0.9, "total": 389},
+      {"mixed_percentage": 1, "total": 534}
     ]
   },
   "HTTPSPercentagePages": {
-    "description": "Percentage of all mobile pages that load with HTTPS",
+    "description": "Time Series of the percentage of all pages that load with HTTPS",
     "sql": [
       "SELECT * FROM `enamel-step-2020.httparchive.TimeSeries_HTTPPages`",
       " WHERE percent > 5.0 ORDER BY timestamp ASC  LIMIT 200"
     ],
-    "suggestedVisualizations": ["Line chart"]
+    "suggestedVisualizations": ["Line chart"],
+    "mockResult": [
+      {
+        "date": "2018_07_01",
+        "timestamp": 1530403200000,
+        "client": "desktop",
+        "percent": 62.42
+      },
+      {
+        "date": "2018_07_15",
+        "timestamp": 1531612800000,
+        "client": "desktop",
+        "percent": 62.43
+      },
+      {
+        "date": "2018_07_15",
+        "timestamp": 1531612800000,
+        "client": "mobile",
+        "percent": 62.48
+      }
+    ]
   },
   "HTTPSPercentageRequests": {
-    "description": "Percentage of all mobile pages that load with HTTPS",
+    "description": "Time Series of the percentage of all resources that load with HTTPS",
     "sql": [
       "SELECT * FROM `enamel-step-2020.httparchive.TimeSeries_HTTPS`",
       " WHERE percent > 5.0 ORDER BY timestamp ASC  LIMIT 200"
     ],
-    "suggestedVisualizations": ["Line chart"]
+    "suggestedVisualizations": ["Line chart"],
+    "mockResult": [
+      {
+        "date": "2016_01_01",
+        "timestamp": 1451606400000,
+        "client": "mobile",
+        "percent": 21.81
+      },
+      {
+        "date": "2016_01_15",
+        "timestamp": 1452816000000,
+        "client": "mobile",
+        "percent": 22.38
+      },
+      {
+        "date": "2016_02_01",
+        "timestamp": 1454284800000,
+        "client": "desktop",
+        "percent": 25.64
+      }
+    ]
   },
   "HSTSPercentageRequests": {
-    "description": "Percentage of all desktop requests that contain Strict-Transport-Security header.",
+    "description": "Time Series of the percentage of all desktop resources that contain Strict-Transport-Security header.",
     "sql": [
       "SELECT ROUND(percent, 2) percent, year FROM `enamel-step-2020.httparchive.HSTSTimeSeries` LIMIT 10"
     ],
-    "suggestedVisualizations": ["Line chart"]
+    "suggestedVisualizations": ["Line chart"],
+    "mockResult": [
+      {"percent": 0, "year": 2013},
+      {"percent": 0.27, "year": 2014},
+      {"percent": 0.46, "year": 2015},
+      {"percent": 0.26, "year": 2016},
+      {"percent": 4.84, "year": 2017},
+      {"percent": 5.56, "year": 2018},
+      {"percent": 8.05, "year": 2019},
+      {"percent": 12.43, "year": 2020}
+    ]
   }
 }
