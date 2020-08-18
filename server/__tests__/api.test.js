@@ -39,3 +39,11 @@ describe('mixed-content-by-type', () => {
     expect(res.body.result).not.toBeNull();
   });
 });
+
+describe('key-exchange', () => {
+  it('Check /tls/key-exchange', async () => {
+    const res = await request(app).get('/api/tls/key-exchange');
+    expect(res.body.description).toBe('');
+    expect(res.body.result).not.toBeNull();
+  });
+});

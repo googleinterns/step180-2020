@@ -1,4 +1,5 @@
 import React from 'react';
+import KeyExchange from './key-exchange/index.js';
 import TLSversion from './tls-version/index.js';
 import Typography from '@material-ui/core/Typography';
 
@@ -7,13 +8,14 @@ import Typography from '@material-ui/core/Typography';
  * List of components for TLS-related visualizations
  *@return {ReactNode} TLS view
  */
-const tls = () => {
+const Tls = () => {
   return (
     <div data-testid="tls">
       <Typography variant="h1">TLS Visualizations</Typography>
       <TLSversion/>
+      <KeyExchange/>
     </div>
   );
 };
 
-export default tls;
+export default Tls;

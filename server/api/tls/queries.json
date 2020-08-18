@@ -14,5 +14,27 @@
         ],
         "tableIndex": "4",
         "suggestedVisualizations": ["Pie chart"]
+    },
+    "SignatureAlgorithm":
+    {
+        "description": "",
+        "query": [
+            "SELECT JSON_EXTRACT(payload, '$._securityDetails.signedCertificateTimestampList[0].signatureAlgorithm')",
+            "as signature, count(*)",
+            "FROM `httparchive.sample_data.requests_desktop_10k`",
+            "group by signature;"
+        ]
+    },
+    "KeyExchange":
+    {
+        "description": "",
+        "query": [
+            "SELECT JSON_EXTRACT(payload, '$._securityDetails.keyExchange') as id, count(*) as value",
+            "FROM ",
+            "httparchive.sample_data.requests_desktop_10k",
+            "group by id",
+            "having id is not null"
+        ],
+        "tableIndex":"2"
     }
 }
