@@ -25,21 +25,16 @@ describe('Health Check', () => {
 });
 
 describe('mixed-content', () => {
-  it(
-    'Check /top-countries-with-more-government' +
-      '-websites-with-mixed-content is working',
-    async () => {
-      const res = await request(app).get(
-        '/api/mixed-content/top-countries-with' +
-          '-more-government-websites-with-mixed-content',
-      );
-      expect(res.body.description).toBe(
-        'Countries with more government websites that have mixed content',
-      );
-      expect(res.body.result).not.toBeNull();
-      expect(res.body.suggestedVisualizations).not.toBeNull();
-    },
-  );
+  it('Check /top-countries-with-more-government-websites-with-mixed-content is working', async () => {
+    const res = await request(app).get(
+      '/api/mixed-content/top-countries-with-more-government-websites-with-mixed-content',
+    );
+    expect(res.body.description).toBe(
+      'Countries with more government websites that have mixed content',
+    );
+    expect(res.body.result).not.toBeNull();
+    expect(res.body.suggestedVisualizations).not.toBeNull();
+  });
 
   it('Check /top-websites-with-mixed-content', async () => {
     const res = await request(app).get(
@@ -71,7 +66,7 @@ describe('mixed-content', () => {
     );
 
     expect(res.body.description).toBe(
-      'Countries with more government' + ' websites that have mixed content',
+      'Countries with more government websites that have mixed content',
     );
     expect(res.body.result).toBeInstanceOf(Array);
     expect(res.body.suggestedVisualizations).toContain('Map');
@@ -79,11 +74,11 @@ describe('mixed-content', () => {
 
   it('Check /mixed-content-percentage-histogram', async () => {
     const res = await request(app).get(
-      '/api/mixed-content/' + '/mixed-content-percentage-histogram',
+      '/api/mixed-content/mixed-content-percentage-histogram',
     );
 
     expect(res.body.description).toBe(
-      'Histogram of the percentage of mixed' + ' content of all websites.',
+      'Histogram of the percentage of mixed content of all websites.',
     );
     expect(res.body.result).toBeInstanceOf(Array);
     expect(res.body.suggestedVisualizations).toContain('Bar chart');
@@ -91,16 +86,16 @@ describe('mixed-content', () => {
 
   it('Check /https-percentage-pages', async () => {
     const res = await request(app).get(
-      '/api/mixed-content/' + '/https-percentage-pages',
+      '/api/mixed-content//https-percentage-pages',
     );
 
     expect(res.body.description).toBe(
-      'Time Series of the percentage of' + ' all pages that load with HTTPS',
-      '/api/mixed-content/' + '/https-percentage-pages',
+      'Time Series of the percentage of all pages that load with HTTPS',
+      '/api/mixed-content//https-percentage-pages',
     );
 
     expect(res.body.description).toBe(
-      'Time Series of the percentage of' + ' all pages that load with HTTPS',
+      'Time Series of the percentage of all pages that load with HTTPS',
     );
     expect(res.body.result).toBeInstanceOf(Array);
     expect(res.body.suggestedVisualizations).toContain('Line chart');
@@ -108,11 +103,11 @@ describe('mixed-content', () => {
 
   it('Check with 3 datapoints /https-percentage-pages', async () => {
     const res = await request(app).get(
-      '/api/mixed-content/' + '/https-percentage-pages?datapoints=3',
+      '/api/mixed-content//https-percentage-pages?datapoints=3',
     );
 
     expect(res.body.description).toBe(
-      'Time Series of the percentage of' + ' all pages that load with HTTPS',
+      'Time Series of the percentage of all pages that load with HTTPS',
     );
     expect(res.body.result).toBeInstanceOf(Array);
     // 3 desktop and mobile datapoints each
@@ -136,13 +131,12 @@ describe('mixed-content', () => {
 
   it('Check /https-percentage-requests', async () => {
     const res = await request(app).get(
-      '/api/mixed-content/' + '/https-percentage-requests',
+      '/api/mixed-content//https-percentage-requests',
     );
 
     expect(res.body.description).toBe(
-      'Time Series of the percentage of' +
-        ' all resources that load with HTTPS',
-      '/api/mixed-content/' + '/https-percentage-requests',
+      'Time Series of the percentage of all resources that load with HTTPS',
+      '/api/mixed-content//https-percentage-requests',
     );
 
     expect(res.body.description).toBe(
@@ -154,7 +148,7 @@ describe('mixed-content', () => {
 
   it('Check /hsts-percentage-requests', async () => {
     const res = await request(app).get(
-      '/api/mixed-content/' + '/hsts-percentage-requests',
+      '/api/mixed-content//hsts-percentage-requests',
     );
 
     expect(res.body.description).toBe(
@@ -162,8 +156,7 @@ describe('mixed-content', () => {
     );
 
     expect(res.body.description).toBe(
-      'Time Series of the percentage of' +
-        ' all desktop resources that contain Strict-Transport-Security header.',
+      'Time Series of the percentage of all desktop resources that contain Strict-Transport-Security header.',
     );
     expect(res.body.result).toBeInstanceOf(Array);
     expect(res.body.suggestedVisualizations).toContain('Line chart');

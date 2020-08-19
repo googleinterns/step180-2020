@@ -109,8 +109,7 @@ const server = setupServer(
   // "GET /api/mixed-content/top-countries-with-
   //      more-websites-more-government-with-mixed-content" requests
   rest.get(
-    '/api/mixed-content/top-countries' +
-      '-with-more-government-websites-with-mixed-content',
+    '/api/mixed-content/top-countries-with-more-government-websites-with-mixed-content',
     (req, res, ctx) => {
       return res(
         ctx.json({

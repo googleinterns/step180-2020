@@ -2,8 +2,9 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiAlert from '@material-ui/lab/Alert';
+import moment from 'moment';
 import React, {useState, useEffect} from 'react';
-import {api} from '../../../client';
+import {api} from 'client';
 import {ChartContainer} from './elements';
 import {ResponsiveLine} from '@nivo/line';
 import {Typography, Snackbar} from '@material-ui/core';
@@ -22,7 +23,7 @@ const HTTPSPercentagePages = () => {
         const formattedData = [];
         response.data.result.forEach((element) => {
           const newElement = {};
-          newElement.x = formatDate(new Date(element.timestamp));
+          newElement.x = moment(element.timestamp).format('L');
           newElement.y = element.percent;
           newElement.client = element.client;
           formattedData.push(newElement);
@@ -34,27 +35,6 @@ const HTTPSPercentagePages = () => {
         setSnackOpen(true);
       });
   }, []);
-
-  /**
-   * Converts a Date object to a yy-mm-dd string
-   * @param {object} date Date object to be converted
-   * @return {string} String of a date with yy-mm-dd format
-   */
-  const formatDate = (date) => {
-    const d = new Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-
-    return [year, month, day].join('-');
-  };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
