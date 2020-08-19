@@ -11,10 +11,10 @@ import {SelectContainer} from '../../select-container';
 import Typography from '@material-ui/core/Typography';
 
 /**
- * This component shows a pie chart with the number of requests
- * per TLS version in the sample data requests table.
+ * This component shows a pie chart with the percentage of different
+ * certificates used in the key exchange
  *
- * @return {ReactNode} TLS versions component
+ * @return {ReactNode} Key exchange component
  */
 const KeyExchange = () => {
   const [data, setData] = useState([]);
@@ -32,9 +32,10 @@ const KeyExchange = () => {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h3">Key Exchange</Typography>
+        <Typography variant="h3">Key Exchange Certificates</Typography>
         <Typography paragraph={true}
-        >RSA vs ECDSA</Typography>
+        >Percentage of the different certificates used in key exchange
+        </Typography>
         <SelectContainer>
           <FormControl>
             <Select
@@ -43,10 +44,10 @@ const KeyExchange = () => {
             >
               <MenuItem
                 value={'httparchive.smaller_sample_requests'}
-              >Table 1</MenuItem>
+              >Small sample set</MenuItem>
               <MenuItem
                 value={'httparchive.sample_data.requests_desktop_10k'}
-              >Table 2</MenuItem>
+              >10k sample set</MenuItem>
             </Select>
           </FormControl>
         </SelectContainer>
@@ -59,6 +60,10 @@ const KeyExchange = () => {
             cornerRadius={3}
             colors={{scheme: 'nivo'}}
             animate={true}
+            sortByValue={false}
+            radialLabel={(d)=>(d.id==='') ? 'Empty' : d.id}
+            enableSlicesLabels={false}
+            startAngle={-350}
           />
         </ChartContainer>
       </CardContent>

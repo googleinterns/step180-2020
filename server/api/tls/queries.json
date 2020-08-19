@@ -29,7 +29,7 @@
     {
         "description": "",
         "query": [
-            "SELECT JSON_EXTRACT(payload, '$._securityDetails.keyExchange') as id, count(*) as value",
+            "SELECT trim(JSON_EXTRACT(payload, '$._securityDetails.keyExchange'), \"\\\"\") as id, count(*) as value",
             "FROM ",
             "httparchive.sample_data.requests_desktop_10k",
             "group by id",
