@@ -6,6 +6,7 @@
  * it can be accessed via /:resource
  */
 import mixedApi from './mixed-content';
+import tlsApi from './tls';
 import {Router as router} from 'express';
 
 // TODO(ernestognw): Setup routes for every model in db
@@ -17,5 +18,6 @@ api.get('/', (req, res) => {
 });
 
 api.use('/mixed-content', mixedApi);
+api.use('/tls', tlsApi);
 
 export default api;
