@@ -17,7 +17,7 @@ test('Renders main card container correctly', async () => {
 
 test('Renders charts after API is called', async () => {
   // After API is called, loaders should disappear
-  await waitForElementToBeRemoved(screen.getByTestId('chart-loader'));
+  await waitForElementToBeRemoved(() => screen.getByTestId('chart-loader'));
 
   // Also, chart should be rendered by default
   const mixedPercentageChart = screen.getByTestId(
@@ -28,7 +28,7 @@ test('Renders charts after API is called', async () => {
 
 test('Renders table after API is called', async () => {
   // After API is called, skeletons should disappear
-  await waitForElementToBeRemoved(screen.getByTestId('table-skeletons'));
+  await waitForElementToBeRemoved(() => screen.getByTestId('table-skeletons'));
 
   // Also, first table should be rendered by default
   const mixedContentTable = screen.getByTestId(

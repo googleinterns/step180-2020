@@ -17,7 +17,7 @@ test('Renders main card container correctly', async () => {
 
 test('Renders charts after API is called', async () => {
   // After API is called, loaders should disappear
-  await waitForElementToBeRemoved(screen.getByTestId('chart-loader'));
+  await waitForElementToBeRemoved(() => screen.getByTestId('chart-loader'));
 
   // Also, chart should be rendered by default
   const mixedPercentageChart = screen.getByTestId(
