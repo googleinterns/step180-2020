@@ -79,10 +79,22 @@ tlsApi.get('/tls-version', async (req, res) => {
   });
 });
 
+tlsApi.get('/key-exchange', async (req, res) => {
+  const query = queries.KeyExchange;
+  const table = req.query.table;
+  const rows = await queryData(query, table);
+  res.json({
+    description: query.description,
+    result: rows,
+  });
+});
+
 const queryData = async (data, table) => {
   const index = data.tableIndex;
   let dataQuery = data.query;
-  dataQuery[index] = table;
+  if (table != null) {
+    dataQuery[index] = table;
+  }
   dataQuery = dataQuery.join(' ');
   const [rows] = await bigQueryClient.query({
     query: dataQuery,

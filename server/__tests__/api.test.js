@@ -158,9 +158,7 @@ describe('mixed-content', () => {
     );
 
     expect(res.body.description).toBe(
-      'Time Series of the percentage of' +
-        '/api/mixed-content/' +
-        '/hsts-percentage-requests',
+      'Time Series of the percentage of all desktop resources that contain Strict-Transport-Security header.',
     );
 
     expect(res.body.description).toBe(
@@ -188,6 +186,14 @@ describe('mixed-content-by-type', () => {
       '/api/mixed-content/mixed-content-by-type?type=all',
     );
     expect(res.body.description).toBe('Return mixed content request by types');
+    expect(res.body.result).not.toBeNull();
+  });
+});
+
+describe('key-exchange', () => {
+  it('Check /tls/key-exchange', async () => {
+    const res = await request(app).get('/api/tls/key-exchange');
+    expect(res.body.description).toBe('');
     expect(res.body.result).not.toBeNull();
   });
 });
