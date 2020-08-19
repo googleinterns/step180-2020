@@ -1,9 +1,9 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import MixedContentPercentageHistogram from './mixed-content-percentage-histogram';
-import MixedContentByType from './mixed-content-by-type';
-import TopWebsitesWithMixedContent from './top-websites-with-mixed-content';
 import {Container} from './elements';
+import Grid from '@material-ui/core/Grid';
+import MixedContentByType from './mixed-content-by-type';
+import MixedContentPercentageHistogram from './mixed-content-percentage-histogram';
+import React from 'react';
+import TopWebsitesWithMixedContent from './top-websites-with-mixed-content';
 import {Typography} from '@material-ui/core';
 
 const Worldwide = () => {

@@ -1,5 +1,5 @@
-import React from 'react';
 import KeyExchange from './key-exchange/index.js';
+import React from 'react';
 import TLSversion from './tls-version/index.js';
 import Typography from '@material-ui/core/Typography';
 

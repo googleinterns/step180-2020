@@ -1,5 +1,5 @@
-import {css} from 'styled-components';
 import {createMuiTheme} from '@material-ui/core/styles';
+import {css} from 'styled-components';
 
 const prebuiltTheme = createMuiTheme({
   // Add special theming using this reference: https://material-ui.com/customization/default-theme/

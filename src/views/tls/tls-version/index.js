@@ -1,13 +1,13 @@
 import {api} from 'client';
 import Card from '@material-ui/core/Card';
 import {CardContent} from '@material-ui/core';
-import {ChartContainer, SelectContainer} from './elements';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
-import React, {useEffect, useState} from 'react';
 import {ResponsivePie} from '@nivo/pie';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
+import {ChartContainer, SelectContainer} from './elements';
+import React, {useEffect, useState} from 'react';
 
 /**
  * This component shows a pie chart with the number of requests

@@ -1,21 +1,22 @@
 import Business from '@material-ui/icons/Business';
-import Collapse from '@material-ui/core/Collapse';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import Collapse from '@material-ui/core/Collapse';
 import Description from '@material-ui/icons/Description';
 import Emoji from 'a11y-react-emoji';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import IconButton from '@material-ui/core/IconButton';
 import Https from '@material-ui/icons/Https';
+import IconButton from '@material-ui/core/IconButton';
+import {Link} from 'react-router-dom';
 import List from '@material-ui/core/List';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import PropTypes from 'prop-types';
 import Public from '@material-ui/icons/Public';
-import React, {useState} from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import TrendingUp from '@material-ui/icons/TrendingUp';
 import Typography from '@material-ui/core/Typography';
+import {useLocation} from 'react-router-dom';
 import {
   Content,
   CustomAppBar,
@@ -25,8 +26,7 @@ import {
   NestedList,
   Root,
 } from './elements';
-import {Link} from 'react-router-dom';
-import {useLocation} from 'react-router-dom';
+import React, {useState} from 'react';
 
 /**
  * Main Layout

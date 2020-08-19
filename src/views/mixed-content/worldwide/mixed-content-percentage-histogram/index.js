@@ -1,13 +1,13 @@
+import {api} from 'client';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import {ChartContainer} from './elements';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiAlert from '@material-ui/lab/Alert';
-import React, {useState, useEffect} from 'react';
-import {api} from 'client';
-import {ChartContainer} from './elements';
 import {ResponsivePie} from '@nivo/pie';
 import {Snackbar} from '@material-ui/core';
+import React, {useEffect, useState} from 'react';
 
 const MixedContentPercentageHistogram = () => {
   const [loading, setLoading] = useState(true);

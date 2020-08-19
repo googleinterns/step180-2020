@@ -1,13 +1,13 @@
+import {api} from 'client';
 import Card from '@material-ui/core/Card';
+import {CardContent} from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
+import {ResponsivePie} from '@nivo/pie';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
-import React, {useEffect, useState} from 'react';
-import {api} from 'client';
-import {CardContent} from '@material-ui/core';
-import {ResponsivePie} from '@nivo/pie';
 import {ChartContainer, SelectContainer} from './elements';
+import React, {useEffect, useState} from 'react';
 
 /**
  * Returns a pie chart with the percentage of mixed content by types

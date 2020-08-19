@@ -1,6 +1,6 @@
 import MainLayout from '../index';
 import React from 'react';
-import {render, fireEvent} from 'test-utils';
+import {fireEvent, render} from 'test-utils';
 
 test('Route buttons are shown', () => {
   const {getByTestId} = render(<MainLayout>Test Children</MainLayout>);

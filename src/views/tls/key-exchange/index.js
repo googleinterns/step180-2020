@@ -1,13 +1,13 @@
+import {api} from 'client';
 import Card from '@material-ui/core/Card';
+import {CardContent} from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
-import React, {useEffect, useState} from 'react';
+import {ResponsivePie} from '@nivo/pie';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
-import {api} from 'client';
-import {CardContent} from '@material-ui/core';
 import {ChartContainer, SelectContainer} from './elements';
-import {ResponsivePie} from '@nivo/pie';
+import React, {useEffect, useState} from 'react';
 
 /**
  * This component shows a pie chart with the percentage of different

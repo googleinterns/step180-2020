@@ -1,5 +1,5 @@
-import React from 'react';
 import MixedContentPercentageHistogram from '../index';
+import React from 'react';
 import {render, screen, waitForElementToBeRemoved} from 'test-utils';
 
 beforeEach(() => render(<MixedContentPercentageHistogram />));

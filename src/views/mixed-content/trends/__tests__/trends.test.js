@@ -1,6 +1,6 @@
-import Trends from '../index';
 import React from 'react';
 import {render} from 'test-utils';
+import Trends from '../index';
 
 test('Renders /mixed-content/trends correctly', () => {
   const {getByTestId} = render(<Trends />);

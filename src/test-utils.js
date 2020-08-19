@@ -5,13 +5,13 @@
  * for the project setup, like a custom render with every wrapper
  * needed to get the tests to work.
  */
-import PropTypes from 'prop-types';
 import {MemoryRouter} from 'react-router-dom';
-import {theme} from './config/theme';
-import {ThemeProvider as StyledProvider} from 'styled-components';
-import {ThemeProvider, StylesProvider} from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import React from 'react';
 import {render} from '@testing-library/react';
+import {ThemeProvider as StyledProvider} from 'styled-components';
+import {theme} from './config/theme';
+import {StylesProvider, ThemeProvider} from '@material-ui/core/styles';
 
 /**
  * Setup context needed in every render, so test could pass

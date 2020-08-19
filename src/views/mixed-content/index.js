@@ -2,7 +2,7 @@ import Government from './government';
 import React from 'react';
 import Trends from './trends';
 import Worldwide from './worldwide';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 
 /**
  * Mixed Content View

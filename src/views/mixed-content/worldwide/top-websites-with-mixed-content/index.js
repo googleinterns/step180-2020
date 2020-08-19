@@ -1,10 +1,12 @@
+import {api} from 'client';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiAlert from '@material-ui/lab/Alert';
 import Paper from '@material-ui/core/Paper';
-import React, {useState, useEffect} from 'react';
+import {ResponsiveBar} from '@nivo/bar';
 import Skeleton from '@material-ui/lab/Skeleton';
+import {Snackbar} from '@material-ui/core';
 import Tab from '@material-ui/core/Tab';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,10 +15,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Tabs from '@material-ui/core/Tabs';
-import {api} from 'client';
 import {ChartContainer, CustomCard, SkeletonContainer} from './elements';
-import {ResponsiveBar} from '@nivo/bar';
-import {Snackbar} from '@material-ui/core';
+import React, {useEffect, useState} from 'react';
 
 const TopWebsitesWithMixedContent = () => {
   const [loading, setLoading] = useState(true);

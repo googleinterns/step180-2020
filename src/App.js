@@ -2,8 +2,8 @@ import About from './views/about';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MainLayout from './layouts/main';
 import MixedContent from './views/mixed-content';
-import Tls from './views/tls';
 import React from 'react';
+import Tls from './views/tls';
 import {Redirect, Route, Switch} from 'react-router-dom';
 
 /**

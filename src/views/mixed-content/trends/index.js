@@ -1,10 +1,10 @@
-import React from 'react';
 import {Container} from './elements';
 import Grid from '@material-ui/core/Grid';
-import {Typography} from '@material-ui/core';
+import HSTSPercentageRequests from './hsts-percentage-requests';
 import HTTPSPercentagePages from './https-percentage-pages';
 import HTTPSPercentageRequests from './https-percentage-requests';
-import HSTSPercentageRequests from './hsts-percentage-requests';
+import React from 'react';
+import {Typography} from '@material-ui/core';
 
 const Trends = () => {
   return (

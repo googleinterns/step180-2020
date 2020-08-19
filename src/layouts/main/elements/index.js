@@ -1,11 +1,11 @@
 import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
+import {drawerWidth} from './constants';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import styled from 'styled-components';
-import {getDrawerStyles, getActiveTabStyles} from './functions';
-import {drawerWidth} from './constants';
+import {getActiveTabStyles, getDrawerStyles} from './functions';
 
 const Content = styled.main`
   flex-grow: 1;

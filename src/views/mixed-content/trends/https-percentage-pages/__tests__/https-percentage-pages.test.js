@@ -1,6 +1,6 @@
-import React from 'react';
 import HTTPSPercentagePages from '../index';
-import {render, waitForElementToBeRemoved, screen} from 'test-utils';
+import React from 'react';
+import {render, screen, waitForElementToBeRemoved} from 'test-utils';
 
 beforeEach(() => render(<HTTPSPercentagePages />));
 

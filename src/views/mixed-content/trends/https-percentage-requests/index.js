@@ -1,13 +1,13 @@
+import {api} from 'client';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import moment from 'moment';
 import MuiAlert from '@material-ui/lab/Alert';
-import React, {useState, useEffect} from 'react';
-import {api} from 'client';
-import {ChartContainer, CustomCard} from './elements';
 import {ResponsiveLine} from '@nivo/line';
 import {Snackbar} from '@material-ui/core';
+import {ChartContainer, CustomCard} from './elements';
+import React, {useEffect, useState} from 'react';
 
 const HTTPSPercentageRequests = () => {
   const [loading, setLoading] = useState(true);

@@ -9,8 +9,8 @@
  */
 
 // This is a collection of all queries and their metadata in json.
-import queries from './queries.json';
 import {BigQuery} from '@google-cloud/bigquery';
+import queries from './queries.json';
 import {Router as router} from 'express';
 
 const mixedApi = router();

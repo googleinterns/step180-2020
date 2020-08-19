@@ -9,9 +9,9 @@ import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
-import {theme} from './config/theme';
 import {ThemeProvider as StyledProvider} from 'styled-components';
-import {ThemeProvider, StylesProvider} from '@material-ui/core/styles';
+import {theme} from './config/theme';
+import {StylesProvider, ThemeProvider} from '@material-ui/core/styles';
 
 /**
  * Entry point
