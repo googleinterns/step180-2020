@@ -14,7 +14,7 @@ import {BigQuery} from '@google-cloud/bigquery';
 import {Router as router} from 'express';
 
 const mixedApi = router();
-const bigqueryClient = new BigQuery();
+const bigQueryClient = new BigQuery();
 
 mixedApi.get('/top-websites-with-mixed-content', async (req, res) => {
   const query = queries.TopWebsitesWithMixedContent;
@@ -117,6 +117,7 @@ mixedApi.get('/mixed-content-by-type', async (req, res) => {
     rows = await toPieChart(rows);
   }
   res.json({
+    description: query.description,
     type: type,
     result: rows,
   });
@@ -133,7 +134,7 @@ const queryData = async ({sql}) => {
   } else {
     throw new Error('SQL query must be an array');
   }
-  const [rows] = await bigqueryClient.query({
+  const [rows] = await bigQueryClient.query({
     query: sql,
     location: 'US',
   });
@@ -154,7 +155,7 @@ const queryType = async (data, type) => {
     dataQuery[index] = '("%' + type + '/%")';
   }
   dataQuery = dataQuery.join(' ');
-  const [rows] = await bigqueryClient.query({
+  const [rows] = await bigQueryClient.query({
     query: dataQuery,
     location: 'US',
   });
