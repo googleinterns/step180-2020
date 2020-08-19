@@ -1,18 +1,27 @@
 {
-    "TlsRequests":
-    {
-        "description": "Number of requests per TLS version",
-        "query": [
-            "SELECT tls as id, COUNT(tls) as value",
-            "FROM",
-            "(SELECT JSON_EXTRACT(payload, '$._securityDetails.protocol') as tls",
-            "FROM",
-            "httparchive.smaller_sample_requests",
-            "where url like (\"https%\"))",
-            "where tls is not null",
-            "GROUP BY tls"
-        ],
-        "tableIndex": "4",
-        "suggestedVisualizations": ["Pie chart"]
-    }
+  "TlsRequests": {
+    "description": "Number of requests per TLS version",
+    "query": [
+      "SELECT tls as id, COUNT(tls) as value",
+      "FROM",
+      "(SELECT JSON_EXTRACT(payload, '$._securityDetails.protocol') as tls",
+      "FROM",
+      "httparchive.smaller_sample_requests",
+      "where url like (\"https%\"))",
+      "where tls is not null",
+      "GROUP BY tls"
+    ],
+    "tableIndex": "4",
+    "suggestedVisualizations": ["Pie chart"],
+    "mockResult": [
+      {
+        "id": "\"TLS 1.2\"",
+        "value": 12
+      },
+      {
+        "id": "\"TLS 1.3\"",
+        "value": 13
+      }
+    ]
+  }
 }

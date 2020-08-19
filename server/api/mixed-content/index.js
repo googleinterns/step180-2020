@@ -8,9 +8,10 @@
  *
  */
 
+// This is a collection of all queries and their metadata in json.
+import queries from './queries.json';
 import {BigQuery} from '@google-cloud/bigquery';
 import {Router as router} from 'express';
-import * as queries from './queries.json';
 
 const mixedApi = router();
 const bigQueryClient = new BigQuery();
@@ -41,7 +42,8 @@ mixedApi.get(
     },
 );
 
-mixedApi.get('/top-countries-with-more-government-websites-with-mixed-content',
+mixedApi.get(
+    '/top-countries-with-more-government-websites-with-mixed-content',
     async (req, res) => {
       const query =
       queries.TopCountriesWithMoreGovernmentWebsitesWithMixedContent;
@@ -55,7 +57,7 @@ mixedApi.get('/top-countries-with-more-government-websites-with-mixed-content',
     },
 );
 
-mixedApi.get('/mixed-content-percentage-histogram', async (req, res) =>{
+mixedApi.get('/mixed-content-percentage-histogram', async (req, res) => {
   const query = queries.MixedContentPercentageHistogram;
   let rows = [];
   rows = await queryData(query);
@@ -67,7 +69,7 @@ mixedApi.get('/mixed-content-percentage-histogram', async (req, res) =>{
   });
 });
 
-mixedApi.get('/mixed-content-by-type', async (req, res) =>{
+mixedApi.get('/mixed-content-by-type', async (req, res) => {
   let query = queries.MixedContentByType;
   const type = req.query.type;
   if (type != 'all') {
@@ -85,19 +87,56 @@ mixedApi.get('/mixed-content-by-type', async (req, res) =>{
   });
 });
 
+mixedApi.get('/https-percentage-pages', async (req, res) => {
+  const query = queries.HTTPSPercentagePages;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
+mixedApi.get('/https-percentage-requests', async (req, res) => {
+  const query = queries.HTTPSPercentageRequests;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
+mixedApi.get('/hsts-percentage-requests', async (req, res) => {
+  const query = queries.HSTSPercentageRequests;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
 /**
  * Makes a BigQuery query given the query from ./queries.json
  * @param {{query: array}} data Query from /.queries.json
  * @return {object} Array of rows (result of the query).
  */
-const queryData = async ({query}) => {
-  if (Array.isArray(query)) {
-    query = query.join(' ');
+const queryData = async ({sql}) => {
+  if (Array.isArray(sql)) {
+    sql = sql.join(' ');
   } else {
-    throw new Error('Query must be an array');
+    throw new Error('SQL query must be an array');
   }
+
   const [rows] = await bigQueryClient.query({
-    query: query,
+    query: sql,
     location: 'US',
   });
 
@@ -114,7 +153,7 @@ const queryType = async (data, type) => {
   const index = data.typeIndex;
   let dataQuery = data.query;
   if (type != 'all') {
-    dataQuery[index] = '("%'+type+'/%")';
+    dataQuery[index] = '("%' + type + '/%")';
   }
   dataQuery = dataQuery.join(' ');
   const [rows] = await bigQueryClient.query({
@@ -129,8 +168,10 @@ const queryType = async (data, type) => {
  * @param {object} result
  */
 const toPieChart = async (result) => {
-  const rows = [{'id': 'httpsPercentage', 'value': result[0].httpsPercentage},
-    {'id': 'httpPercentage', 'value': result[0].httpPercentage}];
+  const rows = [
+    {id: 'httpsPercentage', value: result[0].httpsPercentage},
+    {id: 'httpPercentage', value: result[0].httpPercentage},
+  ];
   return rows;
 };
 
