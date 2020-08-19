@@ -69,6 +69,22 @@ mixedApi.get('/mixed-content-percentage-histogram', async (req, res) => {
   });
 });
 
+mixedApi.get('/mixed-content-by-type', async (req, res) => {
+  let query = queries.MixedContentByType;
+  const type = req.query.type;
+  if (type != 'all') {
+    query = queries.MixedContentOneType;
+  }
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
 mixedApi.get('/https-percentage-pages', async (req, res) => {
   const query = queries.HTTPSPercentagePages;
   let rows = [];
@@ -105,12 +121,32 @@ mixedApi.get('/hsts-percentage-requests', async (req, res) => {
   });
 });
 
-mixedApi.get('/mixed-content-by-type', async (req, res) => {
-  let query = queries.MixedContentByType;
-  const type = req.query.type;
-  if (type != 'all') {
-    query = queries.MixedContentOneType;
-  }
+mixedApi.get('/https-percentage-pages', async (req, res) => {
+  const query = queries.HTTPSPercentagePages;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
+mixedApi.get('/https-percentage-requests', async (req, res) => {
+  const query = queries.HTTPSPercentageRequests;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
+mixedApi.get('/hsts-percentage-requests', async (req, res) => {
+  const query = queries.HSTSPercentageRequests;
   let rows = [];
   rows = await queryType(query, type);
   if (type != 'all') {

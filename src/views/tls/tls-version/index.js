@@ -1,4 +1,4 @@
-import {api} from '../../../client';
+import {api} from 'client';
 import Card from '@material-ui/core/Card';
 import {CardContent} from '@material-ui/core';
 import {ChartContainer, SelectContainer} from './elements';

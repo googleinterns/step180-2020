@@ -1,5 +1,15 @@
-import request from 'supertest';
+/**
+ * @fileoverview API Tests
+ * Tests for the routes of the API.
+ *
+ * They use a mock object of the original BigQuery
+ * class and it's method, BigQuery.query.
+ *
+ * To run these tests: yarn test:server
+ *
+ */
 import app from '../app';
+import request from 'supertest';
 
 jest.mock('@google-cloud/bigquery');
 
@@ -15,15 +25,33 @@ describe('Health Check', () => {
 });
 
 describe('mixed-content', () => {
-  it('Check /top-countries-with-more-government-websites-with-mixed-content is working', async () => {
+  it(
+    'Check /top-countries-with-more-government' +
+      '-websites-with-mixed-content is working',
+    async () => {
+      const res = await request(app).get(
+        '/api/mixed-content/top-countries-with' +
+          '-more-government-websites-with-mixed-content',
+      );
+      expect(res.body.description).toBe(
+        'Countries with more government websites that have mixed content',
+      );
+      expect(res.body.result).not.toBeNull();
+      expect(res.body.suggestedVisualizations).not.toBeNull();
+    },
+  );
+
+  it('Check /top-websites-with-mixed-content', async () => {
     const res = await request(app).get(
-      '/api/mixed-content/top-countries-with-more-government-websites-with-mixed-content',
+      '/api/mixed-content/top-websites-with-mixed-content',
     );
+
     expect(res.body.description).toBe(
-      'Countries with more government websites that have mixed content',
+      'Top websites with most mixed content' +
+        ' and the percentage of mixed content in it.',
     );
-    expect(res.body.result).not.toBeNull();
-    expect(res.body.suggestedVisualizations).not.toBeNull();
+    expect(res.body.result).toBeInstanceOf(Array);
+    expect(res.body.suggestedVisualizations).toContain('Bar chart');
   });
 });
 
