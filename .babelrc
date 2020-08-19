@@ -2,6 +2,7 @@
   "env": {
     "production": {
       "plugins": [
+        ["inline-json-import", {}],
         [
           "transform-inline-environment-variables",
           {
