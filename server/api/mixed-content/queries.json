@@ -100,6 +100,40 @@
       {"mixed_percentage": 1, "total": 534}
     ]
   },
+  "MixedContentByType": {
+    "description": "Return mixed content request by types",
+    "query": [
+      "SELECT substr(mimeType, 1, strpos(mimeType, \"/\")-1) as id,",
+      "count(*) value,",
+      "count(distinct p.pageid) as pages",
+      "FROM httparchive.sample_data.summary_requests_desktop_10k r",
+      "INNER JOIN httparchive.sample_data.summary_pages_desktop_10k p",
+      "ON r.pageid=p.pageid",
+      "WHERE r.url NOT LIKE (\"https%\") AND p.url LIKE (\"https%\")",
+      "and char_length(mimeType)>0",
+      "GROUP by id",
+      "HAVING value > 1"
+    ]
+  },
+  "MixedContentOneType": {
+    "description": "Return mixed content requests of specified type",
+    "query": [
+      "SELECT sum(https) AS httpsPercentage, sum(http) AS httpPercentage",
+      "FROM",
+      "(SELECT mimeType, COUNT(CASE WHEN r.url LIKE (\"https%\") THEN 1 END)",
+      "AS https,COUNT(CASE WHEN r.url LIKE (\"http:%\") THEN 1 END) AS http, count(r.url) AS total",
+      "FROM httparchive.sample_data.summary_requests_desktop_10k r",
+      "JOIN httparchive.sample_data.summary_pages_desktop_10k p",
+      "ON r.pageid=p.pageid",
+      "WHERE p.url like(\"https%\") and mimeType like",
+      "(\"%image/%\")",
+      "and char_length(mimeType)>0",
+      "GROUP BY mimeType);"
+    ],
+    "defaultSize": "124.6 MB",
+    "typeIndex": "8",
+    "suggestedVisualizations": ["Pie chart"]
+  },
   "HTTPSPercentagePages": {
     "description": "Time Series of the percentage of all pages that load with HTTPS",
     "sql": [
