@@ -76,12 +76,14 @@ mixedApi.get('/mixed-content-by-type', async (req, res) => {
     query = queries.MixedContentOneType;
   }
   let rows = [];
-  rows = await queryData(query);
-
+  rows = await queryType(query, type);
+  if (type != 'all') {
+    rows = await toPieChart(rows);
+  }
   res.json({
     description: query.description,
+    type: type,
     result: rows,
-    suggestedVisualizations: query.suggestedVisualizations,
   });
 });
 
@@ -232,7 +234,7 @@ const select = (array, elements) => {
  */
 const queryType = async (data, type) => {
   const index = data.typeIndex;
-  let dataQuery = data.query;
+  let dataQuery = data.sql;
   if (type != 'all') {
     dataQuery[index] = '("%' + type + '/%")';
   }
