@@ -6,6 +6,11 @@ handlers:
     upload: build/static/js/(.*)
     secure: always
     redirect_http_response_code: 301
+  - url: /css/(.*)
+    static_files: build/css/\1
+    upload: build/css/(.*)
+    secure: always
+    redirect_http_response_code: 301
   - url: /images/(.*\.(gif|png|jpg))$
     static_files: public/images/\1
     upload: public/images/.*\.(gif|png|jpg)$
