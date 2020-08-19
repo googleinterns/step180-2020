@@ -1,3 +1,8 @@
+import HSTSPercentageRequests from './hsts-percentage-requests';
+import HTTPSPercentagePages
+  from './https-percentage-pages';
+import HTTPSPercentageRequests
+  from './https-percentage-requests';
 import MixedContentPercentageHistogram
   from './mixed-content-percentage-histogram';
 import React from 'react';
@@ -25,6 +30,28 @@ const MixedContent = () => {
       <Typography variant={'h1'}>
         Mixed Content
       </Typography>
+
+      <Typography variant={'h2'}>
+        Mixed Content in the web
+      </Typography>
+      <TopWebsitesWithMixedContent/>
+      <MixedContentPercentageHistogram/>
+
+      <Typography variant={'h2'}>
+        HTTPS Trends
+      </Typography>
+      <Typography paragraph={true}>
+          Trends of HTTPS adoption throughout the web in websites and resources.
+      </Typography>
+      <HTTPSPercentagePages/>
+      <HTTPSPercentageRequests/>
+
+      <Typography variant={'h2'}>
+        HSTS Header Trends
+      </Typography>
+      <HSTSPercentageRequests/>
+
+
       <Typography variant={'h2'}>
         Government websites
       </Typography>
@@ -35,8 +62,7 @@ const MixedContent = () => {
       </Typography>
       <TopGovernmentWebsitesWithMixedContent />
       <TopCountriesWithMoreWebsitesWithMixedContent/>
-      <TopWebsitesWithMixedContent/>
-      <MixedContentPercentageHistogram/>
+
     </div>
   );
 };

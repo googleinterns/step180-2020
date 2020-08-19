@@ -1,7 +1,7 @@
 {
   "TopWebsitesWithMixedContent": {
     "description": "Top websites with most mixed content and the percentage of mixed content in it.",
-    "query": [
+    "sql": [
       "SELECT",
       "pages.url,",
       "COUNT(CASE WHEN reqs.url LIKE 'http:%' THEN 1 END) mixed_reqs_total,",
@@ -18,11 +18,28 @@
       "ORDER BY mixed_reqs_total DESC",
       "LIMIT 7"
     ],
-    "suggestedVisualizations": ["Bar chart"]
+    "suggestedVisualizations": ["Bar chart"],
+    "mockResult": [
+      {
+        "url": "http://toan.hoctainha.vn/",
+        "mixed_reqs_total": 1142,
+        "mixed_percentage": 0.9921807124239791
+      },
+      {
+        "url": "http://www.egozigallery.com/",
+        "mixed_reqs_total": 396,
+        "mixed_percentage": 0.9949748743718593
+      },
+      {
+        "url": "http://www.hcmriopreto.com.br/",
+        "mixed_reqs_total": 363,
+        "mixed_percentage": 0.968
+      }
+    ]
   },
   "TopGovernmentWebsitesWithMixedContent": {
     "description": "Top gubermental websites with most mixed content and the number of those resources.",
-    "query": [
+    "sql": [
       "SELECT",
       "pages.url, COUNT(*) mixed_content_resources",
       "FROM",
@@ -41,7 +58,7 @@
   },
   "TopCountriesWithMoreGovernmentWebsitesWithMixedContent": {
     "description": "Countries with more government websites that have mixed content",
-    "query": [
+    "sql": [
       "SELECT tld id, total_government_websites_with_mxcont value FROM `enamel-step-2020.httparchive.government_websites_per_country_with_mixed_content`",
       " LIMIT 40"
     ],
@@ -49,9 +66,32 @@
   },
   "MixedContentPercentageHistogram": {
     "description": "Histogram of the percentage of mixed content of all websites.",
-    "query": [
+    "sql": [
       "SELECT mixed_percentage, COUNT(*) total FROM `enamel-step-2020.httparchive.percentage_mixed_content`",
       " GROUP BY mixed_percentage ORDER BY mixed_percentage ASC;"
     ]
+  },
+  "HTTPSPercentagePages": {
+    "description": "Percentage of all mobile pages that load with HTTPS",
+    "sql": [
+      "SELECT * FROM `enamel-step-2020.httparchive.TimeSeries_HTTPPages`",
+      " WHERE percent > 5.0 ORDER BY timestamp ASC  LIMIT 200"
+    ],
+    "suggestedVisualizations": ["Line chart"]
+  },
+  "HTTPSPercentageRequests": {
+    "description": "Percentage of all mobile pages that load with HTTPS",
+    "sql": [
+      "SELECT * FROM `enamel-step-2020.httparchive.TimeSeries_HTTPS`",
+      " WHERE percent > 5.0 ORDER BY timestamp ASC  LIMIT 200"
+    ],
+    "suggestedVisualizations": ["Line chart"]
+  },
+  "HSTSPercentageRequests": {
+    "description": "Percentage of all desktop requests that contain Strict-Transport-Security header.",
+    "sql": [
+      "SELECT ROUND(percent, 2) percent, year FROM `enamel-step-2020.httparchive.HSTSTimeSeries` LIMIT 10"
+    ],
+    "suggestedVisualizations": ["Line chart"]
   }
 }

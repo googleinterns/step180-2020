@@ -9,7 +9,7 @@
  */
 
 // This is a collection of all queries and their metadata in json.
-import * as queries from './queries.json';
+import queries from './queries.json';
 import {BigQuery} from '@google-cloud/bigquery';
 import {Router as router} from 'express';
 
@@ -69,19 +69,56 @@ mixedApi.get('/mixed-content-percentage-histogram', async (req, res) =>{
 });
 
 
+mixedApi.get('/https-percentage-pages', async (req, res) =>{
+  const query = queries.HTTPSPercentagePages;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
+mixedApi.get('/https-percentage-requests', async (req, res) =>{
+  const query = queries.HTTPSPercentageRequests;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
+mixedApi.get('/hsts-percentage-requests', async (req, res) =>{
+  const query = queries.HSTSPercentageRequests;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
 /**
  * Makes a BigQuery query given the query from ./queries.json
  * @param {{query: array}} data Query from /.queries.json
  * @return {object} Array of rows (result of the query).
  */
-const queryData = async ({query}) => {
-  if (Array.isArray(query)) {
-    query = query.join(' ');
+const queryData = async ({sql}) => {
+  if (Array.isArray(sql)) {
+    sql = sql.join(' ');
   } else {
-    throw new Error('Query must be an array');
+    throw new Error('SQL query must be an array');
   }
+
   const [rows] = await bigqueryClient.query({
-    query: query,
+    query: sql,
     location: 'US',
   });
 
