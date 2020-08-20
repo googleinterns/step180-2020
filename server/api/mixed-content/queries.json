@@ -143,22 +143,40 @@
     "suggestedVisualizations": ["Line chart"],
     "mockResult": [
       {
+        "date": "2018_07_15",
+        "timestamp": 1531612800000,
+        "client": "mobile",
+        "percent": 62.48
+      },
+      {
+        "date": "2018_12_15",
+        "timestamp": 1544832000000,
+        "client": "mobile",
+        "percent": 62.62
+      },
+      {
+        "date": "2019_10_01",
+        "timestamp": 1569888000000,
+        "client": "mobile",
+        "percent": 62.49
+      },
+      {
         "date": "2018_07_01",
         "timestamp": 1530403200000,
         "client": "desktop",
         "percent": 62.42
       },
       {
-        "date": "2018_07_15",
-        "timestamp": 1531612800000,
+        "date": "2018_12_01",
+        "timestamp": 1543622400000,
         "client": "desktop",
-        "percent": 62.43
+        "percent": 62.62
       },
       {
-        "date": "2018_07_15",
-        "timestamp": 1531612800000,
-        "client": "mobile",
-        "percent": 62.48
+        "date": "2019_09_01",
+        "timestamp": 1567296000000,
+        "client": "desktop",
+        "percent": 67.05
       }
     ]
   },
