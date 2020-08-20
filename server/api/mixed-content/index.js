@@ -212,16 +212,13 @@ const queryData = async ({sql}) => {
  * @return {Array} Subset of elements proportionally spaced.
  */
 const select = (array, elements) => {
-  let skip = Math.floor(array.length / elements);
-  skip = skip == 0 ? 1 : skip;
-  let count = 0;
   const newArray = [];
-  for (let i = 0; i < array.length; i += skip) {
-    if (count >= elements) {
-      break;
-    }
+  for (
+    let i = 0;
+    i < array.length && newArray.length < elements;
+    i += Math.max(Math.floor(array.length / elements), 1)
+  ) {
     newArray.push(array[i]);
-    count++;
   }
   return newArray;
 };
