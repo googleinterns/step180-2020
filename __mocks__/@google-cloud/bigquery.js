@@ -9,7 +9,7 @@ class BigQuery {
    */
   constructor() {
     this.query = ({query, location}) => {
-      return [results[0][query]];
+      return [results[query].result];
     };
   }
 }

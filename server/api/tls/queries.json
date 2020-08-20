@@ -27,7 +27,7 @@
     },
     "KeyExchange":
     {
-        "description": "",
+        "description": "Key exchange algorithm usage",
         "query": [
             "SELECT trim(JSON_EXTRACT(payload, '$._securityDetails.keyExchange'), \"\\\"\") as id, count(*) as value",
             "FROM ",
