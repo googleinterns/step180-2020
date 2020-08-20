@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const ChartContainer = styled.div`
-  height: 300px;
+  align-items: center;
   display: flex;
+  height: 300px;
   justify-content: center;
-  align-items: center
 `;
 
 export {ChartContainer};
