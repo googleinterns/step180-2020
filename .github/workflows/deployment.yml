@@ -3,7 +3,7 @@ name: Deploy NodeJS app to GCloud App Engine
 on:
   push:
     branches:
-      - master
+      - demo/august-19-2020
 
 jobs:
   build:
