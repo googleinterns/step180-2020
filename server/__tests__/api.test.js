@@ -41,6 +41,28 @@ describe('tls', () => {
       },
     ]);
   });
+  it('Check /tls/key-exchange', async () => {
+    const res = await request(app).get('/api/tls/key-exchange');
+    expect(res.body.description).toBe('Key exchange algorithm usage');
+    expect(res.body.result).toMatchObject([
+      {
+        'id': '',
+        'value': 74131,
+      },
+      {
+        'id': 'ECDHE_RSA',
+        'value': 51109,
+      },
+      {
+        'id': 'ECDHE_ECDSA',
+        'value': 3272,
+      },
+      {
+        'id': 'RSA',
+        'value': 1825,
+      },
+    ]);
+  });
 });
 
 describe('mixed-content-by-type', () => {
@@ -69,31 +91,6 @@ describe('mixed-content-by-type', () => {
         'id': 'application',
         'value': 1889,
         'pages': 912,
-      },
-    ]);
-  });
-});
-
-describe('key-exchange', () => {
-  it('Check /tls/key-exchange', async () => {
-    const res = await request(app).get('/api/tls/key-exchange');
-    expect(res.body.description).toBe('Key exchange algorithm usage');
-    expect(res.body.result).toMatchObject([
-      {
-        'id': '',
-        'value': 74131,
-      },
-      {
-        'id': 'ECDHE_RSA',
-        'value': 51109,
-      },
-      {
-        'id': 'ECDHE_ECDSA',
-        'value': 3272,
-      },
-      {
-        'id': 'RSA',
-        'value': 1825,
       },
     ]);
   });
