@@ -1,7 +1,7 @@
 {
   "TlsRequests": {
     "description": "Number of requests per TLS version",
-    "query": [
+    "sql": [
       "SELECT tls as id, COUNT(tls) as value",
       "FROM",
       "(SELECT JSON_EXTRACT(payload, '$._securityDetails.protocol') as tls",
@@ -12,11 +12,21 @@
       "GROUP BY tls"
     ],
     "tableIndex": "4",
-    "suggestedVisualizations": ["Pie chart"]
+    "suggestedVisualizations": ["Pie chart"],
+    "mockResult": [
+      {
+        "id": "\"TLS 1.2\"",
+        "value": 12
+      },
+      {
+        "id": "\"TLS 1.3\"",
+        "value": 13
+      }
+    ]
   },
   "SignatureAlgorithm": {
     "description": "",
-    "query": [
+    "sql": [
       "SELECT JSON_EXTRACT(payload, '$._securityDetails.signedCertificateTimestampList[0].signatureAlgorithm')",
       "as signature, count(*)",
       "FROM `httparchive.sample_data.requests_desktop_10k`",
@@ -24,14 +34,32 @@
     ]
   },
   "KeyExchange": {
-    "description": "",
-    "query": [
+    "description": "Key exchange algorithm usage",
+    "sql": [
       "SELECT trim(JSON_EXTRACT(payload, '$._securityDetails.keyExchange'), \"\\\"\") as id, count(*) as value",
       "FROM ",
       "httparchive.sample_data.requests_desktop_10k",
       "group by id",
       "having id is not null"
     ],
-    "tableIndex": "2"
+    "tableIndex": "2",
+    "mockResult": [
+      {
+        "id": "",
+        "value": 74131
+      },
+      {
+        "id": "ECDHE_RSA",
+        "value": 51109
+      },
+      {
+        "id": "ECDHE_ECDSA",
+        "value": 3272
+      },
+      {
+        "id": "RSA",
+        "value": 1825
+      }
+    ]
   }
 }

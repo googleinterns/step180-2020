@@ -113,6 +113,28 @@
       "and char_length(mimeType)>0",
       "GROUP by id",
       "HAVING value > 1"
+    ],
+    "mockResult": [
+      {
+        "id": "text",
+        "value": 1268,
+        "pages": 354
+      },
+      {
+        "id": "font",
+        "value": 247,
+        "pages": 75
+      },
+      {
+        "id": "image",
+        "value": 2250,
+        "pages": 243
+      },
+      {
+        "id": "application",
+        "value": 1889,
+        "pages": 912
+      }
     ]
   },
   "MixedContentOneType": {

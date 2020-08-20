@@ -91,7 +91,7 @@ tlsApi.get('/key-exchange', async (req, res) => {
 
 const queryData = async (data, table) => {
   const index = data.tableIndex;
-  let dataQuery = data.query;
+  let dataQuery = data.sql;
   if (table != null) {
     dataQuery[index] = table;
   }
