@@ -159,24 +159,6 @@
         "timestamp": 1569888000000,
         "client": "mobile",
         "percent": 62.49
-      },
-      {
-        "date": "2018_07_01",
-        "timestamp": 1530403200000,
-        "client": "desktop",
-        "percent": 62.42
-      },
-      {
-        "date": "2018_12_01",
-        "timestamp": 1543622400000,
-        "client": "desktop",
-        "percent": 62.62
-      },
-      {
-        "date": "2019_09_01",
-        "timestamp": 1567296000000,
-        "client": "desktop",
-        "percent": 67.05
       }
     ]
   },
@@ -195,34 +177,17 @@
         "percent": 21.81
       },
       {
-        "date": "2017_04_01",
-        "timestamp": 1491004800000,
+
+        "date": "2016_01_15",
+        "timestamp": 1452816000000,
         "client": "mobile",
-        "percent": 43.48
+        "percent": 22.38
       },
       {
-        "date": "2018_07_01",
-        "timestamp": 1530403200000,
-        "client": "mobile",
-        "percent": 68.15
-      },
-      {
-        "date": "2016_01_01",
-        "timestamp": 1451606400000,
+        "date": "2016_02_01",
+        "timestamp": 1454284800000,
         "client": "desktop",
-        "percent": 24.04
-      },
-      {
-        "date": "2017_04_01",
-        "timestamp": 1491004800000,
-        "client": "desktop",
-        "percent": 43.49
-      },
-      {
-        "date": "2018_07_01",
-        "timestamp": 1530403200000,
-        "client": "desktop",
-        "percent": 74.89
+        "percent": 25.64
       }
     ]
   },
