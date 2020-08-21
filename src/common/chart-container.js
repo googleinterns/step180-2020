@@ -5,7 +5,6 @@ const ChartContainer = styled.div`
   display: flex;
   height: 300px;
   justify-content: center;
-  align-items: center;
 `;
 
-export {ChartContainer};
+export default ChartContainer;
