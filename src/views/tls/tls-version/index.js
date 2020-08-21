@@ -1,14 +1,16 @@
-import {api} from '../../../client';
+import {api} from 'client';
 import Card from '@material-ui/core/Card';
 import {CardContent} from '@material-ui/core';
-import {ChartContainer} from '../../chart-container';
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
-import React, {useEffect, useState} from 'react';
+import CardHeader from '@material-ui/core/CardHeader';
+import ChartContainer from 'common/chart-container';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import MuiAlert from '@material-ui/lab/Alert';
+import Paper from '@material-ui/core/Paper';
 import {ResponsivePie} from '@nivo/pie';
-import Select from '@material-ui/core/Select';
-import {SelectContainer} from '../../select-container';
-import Typography from '@material-ui/core/Typography';
+import Snackbar from '@material-ui/core/Snackbar';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import React, {useEffect, useState} from 'react';
 
 /**
  * This component shows a pie chart with the number of requests
@@ -17,52 +19,88 @@ import Typography from '@material-ui/core/Typography';
  * @return {ReactNode} TLS versions component
  */
 const TLSversion = () => {
+  const [loading, setLoading] = useState(true);
+  const [snackOpen, setSnackOpen] = useState(false);
   const [data, setData] = useState([]);
   const [table, setTable] = useState('httparchive.smaller_sample_requests');
+
   useEffect(() => {
-    api.get('/api/tls/tls-version?table='+table).then((response) => {
-      setData(response.data.result);
-    }).catch((err) => {
-      console.log(err);
-    });
+    setLoading(true);
+    api
+      .get('/api/tls/tls-version?table=' + table)
+      .then((response) => {
+        setLoading(false);
+        setData(response.data.result);
+      })
+      .catch((err) => {
+        setSnackOpen(true);
+      });
   }, [table]);
-  const handleChange = (event) => {
-    setTable(event.target.value);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackOpen(false);
   };
+
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="h3">TLS versions</Typography>
-        <Typography paragraph={true}
-        >Number of requests by TLS version</Typography>
-        <SelectContainer>
-          <FormControl>
-            <Select
-              value={table}
-              onChange={handleChange}
-            >
-              <MenuItem
-                value={'httparchive.smaller_sample_requests'}
-              >Table 1</MenuItem>
-              <MenuItem
-                value={'httparchive.sample_data.requests_desktop_10k'}
-              >Table 2</MenuItem>
-            </Select>
-          </FormControl>
-        </SelectContainer>
-        <ChartContainer>
-          <ResponsivePie
-            data={data}
-            margin={{top: 40, right: 80, bottom: 80, left: 80}}
-            innerRadius={0.5}
-            padAngle={0.7}
-            cornerRadius={3}
-            colors={{scheme: 'nivo'}}
-            animate={true}
-          />
-        </ChartContainer>
-      </CardContent>
-    </Card>
+    <>
+      <Card data-testid="tls-versions-card">
+        <CardHeader
+          title="TLS versions"
+          subheader="Number of requests by TLS version"
+        />
+        <Paper square>
+          <Tabs
+            value={table}
+            indicatorColor="primary"
+            textColor="primary"
+            onChange={(_, newValue) => setTable(newValue)}
+          >
+            <Tab
+              data-testid="sample-tab"
+              value="httparchive.smaller_sample_requests"
+              label="Small sample sets"
+            />
+            <Tab
+              data-testid="10k-tab"
+              value="httparchive.sample_data.requests_desktop_10k"
+              label="10k sample set"
+            />
+          </Tabs>
+        </Paper>
+        <CardContent>
+          {!loading ? (
+            <ChartContainer data-testid="tls-versions-chart">
+              <ResponsivePie
+                data={data}
+                margin={{top: 40, right: 80, bottom: 80, left: 80}}
+                innerRadius={0.5}
+                padAngle={0.7}
+                cornerRadius={3}
+                colors={{scheme: 'nivo'}}
+                animate={true}
+              />
+            </ChartContainer>
+          ) : (
+            <ChartContainer>
+              <CircularProgress data-testid="chart-loader" />
+            </ChartContainer>
+          )}
+        </CardContent>
+      </Card>
+      <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleClose}
+          severity="error"
+        >
+          Could not load chart
+        </MuiAlert>
+      </Snackbar>
+    </>
   );
 };
 

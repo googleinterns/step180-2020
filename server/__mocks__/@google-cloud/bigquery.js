@@ -39,8 +39,8 @@ class BigQuery {
 const simulateQueryResult = (simulatedQuery) => {
   // Will return undefined if query does not belong to mixed content
   const mixedContentQuery = searchSimulatedQuery(
-      simulatedQuery,
-      mixedContentQueries,
+    simulatedQuery,
+    mixedContentQueries,
   );
   if (mixedContentQuery) return mixedContentQuery;
 

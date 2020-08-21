@@ -58,6 +58,24 @@ To test the project, you can run:
     - `yarn test:server`
     - `yarn test:client`
 
+## Guidelines and recommendations
+
+### Frontend
+
+We use `@testing-library/react` for testing purposes in frontend, so, you can refer to its [official docs](https://testing-library.com/docs/react-testing-library/intro). But please try to follow the recommendations below:
+
+- Considering our file structure, every component should be accompanied by its respective test file located in a `__tests__` folder next to the component file location.
+- Every test may try to test only its corresponding component. For example, `App.test.js` should only test App.js behaviour, and not its subcomponents. Those will be tested individually in deeper folders.
+- If you're testing asynchronous behaviour, refer to `src/setupTests.js` in order to mock the server response there, we decided to mock the actual server instead of mock fetch and api calls.
+- If you're adding new `Context` components, please be sure to add it to the customRender function in `src/test-utils.js`, this will apply the context to every component rendered during testing.
+
+## Backend
+
+We use `jest` and `supertest` for testing purposes in backend, so you can refer to their official docs, both for [jest](https://jestjs.io/) and [supertest](https://www.npmjs.com/package/supertest)
+
+- Jest is used for assertions and general testing functionality
+- Supertest is how we mock the server requests
+
 # Adding environment variables
 
 During development, you'll need to add new environment variables. For that, please follow the next steps:

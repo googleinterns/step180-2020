@@ -10,10 +10,10 @@
  * be okay to add the express middleware here to handle them
  */
 
-import express from 'express';
-import api from './api';
 import allowEveryOrigin from './middlewares/allow-every-origin';
+import api from './api';
 import {env} from './config';
+import express from 'express';
 
 const app = express();
 

@@ -4,7 +4,7 @@
     "es6": true,
     "node": true
   },
-  "extends": ["plugin:react/recommended", "google"],
+  "extends": ["plugin:react/recommended", "google", "prettier"],
   "settings": {
     "react": {
       "version": "detect"
@@ -21,6 +21,17 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react"],
-  "rules": {}
+  "plugins": ["react", "better-styled-components"],
+  "rules": {
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": true,
+        "ignoreDeclarationSort": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "single", "multiple"]
+      }
+    ],
+    "better-styled-components/sort-declarations-alphabetically": 2
+  }
 }

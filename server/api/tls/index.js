@@ -6,8 +6,8 @@
  */
 
 import {BigQuery} from '@google-cloud/bigquery';
+import queries from './queries.json';
 import {Router as router} from 'express';
-import * as queries from './queries.json';
 
 const tlsApi = router();
 const bigQueryClient = new BigQuery();
@@ -19,23 +19,31 @@ tlsApi.get('/tls-requests', async (req, res) => {
   const month = req.query.month;
   let table = 'httparchive.sample_data.requests_desktop_10k';
   if (year != null && month != null) {
-    table = 'httparchive.requests.'+year+'_'+month+'_01_desktop';
+    table = 'httparchive.requests.' + year + '_' + month + '_01_desktop';
   }
   let queryDescription = 'Number of requests per TLS version';
-  let sqlQuery = `SELECT tls, COUNT(tls) as requests
+  let sqlQuery =
+    `SELECT tls, COUNT(tls) as requests
   FROM
   (SELECT JSON_EXTRACT(payload, '$._securityDetails.protocol') as tls
   FROM 
-  `+table+`
+  ` +
+    table +
+    `
   where url like ("https%"))
   GROUP BY tls`;
   if (version != null) {
-    queryDescription = 'Number of requests that use TLS '+version;
-    sqlQuery = `SELECT COUNT(url) as requests
-    FROM `+table+`
+    queryDescription = 'Number of requests that use TLS ' + version;
+    sqlQuery =
+      `SELECT COUNT(url) as requests
+    FROM ` +
+      table +
+      `
     WHERE url like ("https%") AND 
     JSON_EXTRACT(payload, '$._securityDetails.protocol') 
-    like "%TLS%`+version+`%"`;
+    like "%TLS%` +
+      version +
+      `%"`;
   }
 
   const options = {
@@ -46,10 +54,8 @@ tlsApi.get('/tls-requests', async (req, res) => {
   const [rows] = await bigQueryClient.query(options);
 
   res.json({
-    description:
-      queryDescription,
-    table:
-      table,
+    description: queryDescription,
+    table: table,
     result: rows,
   });
 });
@@ -59,8 +65,8 @@ tlsApi.get('/tls-version', async (req, res) => {
   let table = req.query.table;
   const year = req.query.year;
   const month = req.query.month;
-  if (year != null && month !=null) {
-    table = 'httparchive.requests.'+year+'_'+month+'_01_desktop';
+  if (year != null && month != null) {
+    table = 'httparchive.requests.' + year + '_' + month + '_01_desktop';
   }
   const rows = await queryData(query, table);
 
@@ -73,10 +79,22 @@ tlsApi.get('/tls-version', async (req, res) => {
   });
 });
 
+tlsApi.get('/key-exchange', async (req, res) => {
+  const query = queries.KeyExchange;
+  const table = req.query.table;
+  const rows = await queryData(query, table);
+  res.json({
+    description: query.description,
+    result: rows,
+  });
+});
+
 const queryData = async (data, table) => {
   const index = data.tableIndex;
-  let dataQuery = data.query;
-  dataQuery[index] = table;
+  let dataQuery = data.sql;
+  if (table != null) {
+    dataQuery[index] = table;
+  }
   dataQuery = dataQuery.join(' ');
   const [rows] = await bigQueryClient.query({
     query: dataQuery,
