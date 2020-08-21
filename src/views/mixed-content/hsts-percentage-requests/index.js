@@ -28,7 +28,6 @@ const HSTSPercentageRequests = () => {
             formattedData.push(newElement);
           });
           setData(formattedData);
-          console.log(formattedData);
           setLoading(false);
         })
         .catch((err) => {

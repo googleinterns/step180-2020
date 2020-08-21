@@ -9,12 +9,12 @@
  */
 
 // This is a collection of all queries and their metadata in json.
-import * as queries from './queries.json';
+import queries from './queries.json';
 import {BigQuery} from '@google-cloud/bigquery';
 import {Router as router} from 'express';
 
 const mixedApi = router();
-const bigqueryClient = new BigQuery();
+const bigQueryClient = new BigQuery();
 
 mixedApi.get('/top-websites-with-mixed-content', async (req, res) => {
   const query = queries.TopWebsitesWithMixedContent;
@@ -42,7 +42,8 @@ mixedApi.get(
     },
 );
 
-mixedApi.get('/top-countries-with-more-government-websites-with-mixed-content',
+mixedApi.get(
+    '/top-countries-with-more-government-websites-with-mixed-content',
     async (req, res) => {
       const query =
       queries.TopCountriesWithMoreGovernmentWebsitesWithMixedContent;
@@ -82,8 +83,86 @@ mixedApi.get('/mixed-content-percentage-histogram', async (req, res) =>{
   });
 });
 
+mixedApi.get('/mixed-content-by-type', async (req, res) => {
+  let query = queries.MixedContentByType;
+  const type = req.query.type;
+  if (type != 'all') {
+    query = queries.MixedContentOneType;
+  }
+  let rows = [];
+  rows = await queryType(query, type);
+  if (type != 'all') {
+    rows = await toPieChart(rows);
+  }
+  res.json({
+    description: query.description,
+    type: type,
+    result: rows,
+  });
+});
 
-mixedApi.get('/https-percentage-pages', async (req, res) =>{
+mixedApi.get('/https-percentage-pages', async (req, res) => {
+  const query = queries.HTTPSPercentagePages;
+  let rows = [];
+  rows = await queryData(query);
+
+
+  // If there is a certain number of datapoints required for visualization
+  // it will select a subset with proportional skips.
+  const datapoints = req.query.datapoints;
+  if (datapoints) {
+    let mobileRows = rows.filter((row) => row.client === 'mobile');
+    let desktopRows = rows.filter((row) => row.client === 'desktop');
+    mobileRows = select(mobileRows, datapoints);
+    desktopRows = select(desktopRows, datapoints);
+    rows = mobileRows.concat(desktopRows);
+  }
+
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
+mixedApi.get('/https-percentage-requests', async (req, res) => {
+  const query = queries.HTTPSPercentageRequests;
+  let rows = [];
+  rows = await queryData(query);
+
+
+  // If there is a certain number of datapoints required for visualization
+  // it will select a subset with proportional skips.
+  const datapoints = req.query.datapoints;
+  if (datapoints) {
+    let mobileRows = rows.filter((row) => row.client === 'mobile');
+    let desktopRows = rows.filter((row) => row.client === 'desktop');
+    mobileRows = select(mobileRows, datapoints);
+    desktopRows = select(desktopRows, datapoints);
+    rows = mobileRows.concat(desktopRows);
+  }
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
+mixedApi.get('/hsts-percentage-requests', async (req, res) => {
+  const query = queries.HSTSPercentageRequests;
+  let rows = [];
+  rows = await queryData(query);
+
+  res.json({
+    description: query.description,
+    result: rows,
+    suggestedVisualizations: query.suggestedVisualizations,
+  });
+});
+
+mixedApi.get('/https-percentage-pages', async (req, res) => {
   const query = queries.HTTPSPercentagePages;
   let rows = [];
   rows = await queryData(query);
@@ -95,7 +174,7 @@ mixedApi.get('/https-percentage-pages', async (req, res) =>{
   });
 });
 
-mixedApi.get('/https-percentage-requests', async (req, res) =>{
+mixedApi.get('/https-percentage-requests', async (req, res) => {
   const query = queries.HTTPSPercentageRequests;
   let rows = [];
   rows = await queryData(query);
@@ -107,7 +186,7 @@ mixedApi.get('/https-percentage-requests', async (req, res) =>{
   });
 });
 
-mixedApi.get('/hsts-percentage-requests', async (req, res) =>{
+mixedApi.get('/hsts-percentage-requests', async (req, res) => {
   const query = queries.HSTSPercentageRequests;
   let rows = [];
   rows = await queryData(query);
@@ -124,17 +203,68 @@ mixedApi.get('/hsts-percentage-requests', async (req, res) =>{
  * @param {{query: array}} data Query from /.queries.json
  * @return {object} Array of rows (result of the query).
  */
-const queryData = async ({query}) => {
-  if (Array.isArray(query)) {
-    query = query.join(' ');
+const queryData = async ({sql}) => {
+  if (Array.isArray(sql)) {
+    sql = sql.join(' ');
   } else {
-    throw new Error('Query must be an array');
+    throw new Error('SQL query must be an array');
   }
-  const [rows] = await bigqueryClient.query({
-    query: query,
+
+  const [rows] = await bigQueryClient.query({
+    query: sql,
     location: 'US',
   });
 
+  return rows;
+};
+
+/**
+ * Selects a subset of elements of an array proportionally spaced
+ *
+ * If elements is 3 in this array, it selects: [1],2,3,[4],5,6,[7],8,9
+ *
+ * @param {Array} array Array to get subset from.
+ * @param {number} elements Total number of elements to retrieve.
+ * @return {Array} Subset of elements proportionally spaced.
+ */
+const select = (array, elements) => {
+  const newArray = [];
+  for (let i = 0; i < array.length && newArray.length < elements;
+    i += Math.max(Math.floor(array.length / elements), 1)) {
+    newArray.push(array[i]);
+  }
+  return newArray;
+};
+
+/*
+ * Makes a BigQuery from ./queries.json, but takes a 'type'
+ * parameter into account.
+ * @param {object} data
+ * @param {string} type
+ */
+const queryType = async (data, type) => {
+  const index = data.typeIndex;
+  let dataQuery = data.query;
+  if (type != 'all') {
+    dataQuery[index] = '("%' + type + '/%")';
+  }
+  dataQuery = dataQuery.join(' ');
+  const [rows] = await bigQueryClient.query({
+    query: dataQuery,
+    location: 'US',
+  });
+  return rows;
+};
+
+/**
+ * Changes query result to graph a Pie chart
+ * @param {object} result
+ */
+const toPieChart = async (result) => {
+  const rows = [
+    {id: 'httpsPercentage', value: result[0].httpsPercentage},
+    {id: 'httpPercentage', value: result[0].httpPercentage},
+  ];
   return rows;
 };
 

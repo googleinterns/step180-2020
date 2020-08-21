@@ -41,8 +41,7 @@ const TopCountriesWithMoreWebsitesWithMixedContentAdjusted = () => {
     <Card>
       <CardContent>
         <Typography variant={'h3'}>
-        Top countries by percentage of government websites
-        with mixed content from the total.
+        Percentage of government websites that have a form of mixed-content.
         </Typography>
         <Typography paragraph={true}>
         This is the adjusted chart from above that is basically <b>(# gov sites
