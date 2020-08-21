@@ -21,7 +21,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": ["react", "better-styled-components"],
   "rules": {
     "sort-imports": [
       "error",
@@ -31,6 +31,7 @@
         "ignoreMemberSort": false,
         "memberSyntaxSortOrder": ["none", "all", "single", "multiple"]
       }
-    ]
+    ],
+    "better-styled-components/sort-declarations-alphabetically": 2
   }
 }
