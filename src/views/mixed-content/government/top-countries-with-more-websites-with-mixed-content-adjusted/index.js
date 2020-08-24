@@ -1,4 +1,4 @@
-import * as features from './features.json';
+import * as features from '../features.json';
 import {api} from '../../../../client';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
