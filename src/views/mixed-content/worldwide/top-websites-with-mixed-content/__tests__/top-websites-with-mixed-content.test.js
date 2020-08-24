@@ -1,5 +1,5 @@
 import React from 'react';
-import TopWebistesWithMixedContent from '../index';
+import TopWebsitesWithMixedContent from '../index';
 import {
   fireEvent,
   render,
@@ -8,7 +8,7 @@ import {
   waitForElementToBeRemoved,
 } from 'test-utils';
 
-beforeEach(() => render(<TopWebistesWithMixedContent />));
+beforeEach(() => render(<TopWebsitesWithMixedContent />));
 
 test('Renders main card container correctly', async () => {
   const card = screen.getByTestId('top-websites-with-mixed-content-card');

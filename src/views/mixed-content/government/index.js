@@ -16,8 +16,8 @@ const Government = () => {
         Why analyze government websites?
       </Typography>
       <Typography paragraph={true}>
-        Governmental webistes are unfortunately the ones that contain the most percentage of <b>mixed content</b> resources,
-        this makes them a great attack target because they are popular and there's a great flux of sensitive information in them to be sniffed.
+        Governmental websites are unfortunately the ones that contain the most percentage of <b>mixed content</b> resources,
+        this makes them a great attack target because they are popular and there&apos;s a great flux of sensitive information in them to be sniffed.
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>

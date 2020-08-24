@@ -7,7 +7,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiAlert from '@material-ui/lab/Alert';
 import {ResponsivePie} from '@nivo/pie';
 import {Snackbar} from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import React, {useEffect, useState} from 'react';
 
 const MixedContentPercentageHistogram = () => {
