@@ -65,9 +65,11 @@ tlsApi.get('/tls-version', async (req, res) => {
   let table = req.query.table;
   const year = req.query.year;
   const month = req.query.month;
-  if (year != null && month != null) {
+  if (year != 'sample') {
     table = 'httparchive.requests.' + year + '_' + month + '_01_desktop';
   }
+  console.log('table');
+  console.log(table);
   const rows = await queryData(query, table);
 
   res.json({

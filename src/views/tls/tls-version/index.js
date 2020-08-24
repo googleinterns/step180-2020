@@ -1,6 +1,6 @@
 import {api} from 'client';
 import Card from '@material-ui/core/Card';
-import {CardContent, NativeSelect} from '@material-ui/core';
+import {CardContent, NativeSelect, useScrollTrigger} from '@material-ui/core';
 import CardHeader from '@material-ui/core/CardHeader';
 import ChartContainer from 'common/chart-container';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -21,80 +21,7 @@ import FormControl from '@material-ui/core/FormControl';
  *
  * @return {ReactNode} TLS versions component
  */
-/**
- * const TLSversion = () => {
-  const [data, setData] = useState([]);
-  const [table, setTable] = useState('httparchive.smaller_sample_requests');
-  const [year, setYear] = useState('sample');
-  useEffect(() => {
-    api.get('/api/tls/tls-version?table='+table+'&year='+year)
-        .then((response) => {
-          setData(response.data.result);
-        }).catch((err) => {
-          console.log(err);
-        });
-  }, [table, year]);
-  const changeTable = (event) => {
-    setTable(event.target.value);
-  };
-  const changeYear = (event) => {
-    setYear(event.target.value);
-  };
-  return (
-    <Card>
-      <CardContent>
-        <Typography variant="h3">TLS versions</Typography>
-        <Typography paragraph={true}
-        >Number of requests by TLS version</Typography>
-        <SelectContainer>
-          <FormControl>
-            <Select
-              value={table}
-              onChange={changeTable}
-            >
-              <MenuItem
-                value={'httparchive.smaller_sample_requests'}
-              >Small sample set</MenuItem>
-              <MenuItem
-                value={'httparchive.sample_data.requests_desktop_10k'}
-              >10k sample set</MenuItem>
-            </Select>
-          </FormControl>
-        </SelectContainer>
-        <SelectContainer>
-          <FormControl>
-            <Select
-              value={year}
-              onChange={changeYear}
-            >
-              <MenuItem
-                value={'2016'}
-              >2016</MenuItem>
-              <MenuItem
-                value={'2017'}
-              >2017</MenuItem>
-            </Select>
-          </FormControl>
-        </SelectContainer>
-        <ChartContainer>
-          <ResponsivePie
-            data={data}
-            margin={{top: 40, right: 80, bottom: 80, left: 80}}
-            innerRadius={0.5}
-            padAngle={0.7}
-            cornerRadius={3}
-            colors={{scheme: 'nivo'}}
-            animate={true}
-          />
-        </ChartContainer>
-      </CardContent>
-    </Card>
-  );
-};
 
-export default TLSversion;
-
- */
 const TLSversion = () => {
   const [loading, setLoading] = useState(true);
   const [snackOpen, setSnackOpen] = useState(false);
@@ -103,17 +30,40 @@ const TLSversion = () => {
   const [year, setYear] = useState('sample');
   const [month, setMonth] = useState('01');
   const [months, setMonths] = useState([
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
   ]);
+  const [url, setUrl] = useState('');
   useEffect(() => {
+    setUrl(
+      '/api/tls/tls-version?table=' +
+        table +
+        '&year=' +
+        year +
+        '&month=' +
+        month,
+    );
+    console.log(url);
     setLoading(true);
     api
-      .get('/api/tls/tls-version?table=' + table)
+      .get(
+        '/api/tls/tls-version?table=' +
+          table +
+          '&year=' +
+          year +
+          '&month=' +
+          month,
+      )
       .then((response) => {
         setLoading(false);
         setData(response.data.result);
@@ -122,11 +72,24 @@ const TLSversion = () => {
         setSnackOpen(true);
       });
     if (year === '2018') {
-      setMonths(['November', 'December']);
+      setMonths(['04', '05', '06', '07', '08', '09', '10', '11', '12']);
     } else {
-      setMonths(['January', 'February', 'March', 'April', 'May', 'June']);
+      setMonths([
+        '01',
+        '02',
+        '03',
+        '04',
+        '05',
+        '06',
+        '07',
+        '08',
+        '09',
+        '10',
+        '11',
+        '12',
+      ]);
     }
-  }, [table, year]);
+  }, [table, year, month]);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -183,7 +146,7 @@ const TLSversion = () => {
           </Tabs>
           <Select value={month} onChange={changeMonth}>
             {months.map((color, index) => (
-              <MenuItem key={index} value={index}>
+              <MenuItem key={index} value={color}>
                 {color}
               </MenuItem>
             ))}
