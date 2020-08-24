@@ -4,18 +4,18 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import ChartContainer from 'common/chart-container';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {CustomCard, SkeletonContainer} from './elements';
 import MuiAlert from '@material-ui/lab/Alert';
 import {ResponsiveChoropleth} from '@nivo/geo';
-import {Snackbar} from '@material-ui/core';
-import React, {useEffect, useState} from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
+import {Snackbar} from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import {CustomCard, SkeletonContainer} from './elements';
+import React, {useEffect, useState} from 'react';
 
 const TopCountriesWithMoreWebsitesWithMixedContent = () => {
   const [loading, setLoading] = useState(true);
