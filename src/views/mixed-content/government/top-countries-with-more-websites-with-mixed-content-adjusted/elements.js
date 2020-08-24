@@ -2,10 +2,10 @@ import Card from '@material-ui/core/Card';
 import styled from 'styled-components';
 
 const ChartContainer = styled.div`
-  height: 300px;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
+  height: 300px;
+  justify-content: center;
 `;
 
 const CustomCard = styled(Card)`
@@ -13,8 +13,8 @@ const CustomCard = styled(Card)`
 `;
 
 const SkeletonContainer = styled.div`
-  width: 100%;
   padding: 20px;
+  width: 100%;
 `;
 
 export {ChartContainer, CustomCard, SkeletonContainer};
