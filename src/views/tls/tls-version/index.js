@@ -110,8 +110,6 @@ const TLSversion = () => {
     'May',
     'June',
   ]);
-  const lista = {};
-  // const months = [{x:'01',y:'january'},{x:'02',y:'february'}];
   useEffect(() => {
     setLoading(true);
     api
@@ -125,6 +123,8 @@ const TLSversion = () => {
       });
     if (year === '2018') {
       setMonths(['November', 'December']);
+    } else {
+      setMonths(['January', 'February', 'March', 'April', 'May', 'June']);
     }
   }, [table, year]);
 
