@@ -9,8 +9,8 @@
  */
 
 // This is a collection of all queries and their metadata in json.
-import queries from './queries.json';
 import {BigQuery} from '@google-cloud/bigquery';
+import queries from './queries.json';
 import {Router as router} from 'express';
 
 const mixedApi = router();
@@ -28,33 +28,33 @@ mixedApi.get('/top-websites-with-mixed-content', async (req, res) => {
 });
 
 mixedApi.get(
-    '/top-government-websites-with-mixed-content',
-    async (req, res) => {
-      const query = queries.TopGovernmentWebsitesWithMixedContent;
-      let rows = [];
-      rows = await queryData(query);
+  '/top-government-websites-with-mixed-content',
+  async (req, res) => {
+    const query = queries.TopGovernmentWebsitesWithMixedContent;
+    let rows = [];
+    rows = await queryData(query);
 
-      res.json({
-        description: query.description,
-        result: rows,
-        suggestedVisualizations: query.suggestedVisualizations,
-      });
-    },
+    res.json({
+      description: query.description,
+      result: rows,
+      suggestedVisualizations: query.suggestedVisualizations,
+    });
+  },
 );
 
 mixedApi.get(
-    '/top-countries-with-more-government-websites-with-mixed-content',
-    async (req, res) => {
-      const query =
+  '/top-countries-with-more-government-websites-with-mixed-content',
+  async (req, res) => {
+    const query =
       queries.TopCountriesWithMoreGovernmentWebsitesWithMixedContent;
-      const rows = await queryData(query);
+    const rows = await queryData(query);
 
-      res.json({
-        description: query.description,
-        result: rows,
-        suggestedVisualizations: query.suggestedVisualizations,
-      });
-    },
+    res.json({
+      description: query.description,
+      result: rows,
+      suggestedVisualizations: query.suggestedVisualizations,
+    });
+  },
 );
 
 mixedApi.get('/top-countries-with-more-government-'+
@@ -106,7 +106,6 @@ mixedApi.get('/https-percentage-pages', async (req, res) => {
   let rows = [];
   rows = await queryData(query);
 
-
   // If there is a certain number of datapoints required for visualization
   // it will select a subset with proportional skips.
   const datapoints = req.query.datapoints;
@@ -117,7 +116,6 @@ mixedApi.get('/https-percentage-pages', async (req, res) => {
     desktopRows = select(desktopRows, datapoints);
     rows = mobileRows.concat(desktopRows);
   }
-
 
   res.json({
     description: query.description,
@@ -130,7 +128,6 @@ mixedApi.get('/https-percentage-requests', async (req, res) => {
   const query = queries.HTTPSPercentageRequests;
   let rows = [];
   rows = await queryData(query);
-
 
   // If there is a certain number of datapoints required for visualization
   // it will select a subset with proportional skips.
@@ -189,12 +186,14 @@ mixedApi.get('/https-percentage-requests', async (req, res) => {
 mixedApi.get('/hsts-percentage-requests', async (req, res) => {
   const query = queries.HSTSPercentageRequests;
   let rows = [];
-  rows = await queryData(query);
-
+  rows = await queryType(query, type);
+  if (type != 'all') {
+    rows = await toPieChart(rows);
+  }
   res.json({
     description: query.description,
+    type: type,
     result: rows,
-    suggestedVisualizations: query.suggestedVisualizations,
   });
 });
 
@@ -209,7 +208,6 @@ const queryData = async ({sql}) => {
   } else {
     throw new Error('SQL query must be an array');
   }
-
   const [rows] = await bigQueryClient.query({
     query: sql,
     location: 'US',
@@ -229,8 +227,11 @@ const queryData = async ({sql}) => {
  */
 const select = (array, elements) => {
   const newArray = [];
-  for (let i = 0; i < array.length && newArray.length < elements;
-    i += Math.max(Math.floor(array.length / elements), 1)) {
+  for (
+    let i = 0;
+    i < array.length && newArray.length < elements;
+    i += Math.max(Math.floor(array.length / elements), 1)
+  ) {
     newArray.push(array[i]);
   }
   return newArray;
@@ -244,7 +245,7 @@ const select = (array, elements) => {
  */
 const queryType = async (data, type) => {
   const index = data.typeIndex;
-  let dataQuery = data.query;
+  let dataQuery = data.sql;
   if (type != 'all') {
     dataQuery[index] = '("%' + type + '/%")';
   }
@@ -262,8 +263,8 @@ const queryType = async (data, type) => {
  */
 const toPieChart = async (result) => {
   const rows = [
-    {id: 'httpsPercentage', value: result[0].httpsPercentage},
-    {id: 'httpPercentage', value: result[0].httpPercentage},
+    {id: 'HTTPS', value: result[0].httpsPercentage},
+    {id: 'HTTP', value: result[0].httpPercentage},
   ];
   return rows;
 };

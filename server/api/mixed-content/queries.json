@@ -82,7 +82,7 @@
   "TopCountriesWithMoreGovernmentWebsitesWithMixedContentAdjusted": {
     "description": "Top countries with more percentage of government websites that have mixed content from the total of government websites.",
     "sql": [
-      "SELECT country id, percentage_mixed_from_total*100 value FROM `enamel-step-2020.httparchive.countries_mixed_adjusted` LIMIT 1000"
+      "SELECT country id, ROUND(percentage_mixed_from_total*100, 2) value FROM `enamel-step-2020.httparchive.countries_mixed_adjusted` LIMIT 1000"
     ],
     "suggestedVisualizations": ["Bar chart", "Map"],
     "mockResult": [
@@ -116,7 +116,7 @@
   },
   "MixedContentByType": {
     "description": "Return mixed content request by types",
-    "query": [
+    "sql": [
       "SELECT substr(mimeType, 1, strpos(mimeType, \"/\")-1) as id,",
       "count(*) value,",
       "count(distinct p.pageid) as pages",
@@ -127,12 +127,34 @@
       "and char_length(mimeType)>0",
       "GROUP by id",
       "HAVING value > 1"
+    ],
+    "mockResult": [
+      {
+        "id": "text",
+        "value": 1268,
+        "pages": 354
+      },
+      {
+        "id": "font",
+        "value": 247,
+        "pages": 75
+      },
+      {
+        "id": "image",
+        "value": 2250,
+        "pages": 243
+      },
+      {
+        "id": "application",
+        "value": 1889,
+        "pages": 912
+      }
     ]
   },
   "MixedContentOneType": {
     "description": "Return mixed content requests of specified type",
-    "query": [
-      "SELECT sum(https) AS httpsPercentage, sum(http) AS httpPercentage",
+    "sql": [
+      "SELECT ROUND(sum(https)/(sum(https)+sum(http))*100, 2) AS httpsPercentage, ROUND(sum(http)/(sum(https)+sum(http))*100, 2) AS httpPercentage",
       "FROM",
       "(SELECT mimeType, COUNT(CASE WHEN r.url LIKE (\"https%\") THEN 1 END)",
       "AS https,COUNT(CASE WHEN r.url LIKE (\"http:%\") THEN 1 END) AS http, count(r.url) AS total",

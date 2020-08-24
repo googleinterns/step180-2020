@@ -9,9 +9,9 @@ import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
-import {theme} from './config/theme';
 import {ThemeProvider as StyledProvider} from 'styled-components';
-import {ThemeProvider, StylesProvider} from '@material-ui/core/styles';
+import {theme} from './config/theme';
+import {StylesProvider, ThemeProvider} from '@material-ui/core/styles';
 
 /**
  * Entry point
@@ -26,16 +26,16 @@ import {ThemeProvider, StylesProvider} from '@material-ui/core/styles';
  * Router: It handles Single Page Application Routing
  */
 ReactDOM.render(
-    <React.StrictMode>
-      <StylesProvider injectFirst>
-        <StyledProvider theme={theme}>
-          <ThemeProvider theme={theme}>
-            <Router>
-              <App />
-            </Router>
-          </ThemeProvider>
-        </StyledProvider>
-      </StylesProvider>
-    </React.StrictMode>,
-    document.getElementById('root'),
+  <React.StrictMode>
+    <StylesProvider injectFirst>
+      <StyledProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <Router>
+            <App />
+          </Router>
+        </ThemeProvider>
+      </StyledProvider>
+    </StylesProvider>
+  </React.StrictMode>,
+  document.getElementById('root'),
 );
