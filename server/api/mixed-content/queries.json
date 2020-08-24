@@ -140,7 +140,7 @@
   "MixedContentOneType": {
     "description": "Return mixed content requests of specified type",
     "sql": [
-      "SELECT sum(https) AS httpsPercentage, sum(http) AS httpPercentage",
+      "SELECT ROUND(sum(https)/(sum(https)+sum(http))*100, 2) AS httpsPercentage, ROUND(sum(http)/(sum(https)+sum(http))*100, 2) AS httpPercentage",
       "FROM",
       "(SELECT mimeType, COUNT(CASE WHEN r.url LIKE (\"https%\") THEN 1 END)",
       "AS https,COUNT(CASE WHEN r.url LIKE (\"http:%\") THEN 1 END) AS http, count(r.url) AS total",

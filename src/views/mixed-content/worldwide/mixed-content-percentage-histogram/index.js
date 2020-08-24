@@ -7,6 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiAlert from '@material-ui/lab/Alert';
 import {ResponsivePie} from '@nivo/pie';
 import {Snackbar} from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import React, {useEffect, useState} from 'react';
 
 const MixedContentPercentageHistogram = () => {
@@ -43,17 +44,16 @@ const MixedContentPercentageHistogram = () => {
     <Card data-testid="mixed-content-percentage-card">
       <CardContent>
         <CardHeader
-          title="Websites grouped by percentage of mixed content"
-          subheader="Many websites already have 0% mixed content,
-            but there are still many websites with different percentage
-            amounts of mixed content"
+          title="Websites grouped by their percentage of mixed content."
+          subheader="We can see that more than 75% of websites don't have any mixed content."
         />
-        {!loading ? (
+                {!loading ? (
           <ChartContainer data-testid="mixed-content-percentage-chart">
+           
             <ResponsivePie
               data={data}
               margin={{top: 40, right: 80, bottom: 80, left: 80}}
-              colors={{scheme: 'nivo'}}
+              colors={{scheme: 'category10'}}
               borderWidth={1}
               borderColor={{from: 'color', modifiers: [['darker', 0.2]]}}
               slicesLabelsSkipAngle={100}
@@ -81,26 +81,7 @@ const MixedContentPercentageHistogram = () => {
                   spacing: 10,
                 },
               ]}
-              legends={[
-                {
-                  anchor: 'bottom',
-                  direction: 'row',
-                  translateY: 56,
-                  itemWidth: 100,
-                  itemHeight: 18,
-                  itemTextColor: '#999',
-                  symbolSize: 18,
-                  symbolShape: 'circle',
-                  effects: [
-                    {
-                      on: 'hover',
-                      style: {
-                        itemTextColor: '#000',
-                      },
-                    },
-                  ],
-                },
-              ]}
+              
             />
           </ChartContainer>
         ) : (
@@ -108,6 +89,10 @@ const MixedContentPercentageHistogram = () => {
             <CircularProgress data-testid="chart-loader" />
           </ChartContainer>
         )}
+        <CardHeader
+          subheader="On the other hand, if they have mixed content it's usually 100% of
+          their resources."
+        />
       </CardContent>
       <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>
         <MuiAlert

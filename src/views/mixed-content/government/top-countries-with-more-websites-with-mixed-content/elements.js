@@ -12,4 +12,10 @@ const CustomCard = styled(Card)`
   margin: 20px 0px;
 `;
 
-export {ChartContainer, CustomCard};
+
+const SkeletonContainer = styled.div`
+  width: 100%;
+  padding: 20px;
+`;
+
+export {ChartContainer, CustomCard, SkeletonContainer};

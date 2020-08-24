@@ -195,6 +195,35 @@ describe('mixed-content', () => {
     expect(res.body.result).toBeInstanceOf(Array);
     expect(res.body.suggestedVisualizations).toContain('Line chart');
   });
+
+  it('Check /mixed-content/mixed-content-by-type with type = all', async () => {
+    const res = await request(app).get(
+      '/api/mixed-content/mixed-content-by-type?type=all',
+    );
+    expect(res.body.description).toBe('Return mixed content request by types');
+    expect(res.body.result).toMatchObject([
+      {
+        id: 'text',
+        value: 1268,
+        pages: 354,
+      },
+      {
+        id: 'font',
+        value: 247,
+        pages: 75,
+      },
+      {
+        id: 'image',
+        value: 2250,
+        pages: 243,
+      },
+      {
+        id: 'application',
+        value: 1889,
+        pages: 912,
+      },
+    ]);
+  });
 });
 
 describe('tls', () => {
@@ -234,37 +263,6 @@ describe('tls', () => {
       {
         id: 'RSA',
         value: 1825,
-      },
-    ]);
-  });
-});
-
-describe('mixed-content-by-type', () => {
-  it('Check /mixed-content/mixed-content-by-type with type = all', async () => {
-    const res = await request(app).get(
-      '/api/mixed-content/mixed-content-by-type?type=all',
-    );
-    expect(res.body.description).toBe('Return mixed content request by types');
-    expect(res.body.result).toMatchObject([
-      {
-        id: 'text',
-        value: 1268,
-        pages: 354,
-      },
-      {
-        id: 'font',
-        value: 247,
-        pages: 75,
-      },
-      {
-        id: 'image',
-        value: 2250,
-        pages: 243,
-      },
-      {
-        id: 'application',
-        value: 1889,
-        pages: 912,
       },
     ]);
   });

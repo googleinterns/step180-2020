@@ -58,7 +58,7 @@ const MainLayout = ({children}) => {
             {open ? <ChevronLeftIcon /> : <MenuIcon />}
           </CustomIconButton>
           <Typography variant="h6" noWrap>
-            Enamel Dashboard <Emoji symbol="🐘" label="sheep" />
+            Enamel Dashboard <Emoji symbol="🐘" label="elephant" />
           </Typography>
         </Toolbar>
       </CustomAppBar>

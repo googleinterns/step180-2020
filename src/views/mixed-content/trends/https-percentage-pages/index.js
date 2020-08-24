@@ -99,7 +99,7 @@ const HTTPSPercentagePages = () => {
                 legendOffset: -40,
                 legendPosition: 'middle',
               }}
-              colors={{scheme: 'nivo'}}
+              colors={{scheme: 'category10'}}
               enablePointLabel={true}
               lineWidth={3}
               pointSize={10}

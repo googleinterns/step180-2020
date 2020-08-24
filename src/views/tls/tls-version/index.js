@@ -22,7 +22,7 @@ const TLSversion = () => {
   const [loading, setLoading] = useState(true);
   const [snackOpen, setSnackOpen] = useState(false);
   const [data, setData] = useState([]);
-  const [table, setTable] = useState('httparchive.smaller_sample_requests');
+  const [table, setTable] = useState('httparchive.sample_data.requests_desktop_10k');
 
   useEffect(() => {
     setLoading(true);
@@ -58,15 +58,16 @@ const TLSversion = () => {
             textColor="primary"
             onChange={(_, newValue) => setTable(newValue)}
           >
-            <Tab
-              data-testid="sample-tab"
-              value="httparchive.smaller_sample_requests"
-              label="Small sample sets"
-            />
+            
             <Tab
               data-testid="10k-tab"
               value="httparchive.sample_data.requests_desktop_10k"
               label="10k sample set"
+            />
+            <Tab
+              data-testid="sample-tab"
+              value="httparchive.smaller_sample_requests"
+              label="Small sample sets"
             />
           </Tabs>
         </Paper>
@@ -79,7 +80,7 @@ const TLSversion = () => {
                 innerRadius={0.5}
                 padAngle={0.7}
                 cornerRadius={3}
-                colors={{scheme: 'nivo'}}
+                colors={{scheme: 'category10'}}
                 animate={true}
               />
             </ChartContainer>
@@ -88,6 +89,7 @@ const TLSversion = () => {
               <CircularProgress data-testid="chart-loader" />
             </ChartContainer>
           )}
+          
         </CardContent>
       </Card>
       <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>

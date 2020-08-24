@@ -53,7 +53,7 @@ const TopGovernmentWebsitesWithMixedContent = () => {
             <ChartContainer data-testid="top-government-websites-with-mixed-content-chart">
               <ResponsiveBar
                 data={data}
-                colors={{scheme: 'accent'}}
+                colors={{scheme: 'category10'}}
                 colorBy="index"
                 keys={['mixed_content_resources']}
                 indexBy="url"
