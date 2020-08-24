@@ -1,9 +1,10 @@
 import {api} from 'client';
 import Card from '@material-ui/core/Card';
-import {CardContent, NativeSelect, useScrollTrigger} from '@material-ui/core';
+import {CardContent} from '@material-ui/core';
 import CardHeader from '@material-ui/core/CardHeader';
 import ChartContainer from 'common/chart-container';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import MenuItem from '@material-ui/core/MenuItem';
 import MuiAlert from '@material-ui/lab/Alert';
 import Paper from '@material-ui/core/Paper';
 import {ResponsivePie} from '@nivo/pie';
@@ -12,8 +13,6 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import React, {useEffect, useState} from 'react';
 import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 
 /**
  * This component shows a pie chart with the number of requests
@@ -43,17 +42,7 @@ const TLSversion = () => {
     '11',
     '12',
   ]);
-  const [url, setUrl] = useState('');
   useEffect(() => {
-    setUrl(
-      '/api/tls/tls-version?table=' +
-        table +
-        '&year=' +
-        year +
-        '&month=' +
-        month,
-    );
-    console.log(url);
     setLoading(true);
     api
       .get(
@@ -71,8 +60,12 @@ const TLSversion = () => {
       .catch((err) => {
         setSnackOpen(true);
       });
-    if (year === '2018') {
+    if (year === 'sample') {
+      setMonths(['Sample']);
+    } else if (year === '2018') {
       setMonths(['04', '05', '06', '07', '08', '09', '10', '11', '12']);
+    } else if (year === '2019') {
+      setMonths(['01', '02', '03', '04', '05', '06', '07', '08']);
     } else {
       setMonths([
         '01',
@@ -97,16 +90,8 @@ const TLSversion = () => {
     }
     setSnackOpen(false);
   };
-  const handleChange = (event) => {
-    setYear(event.target.value);
-    console.log(year);
-  };
   const changeMonth = (event) => {
     setMonth(event.target.value);
-    console.log('month');
-    console.log(month);
-    console.log('value');
-    console.log(event.target.value);
   };
 
   return (
@@ -186,16 +171,4 @@ const TLSversion = () => {
   );
 };
 
-/**
- * 
-          <FormControl>
-            <Select name={month}
-            onChange = {changeMonth}>
-              {months.map(m =>
-              <MenuItem key={m.key} value={m.key}>{m}</MenuItem>
-            )};
-            {console.log(months.map((m,index)=>index))}
-            </Select>
-          </FormControl>
- */
 export default TLSversion;
