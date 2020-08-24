@@ -1,6 +1,7 @@
 import {api} from 'client';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import ChartContainer from 'common/chart-container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiAlert from '@material-ui/lab/Alert';
 import Paper from '@material-ui/core/Paper';
@@ -15,7 +16,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Tabs from '@material-ui/core/Tabs';
-import {ChartContainer, CustomCard, SkeletonContainer} from './elements';
+import {CustomCard, SkeletonContainer} from './elements';
 import React, {useEffect, useState} from 'react';
 
 const TopWebsitesWithMixedContent = () => {

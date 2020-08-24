@@ -2,7 +2,7 @@ import {api} from 'client';
 import Card from '@material-ui/core/Card';
 import {CardContent, NativeSelect} from '@material-ui/core';
 import CardHeader from '@material-ui/core/CardHeader';
-import {ChartContainer} from './elements';
+import ChartContainer from 'common/chart-container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiAlert from '@material-ui/lab/Alert';
 import Paper from '@material-ui/core/Paper';

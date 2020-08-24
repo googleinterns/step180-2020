@@ -2,11 +2,12 @@ import * as features from './features.json';
 import {api} from 'client';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import ChartContainer from 'common/chart-container';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {CustomCard} from './elements';
 import MuiAlert from '@material-ui/lab/Alert';
 import {ResponsiveChoropleth} from '@nivo/geo';
 import {Snackbar} from '@material-ui/core';
-import {ChartContainer, CustomCard} from './elements';
 import React, {useEffect, useState} from 'react';
 
 const TopCountriesWithMoreWebsitesWithMixedContent = () => {

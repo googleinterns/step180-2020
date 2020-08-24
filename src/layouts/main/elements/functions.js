@@ -8,11 +8,11 @@ import {drawerWidth} from './constants';
  * @return {css} drawer styles when opened
  */
 const getOpenDrawerStyles = (theme) => css`
-  width: ${drawerWidth}px;
   transition: ${theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   })};
+  width: ${drawerWidth}px;
 `;
 
 /**
@@ -22,11 +22,11 @@ const getOpenDrawerStyles = (theme) => css`
  * @return {css} drawer styles when closed
  */
 const getClosedDrawerStyles = (theme) => css`
+  overflow-x: hidden;
   transition: ${theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   })};
-  overflow-x: hidden;
   width: ${theme.spacing(9)}px;
 
   .MuiListItemText-root {

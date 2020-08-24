@@ -2,10 +2,12 @@ import {api} from 'client';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import ChartContainer from 'common/chart-container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiAlert from '@material-ui/lab/Alert';
 import {ResponsiveBar} from '@nivo/bar';
 import Skeleton from '@material-ui/lab/Skeleton';
+import {SkeletonContainer} from './elements';
 import {Snackbar} from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,7 +15,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import {ChartContainer, SkeletonContainer} from './elements';
 import React, {useEffect, useState} from 'react';
 
 const TopGovernmentWebsitesWithMixedContent = () => {
