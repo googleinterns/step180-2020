@@ -17,9 +17,9 @@ const CustomAppBar = styled(AppBar)`
 `;
 
 const CustomDrawer = styled(Drawer)`
-  width: ${drawerWidth}px;
   flex-shrink: 0;
   white-space: nowrap;
+  width: ${drawerWidth}px;
 
   ${getDrawerStyles}
 

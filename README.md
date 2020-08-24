@@ -62,7 +62,7 @@ To test the project, you can run:
 
 ### Frontend
 
-We use `@testing-library/react` for testing purposes in frontend, so, you can refer to its [official docs](https://testing-library.com/docs/react-testing-library/intro). But please try to follow the recommendations above:
+We use `@testing-library/react` for testing purposes in frontend, so, you can refer to its [official docs](https://testing-library.com/docs/react-testing-library/intro). But please try to follow the recommendations below:
 
 - Considering our file structure, every component should be accompanied by its respective test file located in a `__tests__` folder next to the component file location.
 - Every test may try to test only its corresponding component. For example, `App.test.js` should only test App.js behaviour, and not its subcomponents. Those will be tested individually in deeper folders.
@@ -71,7 +71,7 @@ We use `@testing-library/react` for testing purposes in frontend, so, you can re
 
 ## Backend
 
-We use `jest` and `supertest` for testing purposes in backend, so you can refer to their official docs, both for [jest](https://jestjs.io/) and [suppertest](https://www.npmjs.com/package/supertest)
+We use `jest` and `supertest` for testing purposes in backend, so you can refer to their official docs, both for [jest](https://jestjs.io/) and [supertest](https://www.npmjs.com/package/supertest)
 
 - Jest is used for assertions and general testing functionality
 - Supertest is how we mock the server requests
