@@ -40,7 +40,7 @@ import React, {useState} from 'react';
  */
 const MainLayout = ({children}) => {
   const [open, setOpen] = useState(true);
-  const [mixedContentOpen, setMixedCntentOpen] = useState(true);
+  const [mixedContentOpen, setMixedContentOpen] = useState(true);
 
   const {pathname} = useLocation();
 
@@ -84,7 +84,7 @@ const MainLayout = ({children}) => {
           <CustomListItem
             data-testid="mixed-content-tab-button"
             active={pathname.includes('/mixed-content') ? 'true' : ''}
-            onClick={() => setMixedCntentOpen(!mixedContentOpen)}
+            onClick={() => setMixedContentOpen(!mixedContentOpen)}
             button
           >
             <IconButton>

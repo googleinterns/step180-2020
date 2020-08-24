@@ -9,7 +9,9 @@
  *
  */
 import app from '../app';
+import mixedContentQueries from '../api/mixed-content/queries.json';
 import request from 'supertest';
+import tlsQueries from '../api/tls/queries.json';
 
 jest.mock('@google-cloud/bigquery');
 
@@ -74,18 +76,23 @@ describe('mixed-content', () => {
     expect(res.body.suggestedVisualizations).toContain('Map');
   });
 
-  it('Check /top-countries-with-more-government-websites-with-mixed-content-'+
-    'adjusted',
-  async () => {
-    const res = await request(app).get('/api/mixed-content/'+
-    '/top-countries-with-more-government-websites-with-mixed-content-adjusted');
+  it(
+    'Check /top-countries-with-more-government-websites-with-mixed-content-' +
+      'adjusted',
+    async () => {
+      const res = await request(app).get(
+        '/api/mixed-content/' +
+          '/top-countries-with-more-government-websites-with-mixed-content-adjusted',
+      );
 
-    expect(res.body.description).toBe('Top countries with more percentage of' +
-    ' government websites that have mixed content from the total of government'+
-    ' websites.');
-    expect(res.body.result).toBeInstanceOf(Array);
-    expect(res.body.suggestedVisualizations).toContain('Map');
-  },
+      expect(res.body.description).toBe(
+        'Top countries with more percentage of' +
+          ' government websites that have mixed content from the total of government' +
+          ' websites.',
+      );
+      expect(res.body.result).toBeInstanceOf(Array);
+      expect(res.body.suggestedVisualizations).toContain('Map');
+    },
   );
 
   it('Check /mixed-content-percentage-histogram', async () => {
@@ -215,28 +222,7 @@ describe('mixed-content', () => {
       '/api/mixed-content/mixed-content-by-type?type=all',
     );
     expect(res.body.description).toBe('Return mixed content request by types');
-    expect(res.body.result).toMatchObject([
-      {
-        id: 'text',
-        value: 1268,
-        pages: 354,
-      },
-      {
-        id: 'font',
-        value: 247,
-        pages: 75,
-      },
-      {
-        id: 'image',
-        value: 2250,
-        pages: 243,
-      },
-      {
-        id: 'application',
-        value: 1889,
-        pages: 912,
-      },
-    ]);
+    expect(res.body.result).toBeInstanceOf(Array);
   });
 });
 
@@ -246,38 +232,24 @@ describe('tls', () => {
       '/api/tls/tls-version?table=httparchive.smaller_sample_requests',
     );
     expect(res.body.description).toBe('Number of requests per TLS version');
-    expect(res.body.result).toMatchObject([
-      {
-        id: '"TLS 1.2"',
-        value: 12,
-      },
-      {
-        id: '"TLS 1.3"',
-        value: 13,
-      },
-    ]);
+    expect(res.body.result).toBeInstanceOf(Array);
   });
 
   it('Check /tls/key-exchange', async () => {
     const res = await request(app).get('/api/tls/key-exchange');
     expect(res.body.description).toBe('Key exchange algorithm usage');
-    expect(res.body.result).toMatchObject([
-      {
-        id: '',
-        value: 74131,
-      },
-      {
-        id: 'ECDHE_RSA',
-        value: 51109,
-      },
-      {
-        id: 'ECDHE_ECDSA',
-        value: 3272,
-      },
-      {
-        id: 'RSA',
-        value: 1825,
-      },
-    ]);
+    expect(res.body.result).toMatchObject(tlsQueries.KeyExchange.mockResult);
+  });
+});
+
+describe('mixed-content-by-type', () => {
+  it('Check /mixed-content/mixed-content-by-type with type = all', async () => {
+    const res = await request(app).get(
+      '/api/mixed-content/mixed-content-by-type?type=all',
+    );
+    expect(res.body.description).toBe('Return mixed content request by types');
+    expect(res.body.result).toMatchObject(
+      mixedContentQueries.MixedContentByType.mockResult,
+    );
   });
 });
