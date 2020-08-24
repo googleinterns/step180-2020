@@ -2,7 +2,7 @@ import {api} from 'client';
 import Card from '@material-ui/core/Card';
 import {CardContent} from '@material-ui/core';
 import CardHeader from '@material-ui/core/CardHeader';
-import {ChartContainer} from './elements';
+import ChartContainer from 'common/chart-container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiAlert from '@material-ui/lab/Alert';
 import Paper from '@material-ui/core/Paper';
@@ -22,7 +22,9 @@ const KeyExchange = () => {
   const [loading, setLoading] = useState(true);
   const [snackOpen, setSnackOpen] = useState(false);
   const [data, setData] = useState([]);
-  const [table, setTable] = useState('httparchive.sample_data.requests_desktop_10k');
+  const [table, setTable] = useState(
+    'httparchive.sample_data.requests_desktop_10k',
+  );
 
   useEffect(() => {
     setLoading(true);
@@ -92,11 +94,8 @@ const KeyExchange = () => {
               <CircularProgress data-testid="chart-loader" />
             </ChartContainer>
           )}
-          <CardHeader
-          subheader="Example: ECDHE is used to generate the encryption keys and RSA is used to verify the key during communications."
-        />
+          <CardHeader subheader="Example: ECDHE is used to generate the encryption keys and RSA is used to verify the key during communications." />
         </CardContent>
-
       </Card>
       <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>
         <MuiAlert

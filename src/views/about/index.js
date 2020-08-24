@@ -13,7 +13,7 @@ import {Typography} from '@material-ui/core';
 const About = () => {
   return (
     <div data-testid="about">
-      <Typography variant='h1'>Enamel Dashboard</Typography>
+      <Typography variant="h1">Enamel Dashboard</Typography>
     </div>
   );
 };

@@ -2,11 +2,12 @@ import * as features from './features.json';
 import {api} from 'client';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import ChartContainer from 'common/chart-container';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {CustomCard, SkeletonContainer} from './elements';
 import MuiAlert from '@material-ui/lab/Alert';
 import {ResponsiveChoropleth} from '@nivo/geo';
 import {Snackbar} from '@material-ui/core';
-import {ChartContainer, CustomCard, SkeletonContainer} from './elements';
 import React, {useEffect, useState} from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Table from '@material-ui/core/Table';
@@ -15,7 +16,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-
 
 const TopCountriesWithMoreWebsitesWithMixedContent = () => {
   const [loading, setLoading] = useState(true);
@@ -128,18 +128,20 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell>Country</TableCell>
-                    <TableCell>Government websites with mixed content</TableCell>
+                    <TableCell>
+                      Government websites with mixed content
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {data.map(
-                    ({id, value}) => (
+                  {data
+                    .map(({id, value}) => (
                       <TableRow key={id}>
                         <TableCell>{id}</TableCell>
                         <TableCell>{value}</TableCell>
                       </TableRow>
-                    ),
-                  ).slice(0,10)}
+                    ))
+                    .slice(0, 10)}
                 </TableBody>
               </Table>
             </TableContainer>

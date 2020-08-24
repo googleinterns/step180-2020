@@ -24,7 +24,7 @@ test('Renders charts after API is called', async () => {
   await waitForElementToBeRemoved(() => screen.getByTestId('chart-loader'));
 
   // Also, first chart should be rendered by default
-  const mixedPercentageChart = screen.getByTestId('mixed-percentage-chart');
+  const mixedPercentageChart = screen.getByTestId('mixed-reqs-total-chart');
   expect(mixedPercentageChart).toBeInTheDocument();
 });
 

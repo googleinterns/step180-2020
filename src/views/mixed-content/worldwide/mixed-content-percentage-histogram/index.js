@@ -2,7 +2,7 @@ import {api} from 'client';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import {ChartContainer} from './elements';
+import ChartContainer from 'common/chart-container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiAlert from '@material-ui/lab/Alert';
 import {ResponsivePie} from '@nivo/pie';
@@ -46,9 +46,8 @@ const MixedContentPercentageHistogram = () => {
           title="Websites grouped by their percentage of mixed content."
           subheader="We can see that more than 75% of websites don't have any mixed content."
         />
-                {!loading ? (
+        {!loading ? (
           <ChartContainer data-testid="mixed-content-percentage-chart">
-           
             <ResponsivePie
               data={data}
               margin={{top: 40, right: 80, bottom: 80, left: 80}}
@@ -80,7 +79,6 @@ const MixedContentPercentageHistogram = () => {
                   spacing: 10,
                 },
               ]}
-              
             />
           </ChartContainer>
         ) : (

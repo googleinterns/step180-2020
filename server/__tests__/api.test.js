@@ -9,7 +9,9 @@
  *
  */
 import app from '../app';
+import mixedContentQueries from '../api/mixed-content/queries.json';
 import request from 'supertest';
+import tlsQueries from '../api/tls/queries.json';
 
 jest.mock('@google-cloud/bigquery');
 
@@ -217,6 +219,18 @@ describe('tls', () => {
   it('Check /tls/key-exchange', async () => {
     const res = await request(app).get('/api/tls/key-exchange');
     expect(res.body.description).toBe('Key exchange algorithm usage');
-    expect(res.body.result).toBeInstanceOf(Array);
+    expect(res.body.result).toMatchObject(tlsQueries.KeyExchange.mockResult);
+  });
+});
+
+describe('mixed-content-by-type', () => {
+  it('Check /mixed-content/mixed-content-by-type with type = all', async () => {
+    const res = await request(app).get(
+      '/api/mixed-content/mixed-content-by-type?type=all',
+    );
+    expect(res.body.description).toBe('Return mixed content request by types');
+    expect(res.body.result).toMatchObject(
+      mixedContentQueries.MixedContentByType.mockResult,
+    );
   });
 });
