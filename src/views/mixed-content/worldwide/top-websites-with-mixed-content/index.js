@@ -56,9 +56,9 @@ const TopWebsitesWithMixedContent = () => {
       <CustomCard data-testid="top-websites-with-mixed-content-card">
         <CardHeader
           title="Top websites with more mixed content"
-          subheader="Websites with the greatest amount of mixed content
+          subheader="These are the websites with the greatest amount of mixed content
           resources. You can check both the percentage of mixed resources
-          across the page or the total amount of mixed content resources"
+          across the page or the total amount of mixed content resources."
         />
         <Paper square>
           <Tabs
@@ -67,23 +67,23 @@ const TopWebsitesWithMixedContent = () => {
             textColor="primary"
             onChange={(_, newValue) => setTab(newValue)}
           >
-            <Tab data-testid="percentage-tab" label="% of resources" />
             <Tab data-testid="total-tab" label="Total of resources" />
+            <Tab data-testid="percentage-tab" label="% of resources" />
           </Tabs>
         </Paper>
         <CardContent>
           {!loading ? (
             <>
               {tab === 0 && (
-                <ChartContainer data-testid="mixed-percentage-chart">
+                <ChartContainer data-testid="mixed-reqs-total-chart">
                   <ResponsiveBar
                     data={data}
-                    colors={{scheme: 'accent'}}
+                    colors={{scheme: 'category10'}}
                     colorBy="index"
-                    keys={['mixed_percentage']}
+                    keys={['mixed_reqs_total']}
                     indexBy="url"
                     axisLeft={{
-                      legend: 'Total of mixed content resources',
+                      legend: '% of mixed content resources',
                       legendPosition: 'middle',
                       legendOffset: -40,
                     }}
@@ -100,15 +100,15 @@ const TopWebsitesWithMixedContent = () => {
                 </ChartContainer>
               )}
               {tab === 1 && (
-                <ChartContainer data-testid="mixed-reqs-total-chart">
+                <ChartContainer data-testid="mixed-percentage-chart">
                   <ResponsiveBar
                     data={data}
-                    colors={{scheme: 'accent'}}
+                    colors={{scheme: 'category10'}}
                     colorBy="index"
-                    keys={['mixed_reqs_total']}
+                    keys={['mixed_percentage']}
                     indexBy="url"
                     axisLeft={{
-                      legend: '% of mixed content resources',
+                      legend: 'Total of mixed content resources',
                       legendPosition: 'middle',
                       legendOffset: -40,
                     }}

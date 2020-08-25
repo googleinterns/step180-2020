@@ -17,7 +17,7 @@ const HTTPSPercentageRequests = () => {
 
   useEffect(() => {
     api
-      .get('/api/mixed-content/https-percentage-requests')
+      .get('/api/mixed-content/https-percentage-requests?datapoints=10')
       .then((response) => {
         // Response data is formated to fit nivo requirements
         // nivo schema: {x: data, y: data}
@@ -64,8 +64,7 @@ const HTTPSPercentageRequests = () => {
         <CardHeader
           title="Percentage of HTTPS requests of all websites"
           subheader="Time Series of the percentage of resources that load
-            through HTTPS. Broken down by desktop and mobile. These
-            resources can be images, javascript code."
+            through HTTPS broken down by desktop and mobile."
         />
         <CardContent>
           {!loading ? (
@@ -101,7 +100,7 @@ const HTTPSPercentageRequests = () => {
                   legendOffset: -40,
                   legendPosition: 'middle',
                 }}
-                colors={{scheme: 'nivo'}}
+                colors={{scheme: 'category10'}}
                 enablePointLabel={true}
                 lineWidth={3}
                 pointSize={10}

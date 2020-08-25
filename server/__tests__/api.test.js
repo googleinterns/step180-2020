@@ -197,6 +197,14 @@ describe('mixed-content', () => {
     expect(res.body.result).toBeInstanceOf(Array);
     expect(res.body.suggestedVisualizations).toContain('Line chart');
   });
+
+  it('Check /mixed-content/mixed-content-by-type with type = all', async () => {
+    const res = await request(app).get(
+      '/api/mixed-content/mixed-content-by-type?type=all',
+    );
+    expect(res.body.description).toBe('Return mixed content request by types');
+    expect(res.body.result).toBeInstanceOf(Array);
+  });
 });
 
 describe('tls', () => {
@@ -205,16 +213,7 @@ describe('tls', () => {
       '/api/tls/tls-version?table=httparchive.smaller_sample_requests',
     );
     expect(res.body.description).toBe('Number of requests per TLS version');
-    expect(res.body.result).toMatchObject([
-      {
-        id: '"TLS 1.2"',
-        value: 12,
-      },
-      {
-        id: '"TLS 1.3"',
-        value: 13,
-      },
-    ]);
+    expect(res.body.result).toBeInstanceOf(Array);
   });
 
   it('Check /tls/key-exchange', async () => {

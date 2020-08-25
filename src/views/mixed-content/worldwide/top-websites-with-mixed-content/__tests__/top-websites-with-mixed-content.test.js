@@ -1,5 +1,5 @@
 import React from 'react';
-import TopWebistesWithMixedContent from '../index';
+import TopWebsitesWithMixedContent from '../index';
 import {
   fireEvent,
   render,
@@ -8,7 +8,7 @@ import {
   waitForElementToBeRemoved,
 } from 'test-utils';
 
-beforeEach(() => render(<TopWebistesWithMixedContent />));
+beforeEach(() => render(<TopWebsitesWithMixedContent />));
 
 test('Renders main card container correctly', async () => {
   const card = screen.getByTestId('top-websites-with-mixed-content-card');
@@ -24,7 +24,7 @@ test('Renders charts after API is called', async () => {
   await waitForElementToBeRemoved(() => screen.getByTestId('chart-loader'));
 
   // Also, first chart should be rendered by default
-  const mixedPercentageChart = screen.getByTestId('mixed-percentage-chart');
+  const mixedPercentageChart = screen.getByTestId('mixed-reqs-total-chart');
   expect(mixedPercentageChart).toBeInTheDocument();
 });
 

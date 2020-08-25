@@ -5,4 +5,9 @@ const CustomCard = styled(Card)`
   margin: 20px 0px;
 `;
 
-export {CustomCard};
+const SkeletonContainer = styled.div`
+  padding: 20px;
+  width: 100%;
+`;
+
+export {CustomCard, SkeletonContainer};

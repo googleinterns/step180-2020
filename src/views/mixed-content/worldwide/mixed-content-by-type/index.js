@@ -48,7 +48,7 @@ const MixedContentByType = () => {
       <Card data-testid="mixed-content-by-type-card">
         <CardHeader
           title="Mixed Content By Type"
-          subheader="There are many different types of mixed content across the web. Here you can explore those types"
+          subheader="There are many different types of mixed content across the web. Unfortunately a big chunk is active mixed content."
         />
         <Paper square>
           <Tabs
@@ -77,7 +77,7 @@ const MixedContentByType = () => {
                 innerRadius={0.5}
                 padAngle={0.7}
                 cornerRadius={3}
-                colors={{scheme: 'nivo'}}
+                colors={{scheme: 'category10'}}
                 animate={true}
               />
             </ChartContainer>

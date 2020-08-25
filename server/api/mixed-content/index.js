@@ -249,8 +249,8 @@ const queryType = async (data, type) => {
  */
 const toPieChart = async (result) => {
   const rows = [
-    {id: 'httpsPercentage', value: result[0].httpsPercentage},
-    {id: 'httpPercentage', value: result[0].httpPercentage},
+    {id: 'HTTPS', value: result[0].httpsPercentage},
+    {id: 'HTTP', value: result[0].httpPercentage},
   ];
   return rows;
 };
