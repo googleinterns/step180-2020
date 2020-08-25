@@ -25,7 +25,6 @@ const TLSversion = () => {
   const [loading, setLoading] = useState(true);
   const [snackOpen, setSnackOpen] = useState(false);
   const [data, setData] = useState([]);
-  const [table, setTable] = useState('httparchive.smaller_sample_requests');
   const [year, setYear] = useState('sample');
   const [month, setMonth] = useState('01');
   const [months, setMonths] = useState([
@@ -45,14 +44,7 @@ const TLSversion = () => {
   useEffect(() => {
     setLoading(true);
     api
-      .get(
-        '/api/tls/tls-version?table=' +
-          table +
-          '&year=' +
-          year +
-          '&month=' +
-          month,
-      )
+      .get('/api/tls/tls-version?year=' + year + '&month=' + month)
       .then((response) => {
         setLoading(false);
         setData(response.data.result);
@@ -82,7 +74,7 @@ const TLSversion = () => {
         '12',
       ]);
     }
-  }, [table, year, month]);
+  }, [year, month]);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -102,23 +94,6 @@ const TLSversion = () => {
           subheader="Number of requests by TLS version"
         />
         <Paper square>
-          <Tabs
-            value={table}
-            indicatorColor="primary"
-            textColor="primary"
-            onChange={(_, newValue) => setTable(newValue)}
-          >
-            <Tab
-              data-testid="sample-tab"
-              value="httparchive.smaller_sample_requests"
-              label="Small sample sets"
-            />
-            <Tab
-              data-testid="10k-tab"
-              value="httparchive.sample_data.requests_desktop_10k"
-              label="10k sample set"
-            />
-          </Tabs>
           <Tabs
             value={year}
             indicatorColor="primary"

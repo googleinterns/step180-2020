@@ -217,6 +217,15 @@ describe('tls', () => {
     ]);
   });
 
+  it('Check /tls/tls-version with date filter', async () => {
+    const res = await request(app).get(
+      '/api/tls/tls-version?year=2018&month=04',
+    );
+    expect(res.body.description).toBe('Number of requests per TLS version');
+    expect(res.body.result).toBeInstanceOf(Array);
+    expect(res.body.suggestedVisualizations).toContain('Pie chart');
+  });
+
   it('Check /tls/key-exchange', async () => {
     const res = await request(app).get('/api/tls/key-exchange');
     expect(res.body.description).toBe('Key exchange algorithm usage');

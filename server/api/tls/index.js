@@ -14,10 +14,10 @@ const bigQueryClient = new BigQuery();
 
 tlsApi.get('/tls-version', async (req, res) => {
   const query = queries.TlsRequests;
-  let table = req.query.table;
+  let table = 'httparchive.smaller_sample_requests';
   const year = req.query.year;
   const month = req.query.month;
-  if (year != 'sample') {
+  if (year != 'sample' && month != 'Sample') {
     table = 'httparchive.requests.' + year + '_' + month + '_01_desktop';
   }
   const rows = await queryData(query, table);
