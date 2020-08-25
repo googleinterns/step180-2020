@@ -45,7 +45,7 @@ const TopCountriesWithMoreWebsitesWithMixedContentAdjusted = () => {
 
   return (
     <>
-      <CustomCard data-testid="top-countries-with-more-websites-more-government-with-mixed-content-card">
+      <CustomCard data-testid="top-countries-with-more-websites-more-government-with-mixed-content-adjusted-card">
         <CardHeader
           title="Percentage of government websites with mixed content"
           subheader="This shows how many government websites have mixed content relative to their total government websites."
@@ -54,7 +54,7 @@ const TopCountriesWithMoreWebsitesWithMixedContentAdjusted = () => {
           {!loading ? (
             <ChartContainer
               data-testid="
-                top-countries-with-more-websites-more-government-with-mixed-content-chart
+                top-countries-with-more-websites-more-government-with-mixed-content-adjusted-chart
               "
             >
               <ResponsiveChoropleth
