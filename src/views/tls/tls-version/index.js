@@ -99,10 +99,10 @@ const TLSversion = () => {
             indicatorColor="primary"
             onChange={(_, newValue) => setYear(newValue)}
           >
-            <Tab value="sample" label="Sample Data" />
-            <Tab value="2018" label="2018" />
-            <Tab value="2019" label="2019" />
-            <Tab value="2020" label="2020" />
+            <Tab data-testid="sample-tab" value="sample" label="Sample Data" />
+            <Tab data-testid="2018" value="2018" label="2018" />
+            <Tab data-testid="2019" value="2019" label="2019" />
+            <Tab data-testid="2020" value="2020" label="2020" />
           </Tabs>
           <Select value={month} onChange={changeMonth}>
             {months.map((color, index) => (

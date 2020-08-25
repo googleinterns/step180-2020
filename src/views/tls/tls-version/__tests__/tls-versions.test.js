@@ -43,7 +43,21 @@ test('Changes between tabs and shows different charts', async () => {
 
   // Change to 10k types tab
   act(() => {
-    fireEvent.click(screen.getByTestId('10k-tab'));
+    fireEvent.click(screen.getByTestId('2018'));
+  });
+  await waitFor(() =>
+    expect(screen.getByTestId('tls-versions-chart')).toBeInTheDocument(),
+  );
+
+  act(() => {
+    fireEvent.click(screen.getByTestId('2019'));
+  });
+  await waitFor(() =>
+    expect(screen.getByTestId('tls-versions-chart')).toBeInTheDocument(),
+  );
+
+  act(() => {
+    fireEvent.click(screen.getByTestId('2020'));
   });
   await waitFor(() =>
     expect(screen.getByTestId('tls-versions-chart')).toBeInTheDocument(),
