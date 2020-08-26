@@ -2,6 +2,7 @@ import {Container} from './elements';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import TopCountriesWithMoreWebsitesWithMixedContent from './top-countries-with-more-websites-with-mixed-content';
+import TopCountriesWithMoreWebsitesWithMixedContentAdjusted from './top-countries-with-more-websites-with-mixed-content-adjusted';
 import TopGovernmentWebsitesWithMixedContent from './top-government-websites-with-mixed-content';
 import {Typography} from '@material-ui/core';
 
@@ -26,7 +27,7 @@ const Government = () => {
           <TopCountriesWithMoreWebsitesWithMixedContent />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TopCountriesWithMoreWebsitesWithMixedContent />
+          <TopCountriesWithMoreWebsitesWithMixedContentAdjusted />
         </Grid>
       </Grid>
 
