@@ -59,12 +59,36 @@ const Root = styled.div`
   display: flex;
 `;
 
+const GithubActions = styled.div`
+  display: flex;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-top: auto;
+
+  span {
+    margin-left: 5px;
+  }
+`;
+
+const Logo = styled.img`
+  height: 30px;
+  margin-right: 10px;
+  width: 30px;
+`;
+
+const Title = styled.div`
+  display: flex;
+`;
+
 export {
   Content,
   CustomAppBar,
   CustomDrawer,
   CustomIconButton,
   CustomListItem,
+  Logo,
   NestedList,
   Root,
+  Title,
+  GithubActions,
 };

@@ -24,7 +24,6 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^10.4.8",
     "@testing-library/user-event": "^7.1.2",
-    "a11y-react-emoji": "^1.1.2",
     "axios": "^0.19.2",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "concurrently": "^5.2.0",
@@ -37,6 +36,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-github-btn": "^1.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "sequelize": "^6.3.3",
@@ -93,7 +93,8 @@
     "precise-commits": "^1.0.2",
     "prettier": "2.0.5",
     "pretty-quick": "^2.0.1",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "ts-jest": "^26.3.0"
   },
   "engines": {
     "yarn": ">=1.0.0 <2.0.0"
@@ -105,6 +106,12 @@
     }
   },
   "jest": {
+    "transform": {
+      "^.+\\.(js|ts)$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-github-btn)"
+    ],
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ]
