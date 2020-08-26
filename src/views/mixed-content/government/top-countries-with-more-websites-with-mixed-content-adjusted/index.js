@@ -17,7 +17,7 @@ import TableRow from '@material-ui/core/TableRow';
 import {CustomCard, SkeletonContainer} from './elements';
 import React, {useEffect, useState} from 'react';
 
-const TopCountriesWithMoreWebsitesWithMixedContent = () => {
+const TopCountriesWithMoreWebsitesWithMixedContentAdjusted = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [snackOpen, setSnackOpen] = useState(false);
@@ -25,7 +25,8 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
   useEffect(() => {
     api
       .get(
-        '/api/mixed-content/top-countries-with-more-government-websites-with-mixed-content',
+        '/api/mixed-content/top-countries' +
+          '-with-more-government-websites-with-mixed-content-adjusted',
       )
       .then((response) => {
         setData(response.data.result);
@@ -45,24 +46,24 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
 
   return (
     <>
-      <CustomCard data-testid="top-countries-with-more-websites-more-government-with-mixed-content-card">
+      <CustomCard data-testid="top-countries-with-more-websites-more-government-with-mixed-content-adjusted-card">
         <CardHeader
-          title="Total government websites that have mixed content"
-          subheader="Total government websites from each country that contain any kind of mixed content."
+          title="Percentage of government websites with mixed content"
+          subheader="This shows how many government websites have mixed content relative to their total government websites."
         />
         <CardContent>
           {!loading ? (
             <ChartContainer
               data-testid="
-                top-countries-with-more-websites-more-government-with-mixed-content-chart
+                top-countries-with-more-websites-more-government-with-mixed-content-adjusted-chart
               "
             >
               <ResponsiveChoropleth
                 data={data}
                 features={features.features}
                 margin={{top: 0, right: 0, bottom: 0, left: 0}}
-                colors="blues"
-                domain={[0, 10000]}
+                colors="greens"
+                domain={[0, 100]}
                 unknownColor="#666666"
                 label="properties.name"
                 valueFormat=".2s"
@@ -84,15 +85,15 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
                     anchor: 'bottom-left',
                     direction: 'row',
                     justify: true,
-                    translateX: -30,
+                    translateX: 10,
                     translateY: 0,
-                    itemsSpacing: 0,
-                    itemWidth: 94,
+                    itemsSpacing: 12,
+                    itemWidth: 40,
                     itemHeight: 18,
-                    itemDirection: 'left-to-right',
+                    itemDirection: 'top-to-bottom',
                     itemTextColor: '#444444',
                     itemOpacity: 0.85,
-                    symbolSize: 18,
+                    symbolSize: 10,
                     effects: [
                       {
                         on: 'hover',
@@ -129,7 +130,7 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
                   <TableRow>
                     <TableCell>Country</TableCell>
                     <TableCell>
-                      Government websites with mixed content
+                      % Government websites with mixed content
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -162,4 +163,4 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
   );
 };
 
-export default TopCountriesWithMoreWebsitesWithMixedContent;
+export default TopCountriesWithMoreWebsitesWithMixedContentAdjusted;

@@ -1,12 +1,14 @@
 import React from 'react';
-import TopCountriesWithMoreWebsitesWithMixedContent from '../index';
+import TopCountriesWithMoreWebsitesWithMixedContentAdjusted from '../index';
 import {render, screen, waitForElementToBeRemoved} from 'test-utils';
 
-beforeEach(() => render(<TopCountriesWithMoreWebsitesWithMixedContent />));
+beforeEach(() =>
+  render(<TopCountriesWithMoreWebsitesWithMixedContentAdjusted />),
+);
 
 test('Renders main card container correctly', async () => {
   const card = screen.getByTestId(
-    'top-countries-with-more-websites-more-government-with-mixed-content-card',
+    'top-countries-with-more-websites-more-government-with-mixed-content-adjusted-card',
   );
   expect(card).toBeInTheDocument();
 
@@ -21,7 +23,7 @@ test('Renders charts after API is called', async () => {
 
   // Also, chart should be rendered by default
   const countryChart = screen.getByTestId(
-    'top-countries-with-more-websites-more-government-with-mixed-content-chart',
+    'top-countries-with-more-websites-more-government-with-mixed-content-adjusted-chart',
   );
   expect(countryChart).toBeInTheDocument();
 });
