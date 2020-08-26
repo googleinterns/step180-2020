@@ -47,7 +47,7 @@
     "start:server": "nodemon server/index.js --exec babel-node",
     "start:client": "NODE_PATH=src react-scripts start",
     "test": "yarn test:server && yarn test:client",
-    "test:server": "jest --modulePathIgnorePatterns src dist",
+    "test:server": "jest --config server/jest.config.js",
     "test:client": "NODE_PATH=src react-scripts test --env=jest-environment-jsdom-sixteen",
     "build": "yarn build:server && yarn build:client",
     "build:server": "BABEL_ENV=production babel server --out-dir dist",
