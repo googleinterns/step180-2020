@@ -1,4 +1,5 @@
 import React from 'react';
+import {Typography} from '@material-ui/core';
 
 /**
  * About View
@@ -12,7 +13,7 @@ import React from 'react';
 const About = () => {
   return (
     <div data-testid="about">
-      <p>About</p>
+      <Typography variant="h1">Enamel Dashboard</Typography>
     </div>
   );
 };

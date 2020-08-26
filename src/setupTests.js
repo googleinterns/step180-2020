@@ -121,6 +121,21 @@ const server = setupServer(
       );
     },
   ),
+  // "GET /api/mixed-content/top-countries-with-
+  //      more-websites-more-government-with-mixed-content-adjusted" requests
+  rest.get(
+    '/api/mixed-content/top-countries-with-more-government-websites-with-mixed-content-adjusted',
+    (req, res, ctx) => {
+      return res(
+        ctx.json({
+          result: new Array(dataArrayMockLength).fill().map(() => ({
+            id: faker.address.countryCode(),
+            value: Math.random(),
+          })),
+        }),
+      );
+    },
+  ),
   // "GET /api/mixed-content/top-government-websites-
   //    with-mixed-content" requests
   rest.get(

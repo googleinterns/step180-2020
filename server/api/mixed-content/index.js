@@ -57,6 +57,23 @@ mixedApi.get(
   },
 );
 
+mixedApi.get(
+  '/top-countries-with-more-government-' +
+    'websites-with-mixed-content-adjusted',
+  async (req, res) => {
+    const query =
+      queries.TopCountriesWithMoreGovernmentWebsitesWithMixedContentAdjusted;
+    let rows = [];
+    rows = await queryData(query);
+
+    res.json({
+      description: query.description,
+      result: rows,
+      suggestedVisualizations: query.suggestedVisualizations,
+    });
+  },
+);
+
 mixedApi.get('/mixed-content-percentage-histogram', async (req, res) => {
   const query = queries.MixedContentPercentageHistogram;
   let rows = [];
@@ -249,8 +266,8 @@ const queryType = async (data, type) => {
  */
 const toPieChart = async (result) => {
   const rows = [
-    {id: 'httpsPercentage', value: result[0].httpsPercentage},
-    {id: 'httpPercentage', value: result[0].httpPercentage},
+    {id: 'HTTPS', value: result[0].httpsPercentage},
+    {id: 'HTTP', value: result[0].httpPercentage},
   ];
   return rows;
 };
