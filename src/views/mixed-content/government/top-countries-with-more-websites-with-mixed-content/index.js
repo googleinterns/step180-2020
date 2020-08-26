@@ -47,8 +47,8 @@ const TopCountriesWithMoreWebsitesWithMixedContent = () => {
     <>
       <CustomCard data-testid="top-countries-with-more-websites-more-government-with-mixed-content-card">
         <CardHeader
-          title="Total of government websites that have mixed content"
-          subheader="Total of government websites from each country that contain any kind of mixed content."
+          title="Total government websites that have mixed content"
+          subheader="Total government websites from each country that contain any kind of mixed content."
         />
         <CardContent>
           {!loading ? (
