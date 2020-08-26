@@ -22,7 +22,9 @@ const KeyExchange = () => {
   const [loading, setLoading] = useState(true);
   const [snackOpen, setSnackOpen] = useState(false);
   const [data, setData] = useState([]);
-  const [table, setTable] = useState('httparchive.smaller_sample_requests');
+  const [table, setTable] = useState(
+    'httparchive.sample_data.requests_desktop_10k',
+  );
 
   useEffect(() => {
     setLoading(true);
@@ -48,8 +50,8 @@ const KeyExchange = () => {
     <>
       <Card data-testid="key-exchange-card">
         <CardHeader
-          title="Key Exchange Certificates"
-          subheader="Percentage of the different certificates used in key exchange"
+          title="Key Exchange & Encryption Algorithms"
+          subheader="Usage of key exchange and communication algorithms"
         />
         <Paper square>
           <Tabs
@@ -59,14 +61,14 @@ const KeyExchange = () => {
             onChange={(_, newValue) => setTable(newValue)}
           >
             <Tab
-              data-testid="sample-tab"
-              value="httparchive.smaller_sample_requests"
-              label="Small sample sets"
-            />
-            <Tab
               data-testid="10k-tab"
               value="httparchive.sample_data.requests_desktop_10k"
               label="10k sample set"
+            />
+            <Tab
+              data-testid="sample-tab"
+              value="httparchive.smaller_sample_requests"
+              label="Small sample sets"
             />
           </Tabs>
         </Paper>
@@ -79,7 +81,7 @@ const KeyExchange = () => {
                 innerRadius={0.5}
                 padAngle={0.7}
                 cornerRadius={3}
-                colors={{scheme: 'nivo'}}
+                colors={{scheme: 'category10'}}
                 animate={true}
                 sortByValue={false}
                 radialLabel={(d) => (d.id === '' ? 'Empty' : d.id)}
@@ -92,6 +94,7 @@ const KeyExchange = () => {
               <CircularProgress data-testid="chart-loader" />
             </ChartContainer>
           )}
+          <CardHeader subheader="Example: ECDHE is used to generate the encryption keys and RSA is used to verify the key during communications." />
         </CardContent>
       </Card>
       <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>

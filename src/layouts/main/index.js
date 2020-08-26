@@ -2,9 +2,9 @@ import Business from '@material-ui/icons/Business';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Collapse from '@material-ui/core/Collapse';
 import Description from '@material-ui/icons/Description';
-import Emoji from 'a11y-react-emoji';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import GitHubButton from 'react-github-btn';
 import Https from '@material-ui/icons/Https';
 import IconButton from '@material-ui/core/IconButton';
 import {Link} from 'react-router-dom';
@@ -23,8 +23,11 @@ import {
   CustomDrawer,
   CustomIconButton,
   CustomListItem,
+  GithubActions,
+  Logo,
   NestedList,
   Root,
+  Title,
 } from './elements';
 import React, {useState} from 'react';
 
@@ -57,9 +60,32 @@ const MainLayout = ({children}) => {
           >
             {open ? <ChevronLeftIcon /> : <MenuIcon />}
           </CustomIconButton>
-          <Typography variant="h6" noWrap>
-            Enamel Dashboard <Emoji symbol="🐘" label="sheep" />
-          </Typography>
+          <Title>
+            <Logo src="/images/chromium.png" alt="Chrome Security UX Logo" />
+            <Typography variant="h6" noWrap>
+              Chrome Security UX
+            </Typography>
+          </Title>
+          <GithubActions>
+            <GitHubButton
+              href="https://github.com/googleinterns/step180-2020"
+              data-icon="octicon-star"
+              data-size="large"
+              data-show-count="true"
+              aria-label="Star ntkme/github-buttons on GitHub"
+            >
+              Star
+            </GitHubButton>
+            <GitHubButton
+              href="https://github.com/googleinterns/step180-2020/issues"
+              data-icon="octicon-issue-opened"
+              data-size="large"
+              data-show-count="true"
+              aria-label="Issue googleinterns/step180-2020 on GitHub"
+            >
+              Issue
+            </GitHubButton>
+          </GithubActions>
         </Toolbar>
       </CustomAppBar>
       <CustomDrawer
