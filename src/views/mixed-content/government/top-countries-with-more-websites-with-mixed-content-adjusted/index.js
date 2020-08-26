@@ -1,7 +1,8 @@
 import * as features from '../features.json';
-import {api} from '../../../../client';
+import {api} from 'client';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import ChartContainer from 'common/chart-container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiAlert from '@material-ui/lab/Alert';
 import {ResponsiveChoropleth} from '@nivo/geo';
@@ -13,7 +14,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import {ChartContainer, CustomCard, SkeletonContainer} from './elements';
+import {CustomCard, SkeletonContainer} from './elements';
 import React, {useEffect, useState} from 'react';
 
 const TopCountriesWithMoreWebsitesWithMixedContentAdjusted = () => {
