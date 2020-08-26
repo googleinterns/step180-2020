@@ -4,6 +4,7 @@ import {CardContent} from '@material-ui/core';
 import CardHeader from '@material-ui/core/CardHeader';
 import ChartContainer from 'common/chart-container';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import image from './empty-state.png';
 import MenuItem from '@material-ui/core/MenuItem';
 import MuiAlert from '@material-ui/lab/Alert';
 import Paper from '@material-ui/core/Paper';
@@ -12,6 +13,7 @@ import Select from '@material-ui/core/Select';
 import Snackbar from '@material-ui/core/Snackbar';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
+import Typography from '@material-ui/core/Typography';
 import React, {useEffect, useState} from 'react';
 
 /**
@@ -23,11 +25,12 @@ import React, {useEffect, useState} from 'react';
 
 const TLSversion = () => {
   const [loading, setLoading] = useState(true);
+  const [empty, setEmpty] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
   const [data, setData] = useState([]);
   const [year, setYear] = useState('sample');
   const [month, setMonth] = useState('01');
-  const [months, setMonths] = useState([
+  const months = [
     '01',
     '02',
     '03',
@@ -40,7 +43,7 @@ const TLSversion = () => {
     '10',
     '11',
     '12',
-  ]);
+  ];
   useEffect(() => {
     setLoading(true);
     api
@@ -48,32 +51,17 @@ const TLSversion = () => {
       .then((response) => {
         setLoading(false);
         setData(response.data.result);
+        if (response.data.result.length < 1) {
+          setEmpty(true);
+        } else {
+          setEmpty(false);
+        }
       })
       .catch((err) => {
         setSnackOpen(true);
       });
-    if (year === 'sample') {
-      setMonths(['Sample']);
-    } else if (year === '2018') {
-      setMonths(['04', '05', '06', '07', '08', '09', '10', '11', '12']);
-    } else if (year === '2019') {
-      setMonths(['01', '02', '03', '04', '05', '06', '07', '08']);
-    } else {
-      setMonths([
-        '01',
-        '02',
-        '03',
-        '04',
-        '05',
-        '06',
-        '07',
-        '08',
-        '09',
-        '10',
-        '11',
-        '12',
-      ]);
-    }
+    console.log(empty);
+    console.log(data);
   }, [year, month]);
 
   const handleClose = (event, reason) => {
@@ -114,17 +102,23 @@ const TLSversion = () => {
         </Paper>
         <CardContent>
           {!loading ? (
-            <ChartContainer data-testid="tls-versions-chart">
-              <ResponsivePie
-                data={data}
-                margin={{top: 40, right: 80, bottom: 80, left: 80}}
-                innerRadius={0.5}
-                padAngle={0.7}
-                cornerRadius={3}
-                colors={{scheme: 'nivo'}}
-                animate={true}
-              />
-            </ChartContainer>
+            empty ? (
+              <ChartContainer>
+                <img src={image} height="60" width="120"></img>
+              </ChartContainer>
+            ) : (
+              <ChartContainer data-testid="tls-versions-chart">
+                <ResponsivePie
+                  data={data}
+                  margin={{top: 40, right: 80, bottom: 80, left: 80}}
+                  innerRadius={0.5}
+                  padAngle={0.7}
+                  cornerRadius={3}
+                  colors={{scheme: 'nivo'}}
+                  animate={true}
+                />
+              </ChartContainer>
+            )
           ) : (
             <ChartContainer>
               <CircularProgress data-testid="chart-loader" />
