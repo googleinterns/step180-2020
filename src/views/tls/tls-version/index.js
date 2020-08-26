@@ -11,9 +11,9 @@ import Paper from '@material-ui/core/Paper';
 import {ResponsivePie} from '@nivo/pie';
 import Select from '@material-ui/core/Select';
 import Snackbar from '@material-ui/core/Snackbar';
+import {StyledCardMedia} from './elements';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
-import Typography from '@material-ui/core/Typography';
 import React, {useEffect, useState} from 'react';
 
 /**
@@ -104,7 +104,7 @@ const TLSversion = () => {
           {!loading ? (
             empty ? (
               <ChartContainer>
-                <img src={image} height="60" width="120"></img>
+                <StyledCardMedia component="img" src={image}></StyledCardMedia>
               </ChartContainer>
             ) : (
               <ChartContainer data-testid="tls-versions-chart">
