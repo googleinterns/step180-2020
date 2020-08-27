@@ -47,9 +47,7 @@ const HSTSPercentageRequests = () => {
       <CardHeader
         title="Percentage of resources with HSTS header"
         subheader="Time Series of the percentage of resources that contain the
-          Strict-Transport-Security header. This response header is used
-          to let the browser know that the resource should be accessed only
-          using HTTPS."
+          Strict-Transport-Security header."
       />
       <CardContent>
         {!loading ? (
@@ -61,7 +59,7 @@ const HSTSPercentageRequests = () => {
               yScale={{
                 type: 'linear',
                 min: 'auto',
-                stacked: true,
+                stacked: false,
                 reverse: false,
               }}
               curve="natural"
@@ -85,7 +83,7 @@ const HSTSPercentageRequests = () => {
                 legendOffset: -40,
                 legendPosition: 'middle',
               }}
-              colors={{scheme: 'nivo'}}
+              colors={{scheme: 'category10'}}
               enablePointLabel={true}
               lineWidth={3}
               pointSize={10}
