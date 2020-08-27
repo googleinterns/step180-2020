@@ -52,14 +52,14 @@ const About = () => {
             </Typography>
             <Typography gutterBottom variant="body1">
               Because of that, it is a problem when Chrome is going to launch a
-              new feature or to deprecate any functionality. That&lsquo;s why we
+              new feature or deprecate any functionality. That&lsquo;s why we
               aim to provide useful data to measure breakage before rolling out
               changes, to see if benefit is worth it.
             </Typography>
             <Typography gutterBottom variant="body1">
               The Chrome Security Dashboard is intended to present public data
-              about future changes to be done in future Chrome Versions, and to
-              serve as a tool to negotiate next steps with other browsers.
+              about changes to be done in future Chrome Versions, and to serve
+              as a tool to negotiate next steps with other browsers.
             </Typography>
           </AccordionTextContainer>
           <Icon alt="Protection" src="images/protection.png" />
@@ -76,9 +76,9 @@ const About = () => {
             <Typography gutterBottom variant="body1">
               As part of our effort to show enough data to support decisions, we
               evaluated many options of public data sources and ended up using
-              HTTP Archive public data sets hosted on BigQuery service on Google
+              HTTP Archive public datasets hosted on BigQuery service on Google
               Cloud. This data is public and accessible from all over the world,
-              which give us enough confidence to use it as a reference to make
+              which gives us enough confidence to use it as a reference to make
               decisions
             </Typography>
             <Typography gutterBottom variant="body1">
