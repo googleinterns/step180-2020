@@ -60,8 +60,6 @@ const TLSversion = () => {
       .catch((err) => {
         setSnackOpen(true);
       });
-    console.log(empty);
-    console.log(data);
   }, [year, month]);
 
   const handleClose = (event, reason) => {
