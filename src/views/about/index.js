@@ -59,7 +59,7 @@ const About = () => {
             <Typography gutterBottom variant="body1">
               The Chrome Security Dashboard is intended to present public data
               about changes to be done in future Chrome Versions, and to serve
-              as a tool to negotiate next steps with other browsers.
+              as a tool when discussing the effect of those changes.
             </Typography>
           </AccordionTextContainer>
           <Icon alt="Protection" src="images/protection.png" />
@@ -76,10 +76,9 @@ const About = () => {
             <Typography gutterBottom variant="body1">
               As part of our effort to show enough data to support decisions, we
               evaluated many options of public data sources and ended up using
-              HTTP Archive public datasets hosted on BigQuery service on Google
-              Cloud. This data is public and accessible from all over the world,
-              which gives us enough confidence to use it as a reference to make
-              decisions
+              HTTP Archive public datasets. This data is public and accessible
+              from all over the world, which gives us enough confidence to use
+              it as a reference to make decisions
             </Typography>
             <Typography gutterBottom variant="body1">
               If you want to learn more about the HTTP Archive Big Query
