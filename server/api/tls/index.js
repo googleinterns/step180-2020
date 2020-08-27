@@ -12,60 +12,13 @@ import {Router as router} from 'express';
 const tlsApi = router();
 const bigQueryClient = new BigQuery();
 
-// TODO (SofiaVega) delete this (this route is the same as the one below)
-tlsApi.get('/tls-requests', async (req, res) => {
-  const version = req.query.version;
-  const year = req.query.year;
-  const month = req.query.month;
-  let table = 'httparchive.sample_data.requests_desktop_10k';
-  if (year != null && month != null) {
-    table = 'httparchive.requests.' + year + '_' + month + '_01_desktop';
-  }
-  let queryDescription = 'Number of requests per TLS version';
-  let sqlQuery =
-    `SELECT tls, COUNT(tls) as requests
-  FROM
-  (SELECT JSON_EXTRACT(payload, '$._securityDetails.protocol') as tls
-  FROM 
-  ` +
-    table +
-    `
-  where url like ("https%"))
-  GROUP BY tls`;
-  if (version != null) {
-    queryDescription = 'Number of requests that use TLS ' + version;
-    sqlQuery =
-      `SELECT COUNT(url) as requests
-    FROM ` +
-      table +
-      `
-    WHERE url like ("https%") AND 
-    JSON_EXTRACT(payload, '$._securityDetails.protocol') 
-    like "%TLS%` +
-      version +
-      `%"`;
-  }
-
-  const options = {
-    query: sqlQuery,
-    location: 'US',
-  };
-
-  const [rows] = await bigQueryClient.query(options);
-
-  res.json({
-    description: queryDescription,
-    table: table,
-    result: rows,
-  });
-});
-
 tlsApi.get('/tls-version', async (req, res) => {
   const query = queries.TlsRequests;
-  let table = req.query.table;
+  let table = 'httparchive.sample_data.requests_desktop_10k';
   const year = req.query.year;
   const month = req.query.month;
-  if (year != null && month != null) {
+  // Table will only be updated if a year is requested. Sample table is default
+  if (year != 'sample') {
     table = 'httparchive.requests.' + year + '_' + month + '_01_desktop';
   }
   const rows = await queryData(query, table);
