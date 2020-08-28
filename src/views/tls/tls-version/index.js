@@ -44,7 +44,7 @@ const TLSversion = () => {
     '11',
     '12',
   ];
-
+  
   useEffect(() => {
     setLoading(true);
     api
@@ -109,6 +109,7 @@ const TLSversion = () => {
               <ChartContainer data-testid="tls-versions-chart">
                 <ResponsivePie
                   data={data}
+                  enableSlicesLabels={false}
                   margin={{top: 40, right: 80, bottom: 80, left: 80}}
                   innerRadius={0.5}
                   padAngle={0.7}
