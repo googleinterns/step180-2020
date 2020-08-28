@@ -159,6 +159,14 @@ const server = setupServer(
       }),
     );
   }),
+  // "GET /api/tls/CA" requests
+  rest.get('/api/tls/CA', (req, res, ctx) => {
+    return res(
+      ctx.json({
+        result: new Array(dataArrayMockLength).fill().map(() => ({})),
+      }),
+    );
+  }),
   // "GET /api/tls/key-exchange" requests
   rest.get('/api/tls/key-exchange', (req, res, ctx) => {
     return res(
