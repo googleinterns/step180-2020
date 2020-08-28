@@ -45,9 +45,29 @@ test('Changes between tabs and shows different charts', async () => {
     ).toBeInTheDocument(),
   );
 
-  // Change to 10k types tab
+  // Change to 2018 tab
   act(() => {
-    fireEvent.click(screen.getByTestId('10k-tab'));
+    fireEvent.click(screen.getByTestId('2018'));
+  });
+  await waitFor(() =>
+    expect(
+      screen.getByTestId('certificate-authority-chart'),
+    ).toBeInTheDocument(),
+  );
+
+  // Change to 2019 tab
+  act(() => {
+    fireEvent.click(screen.getByTestId('2019'));
+  });
+  await waitFor(() =>
+    expect(
+      screen.getByTestId('certificate-authority-chart'),
+    ).toBeInTheDocument(),
+  );
+
+  // Change to 2020 tab
+  act(() => {
+    fireEvent.click(screen.getByTestId('2020'));
   });
   await waitFor(() =>
     expect(
