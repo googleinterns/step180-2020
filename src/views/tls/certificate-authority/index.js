@@ -48,7 +48,7 @@ const CertificateAuthorities = () => {
 
   return (
     <>
-      <Card data-testid="key-exchange-card">
+      <Card data-testid="certificate-authority-card">
         <CardHeader
           title="Certificate Authorities"
           subheader="Top 10 certificate issuers for HTTPS requests"
@@ -74,7 +74,7 @@ const CertificateAuthorities = () => {
         </Paper>
         <CardContent>
           {!loading ? (
-            <ChartContainer data-testid="key-exchange-chart">
+            <ChartContainer data-testid="certificate-authority-chart">
               <ResponsivePie
                 data={data}
                 margin={{top: 40, right: 80, bottom: 80, left: 80}}
