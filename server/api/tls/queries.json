@@ -65,13 +65,13 @@
   "CA": {
     "description": "Certificate authorities",
     "sql": [
-      "SELECT JSON_EXTRACT(payload, '$._securityDetails.issuer') as CA, count(*) as number",
+      "SELECT JSON_EXTRACT(payload, '$._securityDetails.issuer') as id, count(*) as value",
       "FROM",
       "httparchive.sample_data.requests_desktop_10k",
       "where url like (\"https%\")",
-      "group by CA",
-      "having char_length(CA)>0",
-      "order by number desc",
+      "group by id",
+      "having char_length(id)>0",
+      "order by value desc",
       "limit 10;"
     ],
     "tableIndex": 2
