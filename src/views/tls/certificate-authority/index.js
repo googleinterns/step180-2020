@@ -86,7 +86,7 @@ const CertificateAuthorities = () => {
                 sortByValue={false}
                 radialLabel={(d) => (d.id === '' ? 'Empty' : d.id)}
                 enableSlicesLabels={false}
-                startAngle={-350}
+                startAngle={-300}
               />
             </ChartContainer>
           ) : (

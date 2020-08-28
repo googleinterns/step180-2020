@@ -61,7 +61,11 @@ const Tls = () => {
           <Typography variant="h6" gutterBottom={true}>
             Certificate Authorities
           </Typography>
-          <Typography paragraph={true}>Top 10 CAs</Typography>
+          <Typography paragraph={true}>
+            A certificate authority is an entity that issues digital
+            certificates. It acts as a third party that both the owner of the
+            certificate and the party relying upon the certificate should trust.
+          </Typography>
           <CertificateAuthorities />
         </Grid>
       </Grid>
