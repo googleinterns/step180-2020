@@ -240,6 +240,12 @@ describe('tls', () => {
     expect(res.body.description).toBe('Key exchange algorithm usage');
     expect(res.body.result).toMatchObject(tlsQueries.KeyExchange.mockResult);
   });
+
+  it('Check /tls/key-exchange', async () => {
+    const res = await request(app).get('/api/tls/CA');
+    expect(res.body.description).toBe('Certificate authorities');
+    expect(res.body.result).toMatchObject(tlsQueries.CA.mockResult);
+  });
 });
 
 describe('mixed-content-by-type', () => {

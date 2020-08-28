@@ -74,6 +74,48 @@
       "order by value desc",
       "limit 10;"
     ],
-    "tableIndex": 2
+    "tableIndex": 2,
+    "mockResult": [
+      {
+        "id": "\"GTS CA 1O1\"",
+        "value": 39503
+      },
+      {
+        "id": "\"Let's Encrypt Authority X3\"",
+        "value": 14448
+      },
+      {
+        "id": "\"DigiCert SHA2 High Assurance Server CA\"",
+        "value": 11094
+      },
+      {
+        "id": "\"DigiCert SHA2 Secure Server CA\"",
+        "value": 9283
+      },
+      {
+        "id": "\"Sectigo RSA Domain Validation Secure Server CA\"",
+        "value": 9053
+      },
+      {
+        "id": "\"CloudFlare Inc ECC CA-2\"",
+        "value": 6987
+      },
+      {
+        "id": "\"Amazon\"",
+        "value": 6873
+      },
+      {
+        "id": "\"Go Daddy Secure Certificate Authority - G2\"",
+        "value": 3900
+      },
+      {
+        "id": "\"RapidSSL RSA CA 2018\"",
+        "value": 2280
+      },
+      {
+        "id": "\"GeoTrust RSA CA 2018\"",
+        "value": 2235
+      }
+    ]
   }
 }
