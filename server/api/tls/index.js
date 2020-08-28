@@ -42,6 +42,16 @@ tlsApi.get('/key-exchange', async (req, res) => {
   });
 });
 
+tlsApi.get('/CA', async (req, res) => {
+  const query = queries.CA;
+  const table = req.query.table;
+  const rows = await queryData(query, table);
+  res.json({
+    description: query.description,
+    result: rows,
+  });
+});
+
 const queryData = async (data, table) => {
   const index = data.tableIndex;
   let dataQuery = data.sql;

@@ -61,5 +61,19 @@
         "value": 1825
       }
     ]
+  },
+  "CA": {
+    "description": "Certificate authorities",
+    "sql": [
+      "SELECT JSON_EXTRACT(payload, '$._securityDetails.issuer') as CA, count(*) as number",
+      "FROM",
+      "httparchive.sample_data.requests_desktop_10k",
+      "where url like (\"https%\")",
+      "group by CA",
+      "having char_length(CA)>0",
+      "order by number desc",
+      "limit 10;"
+    ],
+    "tableIndex": 2
   }
 }
