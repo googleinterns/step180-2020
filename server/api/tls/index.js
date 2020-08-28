@@ -49,7 +49,12 @@ tlsApi.get('/key-exchange', async (req, res) => {
 
 tlsApi.get('/CA', async (req, res) => {
   const query = queries.CA;
-  const table = req.query.table;
+  let table = 'httparchive.sample_data.requests_desktop_10k';
+  const year = req.query.year;
+  const month = req.query.month;
+  if (year != 'sample') {
+    table = 'httparchive.requests.' + year + '_' + month + '_01_desktop';
+  }
   const rows = await queryData(query, table);
   res.json({
     description: query.description,
