@@ -55,6 +55,8 @@ const MixedContentByType = () => {
             value={type}
             indicatorColor="primary"
             textColor="primary"
+            variant="scrollable"
+            scrollButtons="auto"
             onChange={(_, newValue) => setType(newValue)}
           >
             <Tab data-testid="all-tab" value="all" label="All types" />

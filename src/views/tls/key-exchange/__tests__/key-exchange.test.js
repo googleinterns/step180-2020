@@ -41,9 +41,22 @@ test('Changes between tabs and shows different charts', async () => {
     expect(screen.getByTestId('key-exchange-chart')).toBeInTheDocument(),
   );
 
-  // Change to 10k types tab
   act(() => {
-    fireEvent.click(screen.getByTestId('10k-tab'));
+    fireEvent.click(screen.getByTestId('2018'));
+  });
+  await waitFor(() =>
+    expect(screen.getByTestId('key-exchange-chart')).toBeInTheDocument(),
+  );
+
+  act(() => {
+    fireEvent.click(screen.getByTestId('2019'));
+  });
+  await waitFor(() =>
+    expect(screen.getByTestId('key-exchange-chart')).toBeInTheDocument(),
+  );
+
+  act(() => {
+    fireEvent.click(screen.getByTestId('2020'));
   });
   await waitFor(() =>
     expect(screen.getByTestId('key-exchange-chart')).toBeInTheDocument(),
