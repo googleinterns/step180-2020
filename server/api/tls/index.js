@@ -47,6 +47,21 @@ tlsApi.get('/key-exchange', async (req, res) => {
   });
 });
 
+tlsApi.get('/CA', async (req, res) => {
+  const query = queries.CA;
+  let table = 'httparchive.sample_data.requests_desktop_10k';
+  const year = req.query.year;
+  const month = req.query.month;
+  if (year != 'sample') {
+    table = 'httparchive.requests.' + year + '_' + month + '_01_desktop';
+  }
+  const rows = await queryData(query, table);
+  res.json({
+    description: query.description,
+    result: rows,
+  });
+});
+
 const queryData = async (data, table) => {
   const index = data.tableIndex;
   let dataQuery = data.sql;

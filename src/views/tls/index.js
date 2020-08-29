@@ -1,3 +1,4 @@
+import CertificateAuthorities from './certificate-authority/index.js';
 import {Container} from './elements';
 import Grid from '@material-ui/core/Grid';
 import KeyExchange from './key-exchange/index.js';
@@ -55,6 +56,17 @@ const Tls = () => {
             you can read more about the modern TLS configurations.
           </Typography>
           <KeyExchange />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <Typography variant="h6" gutterBottom={true}>
+            Certificate Authorities
+          </Typography>
+          <Typography paragraph={true}>
+            A certificate authority is an entity that issues digital
+            certificates. It acts as a third party that both the owner of the
+            certificate and the party relying upon the certificate should trust.
+          </Typography>
+          <CertificateAuthorities />
         </Grid>
       </Grid>
     </Container>

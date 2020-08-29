@@ -4,26 +4,25 @@ import {CardContent} from '@material-ui/core';
 import CardHeader from '@material-ui/core/CardHeader';
 import ChartContainer from 'common/chart-container';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import image from './empty-state.png';
+import image from '../tls-version/empty-state.png';
 import MenuItem from '@material-ui/core/MenuItem';
 import MuiAlert from '@material-ui/lab/Alert';
 import Paper from '@material-ui/core/Paper';
 import {ResponsivePie} from '@nivo/pie';
 import Select from '@material-ui/core/Select';
 import Snackbar from '@material-ui/core/Snackbar';
-import {StyledCardMedia} from './elements';
+import {StyledCardMedia} from '../key-exchange/elements';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import React, {useEffect, useState} from 'react';
 
 /**
- * This component shows a pie chart with the number of requests
- * per TLS version in the sample data requests table.
+ * This component shows a pie chart with the percentage of different
+ * certificates used in the key exchange
  *
- * @return {ReactNode} TLS versions component
+ * @return {ReactNode} Key exchange component
  */
-
-const TLSversion = () => {
+const CertificateAuthorities = () => {
   const [loading, setLoading] = useState(true);
   const [empty, setEmpty] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
@@ -48,7 +47,7 @@ const TLSversion = () => {
   useEffect(() => {
     setLoading(true);
     api
-      .get('/api/tls/tls-version?year=' + year + '&month=' + month)
+      .get('/api/tls/CA?year=' + year + '&month=' + month)
       .then((response) => {
         setLoading(false);
         setData(response.data.result);
@@ -69,21 +68,23 @@ const TLSversion = () => {
     }
     setSnackOpen(false);
   };
+
   const changeMonth = (event) => {
     setMonth(event.target.value);
   };
 
   return (
     <>
-      <Card data-testid="tls-versions-card">
+      <Card data-testid="certificate-authority-card">
         <CardHeader
-          title="TLS versions"
-          subheader="Number of requests by TLS version"
+          title="Certificate Authorities"
+          subheader="Top 10 certificate issuers for HTTPS requests"
         />
         <Paper square>
           <Tabs
             value={year}
             indicatorColor="primary"
+            textColor="primary"
             onChange={(_, newValue) => setYear(newValue)}
           >
             <Tab data-testid="sample-tab" value="sample" label="Sample Data" />
@@ -106,16 +107,19 @@ const TLSversion = () => {
                 <StyledCardMedia component="img" src={image}></StyledCardMedia>
               </ChartContainer>
             ) : (
-              <ChartContainer data-testid="tls-versions-chart">
+              <ChartContainer data-testid="certificate-authority-chart">
                 <ResponsivePie
                   data={data}
-                  enableSlicesLabels={false}
                   margin={{top: 40, right: 80, bottom: 80, left: 80}}
                   innerRadius={0.5}
                   padAngle={0.7}
                   cornerRadius={3}
-                  colors={{scheme: 'nivo'}}
+                  colors={{scheme: 'category10'}}
                   animate={true}
+                  sortByValue={false}
+                  radialLabel={(d) => (d.id === '' ? 'Empty' : d.id)}
+                  enableSlicesLabels={false}
+                  startAngle={-300}
                 />
               </ChartContainer>
             )
@@ -140,4 +144,4 @@ const TLSversion = () => {
   );
 };
 
-export default TLSversion;
+export default CertificateAuthorities;
